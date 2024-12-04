@@ -91,6 +91,7 @@ var labels = map[string]*Label{
 	"公会-公会任务-全部领取":  {ix.Position{X: 830, Y: 510}, ix.Color{R: 238, G: 112, B: 70}, 3 * time.Second},
 
 	// 邮箱
+	"邮箱-通用": {ix.Position{X: 143, Y: 101}, ix.Color{R: 238, G: 117, B: 70}, time.Second},
 	"邮箱-个人": {ix.Position{X: 328, Y: 98}, ix.Color{}, time.Second},
 	// "邮箱-今天不再显示":  {ix.Position{X: 560, Y: 350}, ix.Color{}, time.Second},
 	// "邮箱-未领取确认":   {ix.Position{X: 480, Y: 400}, ix.Color{}, time.Second},
@@ -123,7 +124,7 @@ var labels = map[string]*Label{
 	"材料副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"材料副本-进入副本-全部解除": {ix.Position{X: 843, Y: 426}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
 	"材料副本-进入副本-确定":   {ix.Position{X: 560, Y: 480}, ix.ColorButtonOrange, time.Second},
-	"材料副本-副本结算-退出":   {ix.Position{X: 267, Y: 421}, ix.ColorButtonBlue, 3 * time.Second},
+	"材料副本-副本结算-退出":   {ix.Position{X: 228, Y: 423}, ix.ColorButtonBlue, 3 * time.Second},
 
 	// 精英副本
 	"精英副本-快速组队":    {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
