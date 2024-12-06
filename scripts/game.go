@@ -120,6 +120,7 @@ func ntdjzt(ctx *context.Context) {
 	LabelWait("副本-退出", 60*time.Second)
 	LabelWait("副本-麦克风", 30*time.Second)
 	ctx.Schedule()
+	ctx.ExecuteSubs()
 	LabelWaitClick("奈特的金字塔-副本结算-退出", 180*time.Second)
 }
 

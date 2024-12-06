@@ -51,6 +51,21 @@ func (o *Context) Finish() {
 	o.Save()
 }
 
+func (o *Context) Execute(scripts []*ScriptConfig) {
+	for _, script := range scripts {
+		o.curScript = script
+		// 脚本已调度，则跳过
+		if script.ScheduleTime.Format("2006-01-02") == time.Now().Format("2006-01-02") {
+			continue
+		}
+		ExecuteScript(o, script.Name)
+	}
+}
+
+func (o *Context) ExecuteSubs() {
+	o.Execute(o.curScript.Subs)
+}
+
 func (o *Context) Startup() {
 	for _, role := range o.Roles {
 		o.curRole = role
@@ -60,15 +75,7 @@ func (o *Context) Startup() {
 			continue
 		}
 		o.Lanuch()
-		for _, script := range role.Scripts {
-			o.curScript = script
-			// 脚本已调度，则跳过
-			if script.ScheduleTime.Format("2006-01-02") == time.Now().Format("2006-01-02") {
-				log.Infof("[角色-%d] [脚本-%s] 已调度", role.Index, script.Name)
-				continue
-			}
-			ExecuteScript(o, script.Name)
-		}
+		o.Execute(role.Scripts)
 		o.Finish()
 	}
 }

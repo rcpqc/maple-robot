@@ -10,6 +10,7 @@ var scripts = map[string]func(ctx *Context){}
 type ScriptConfig struct {
 	Name    string            `yaml:"name"`
 	Options map[string]string `yaml:"options,omitempty"`
+	Subs    []*ScriptConfig   `yaml:"subs,omitempty"`
 	// 记录
 	ScheduleTime time.Time `yaml:"schedule_time"`
 	CompleteTime time.Time `yaml:"complete_time"`
