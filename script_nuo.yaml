@@ -1,0 +1,17 @@
+tasks:
+  - name: 自动战斗时间
+  - name: 公会签到
+    options:
+      领地树祝福: "NO"
+  - name: 领取个人奖励
+  - name: 天空岛贸易
+  - name: 周常副本
+  - name: 精英副本
+  - name: 材料副本
+    options:
+      全部解除: OK
+      副本名: 武陵桃源
+  - name: 奈特的金字塔
+  - name: 领取个人奖励
+  - name: 领取日常奖励
+  - name: 领取公会奖励
