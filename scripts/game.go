@@ -2,6 +2,7 @@ package scripts
 
 import (
 	"maple-robot/context"
+	"maple-robot/ix"
 	"time"
 )
 
@@ -15,11 +16,13 @@ func init() {
 	context.ProvideTask("自动战斗时间", zdzdsj)
 	context.ProvideTask("公会签到", ghqd)
 	context.ProvideTask("领取个人奖励", lqgrjl)
+	context.ProvideTask("领取个人奖励2", lqgrjl)
 	context.ProvideTask("送人气", srq)
 	context.ProvideTask("领取日常奖励", lqrcjl)
 	context.ProvideTask("补充训练时间", bcxlsj)
 	context.ProvideTask("公会聊天", ghlt)
 	context.ProvideTask("领取公会奖励", lqghjl)
+	context.ProvideTask("怪物乐园跳关", gwlytg)
 }
 
 // tkdmy 天空岛贸易
@@ -236,5 +239,27 @@ func lqghjl(ctx *context.Context) {
 	LabelClick("公会-公会任务-每周任务")
 	LabelClick("公会-公会任务-全部领取")
 	ctx.Schedule()
+	BackWorld()
+}
+
+// gwlytg 怪物乐园跳关
+func gwlytg(ctx *context.Context) {
+	LabelWaitClick("世界-导航", 5*time.Second)
+	LabelWait("导航-枫小喵", 5*time.Second)
+	LabelClick("导航-日常")
+	LabelWaitClick("日常-进度", 5*time.Second)
+	LabelWait("日常-进度-关闭", 5*time.Second)
+	ix.Swipe(ix.Position{X: 579, Y: 481}, ix.Position{X: 579, Y: 50}, 1500)
+	LabelWaitClick("日常-进度-怪物乐园跳关", 5*time.Second)
+	LabelWait("日常-进度-怪物乐园跳关-标题", 5*time.Second)
+	if name := ctx.GetOption("副本名"); name != "" {
+		LabelWaitClick("日常-进度-怪物乐园跳关-"+name, 5*time.Second)
+	} else {
+		LabelWaitClick("日常-进度-怪物乐园跳关-隐匿痕迹", 5*time.Second)
+	}
+	LabelWaitClick("日常-进度-怪物乐园跳关-使用战斗跳关券", 5*time.Second)
+	LabelWaitClick("日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
+	ctx.Schedule()
+	LabelWaitClick("日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
 	BackWorld()
 }

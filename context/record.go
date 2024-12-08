@@ -38,7 +38,7 @@ func (o Records) DailyDone(name string) bool {
 		return false
 	}
 	now := time.Now()
-	zero := time.Date(now.Year(), now.Month(), now.Hour(), 0, 0, 0, 0, time.Local)
+	zero := time.Date(now.Year(), now.Month(), now.Day(), 0, 0, 0, 0, time.Local)
 	return r.Time.After(zero)
 }
 

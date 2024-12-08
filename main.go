@@ -12,13 +12,9 @@ func main() {
 		log.Fatalf(err.Error())
 	}
 	for _, role := range ctx.Roles {
-		if role.Index < 303 {
-			continue
-		}
 		if role.Records == nil {
 			role.Records = make(context.Records)
 		}
-
 		ctx.SetRole(role)
 		// 角色已完成, 则跳过
 		if role.Records.DailyDone("角色") {
