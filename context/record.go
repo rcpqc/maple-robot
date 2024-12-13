@@ -21,6 +21,7 @@ func (o Records) Start(name string) {
 		o[name] = r
 	}
 	r.Time = time.Now()
+	r.Cost = 0
 }
 
 func (o Records) Mark(name string) {
@@ -65,7 +66,7 @@ func (o *Record) UnmarshalYAML(value *yaml.Node) error {
 	if err != nil {
 		return err
 	}
-	o.Time, _ = time.Parse("2006-01-02T15:04:05", t)
+	o.Time, _ = time.ParseInLocation("2006-01-02T15:04:05", t, time.Local)
 	o.Cost = time.Duration(cost) * time.Second
 	return nil
 }
