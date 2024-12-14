@@ -49,6 +49,9 @@ func (o *Context) Finish() {
 
 func (o *Context) Execute(tasks []*Task) {
 	for _, task := range tasks {
+		if !task.Condition.Match() {
+			continue
+		}
 		o.curTask = task
 		// 脚本已调度，则跳过
 		if o.curRole.Records.DailyDone(task.Name) {
