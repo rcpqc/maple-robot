@@ -69,8 +69,9 @@ func zcfb(ctx *context.Context) {
 	}
 	LabelClick("周常副本-入场")
 	LabelWaitClick("周常副本-入场-确定", 5*time.Second)
-	ctx.Schedule()
 	LabelWait("副本-退出", 15*time.Second)
+	ctx.Schedule()
+	ctx.ExecuteSubs()
 	LabelWaitClick("周常副本-副本结算-退出", 90*time.Second)
 }
 
@@ -90,6 +91,7 @@ func jyfb(ctx *context.Context) {
 		LabelWaitClick("精英副本-入场-确定", 5*time.Second)
 		LabelWaitClick("精英副本-集结地-开始", 5*time.Second)
 		ctx.Schedule()
+		ctx.ExecuteSubs()
 		LabelWaitClick("精英副本-副本结算-单人离开", 60*time.Second)
 	} else {
 		LabelWaitClick("精英副本-快速组队", 5*time.Second)
@@ -97,6 +99,7 @@ func jyfb(ctx *context.Context) {
 		LabelWait("副本-退出", 60*time.Second)
 		LabelWait("副本-麦克风", 15*time.Second)
 		ctx.Schedule()
+		ctx.ExecuteSubs()
 		LabelWaitClick("精英副本-副本结算-离开", 180*time.Second)
 	}
 }
@@ -120,6 +123,7 @@ func clfb(ctx *context.Context) {
 	LabelWaitClick("材料副本-进入副本-确定", 5*time.Second)
 	LabelWait("副本-退出", 15*time.Second)
 	ctx.Schedule()
+	ctx.ExecuteSubs()
 	LabelWaitClick("材料副本-副本结算-退出", 300*time.Second)
 }
 
