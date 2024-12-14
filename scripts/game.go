@@ -51,7 +51,7 @@ func wldc(ctx *context.Context) {
 	LabelWaitClick("武陵道场-进入", 5*time.Second)
 	ctx.Schedule()
 	LabelWaitClick("副本-退出", 15*time.Second)
-	time.Sleep(8 * time.Second)
+	time.Sleep(7 * time.Second)
 	LabelWaitClick("武陵道场-退出", 5*time.Second)
 	LabelWaitClick("武陵道场-离开", 10*time.Second)
 }
@@ -81,12 +81,24 @@ func jyfb(ctx *context.Context) {
 	LabelClick("导航-日常")
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式2号")
-	LabelWaitClick("精英副本-快速组队", 5*time.Second)
-	LabelWaitClick("精英副本-入场-确定", 5*time.Second)
-	LabelWait("副本-退出", 60*time.Second)
-	LabelWait("副本-麦克风", 15*time.Second)
-	ctx.Schedule()
-	LabelWaitClick("精英副本-副本结算-离开", 180*time.Second)
+	LabelWait("精英副本-普通", 5*time.Second)
+	if mode := ctx.GetOption("模式"); mode == "单人" {
+		ix.Swipe(ix.Position{X: 100, Y: 120}, ix.Position{X: 100, Y: 520}, 1500)
+		time.Sleep(time.Second)
+		LabelClick("精英副本-鬼怪蘑菇王")
+		LabelWaitClick("精英副本-创建房间", 5*time.Second)
+		LabelWaitClick("精英副本-入场-确定", 5*time.Second)
+		LabelWaitClick("精英副本-集结地-开始", 5*time.Second)
+		ctx.Schedule()
+		LabelWaitClick("精英副本-副本结算-单人离开", 60*time.Second)
+	} else {
+		LabelWaitClick("精英副本-快速组队", 5*time.Second)
+		LabelWaitClick("精英副本-入场-确定", 5*time.Second)
+		LabelWait("副本-退出", 60*time.Second)
+		LabelWait("副本-麦克风", 15*time.Second)
+		ctx.Schedule()
+		LabelWaitClick("精英副本-副本结算-离开", 180*time.Second)
+	}
 }
 
 // clfb 材料副本

@@ -51,8 +51,8 @@ var labels = map[string]*Label{
 	// 成长
 	"成长-每日任务":      {ix.Position{X: 80, Y: 100}, ix.Color{}, time.Second},
 	"成长-每周任务":      {ix.Position{X: 80, Y: 160}, ix.Color{}, time.Second},
-	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.Color{}, time.Second},
-	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.Color{}, time.Second},
+	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.Color{}, 2 * time.Second},
+	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.Color{}, 2 * time.Second},
 	"成长-领取确认":      {ix.Position{X: 560, Y: 383}, ix.ColorButtonOrange, time.Second},
 
 	// 日常
@@ -132,10 +132,14 @@ var labels = map[string]*Label{
 	"材料副本-副本结算-退出":   {ix.Position{X: 228, Y: 423}, ix.ColorButtonBlue, 3 * time.Second},
 
 	// 精英副本
-	"精英副本-快速组队":    {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"精英副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"精英副本-副本结算-离开": {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 3 * time.Second},
-
+	"精英副本-普通":        {ix.Position{X: 80, Y: 90}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
+	"精英副本-鬼怪蘑菇王":     {ix.Position{X: 94, Y: 147}, ix.Color{}, time.Second},
+	"精英副本-创建房间":      {ix.Position{X: 625, Y: 500}, ix.ColorButtonBlue, time.Second},
+	"精英副本-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"精英副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"精英副本-集结地-开始":    {ix.Position{X: 154, Y: 164}, ix.ColorButtonOrange, time.Second},
+	"精英副本-副本结算-单人离开": {ix.Position{X: 322, Y: 440}, ix.ColorButtonBlue, 3 * time.Second},
+	"精英副本-副本结算-离开":   {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 3 * time.Second},
 	// 周常副本
 	"周常副本-星期五":     {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
 	"周常副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
