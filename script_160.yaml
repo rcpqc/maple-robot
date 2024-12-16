@@ -6,13 +6,23 @@ tasks:
     options: 
       副本名: 大木林
   - name: 天空岛贸易
-  - name: 武陵道场
   - name: 周常副本
+  - name: 武陵道场
+    condition: '1234'
+  - name: 精英副本
+    condition: '1234'
+    options:
+      模式: 单人
+    subs:
+      - name: 补充训练时间
+  - name: 奈特的金字塔
+    condition: '560'
+    subs:
+      - name: 补充训练时间
   - name: 材料副本
     options:
       副本名: 神木村
-  - name: 送人气
-  - name: 领取个人奖励2
-  - name: 领取日常奖励
-  - name: 领取公会奖励
-  - name: 补充训练时间
+    subs:
+      - name: 送人气
+      - name: 领取日常奖励
+      - name: 领取公会奖励

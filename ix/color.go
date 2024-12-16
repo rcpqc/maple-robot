@@ -21,6 +21,7 @@ var (
 	ColorTitleGray         = Color{65, 80, 102}   // 标题栏灰色
 	ColorWhite             = Color{255, 255, 255} // 白色
 	ColorButtonExitDungeon = Color{255, 204, 0}   // 退出副本按钮橙色
+	ColorButtonRedDot      = Color{252, 48, 15}   // 红点
 )
 
 func (o Color) Equals(c Color) bool {
