@@ -49,11 +49,13 @@ var labels = map[string]*Label{
 	"导航-天空岛贸易": {ix.Position{X: 900, Y: 424}, ix.Color{}, 3 * time.Second},
 
 	// 成长
+
+	"成长-标题":        {ix.Position{X: 75, Y: 32}, ix.ColorTitleGray, time.Second},
 	"成长-每日任务":      {ix.Position{X: 80, Y: 100}, ix.Color{}, time.Second},
 	"成长-每周任务":      {ix.Position{X: 80, Y: 160}, ix.Color{}, time.Second},
-	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"成长-领取确认":      {ix.Position{X: 560, Y: 383}, ix.ColorButtonOrange, time.Second},
+	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 3 * time.Second},
+	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 3 * time.Second},
+	"成长-领取确认":      {ix.Position{X: 560, Y: 383}, ix.ColorButtonOrange, 3 * time.Second},
 
 	// 日常
 	"日常-进度":                {ix.Position{X: 706, Y: 93}, ix.ColorButtonGray, time.Second},
@@ -93,7 +95,7 @@ var labels = map[string]*Label{
 	"公会-公会任务":       {ix.Position{X: 100, Y: 370}, ix.Color{R: 43, G: 54, B: 70}, time.Second},
 	"公会-公会任务-每日任务":  {ix.Position{X: 216, Y: 92}, ix.Color{}, time.Second},
 	"公会-公会任务-每周任务":  {ix.Position{X: 370, Y: 92}, ix.Color{}, time.Second},
-	"公会-公会任务-全部领取":  {ix.Position{X: 830, Y: 510}, ix.ColorButtonOrange, time.Second},
+	"公会-公会任务-全部领取":  {ix.Position{X: 830, Y: 510}, ix.ColorButtonOrange, 3 * time.Second},
 
 	// 邮箱
 	"邮箱-通用": {ix.Position{X: 143, Y: 101}, ix.Color{R: 238, G: 117, B: 70}, time.Second},
