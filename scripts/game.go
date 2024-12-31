@@ -208,19 +208,29 @@ func lqrcjl(ctx *context.Context) {
 
 	LabelWait("成长-标题", 5*time.Second)
 	LabelClick("成长-每日任务")
+
 	LabelClick("成长-每日任务-全部领取")
-	Back()
+	LabelClick("成长-领取确认")
+	LabelClick("成长-领取确认2")
 	LabelWait("成长-标题", 5*time.Second)
 	LabelClick("成长-每日任务-全部领取")
-	Back()
+	LabelClick("成长-领取确认")
+	LabelClick("成长-领取确认2")
 
 	LabelWait("成长-标题", 5*time.Second)
 	LabelClick("成长-每周任务")
+
 	LabelClick("成长-每周任务-全部领取")
-	Back()
+	LabelClick("成长-领取确认")
+	LabelClick("成长-领取确认2")
 	LabelWait("成长-标题", 5*time.Second)
 	LabelClick("成长-每周任务-全部领取")
-	Back()
+	LabelClick("成长-领取确认")
+	LabelClick("成长-领取确认2")
+	LabelWait("成长-标题", 5*time.Second)
+	LabelClick("成长-每周任务-全部领取")
+	LabelClick("成长-领取确认")
+	LabelClick("成长-领取确认2")
 
 	ctx.Schedule()
 	BackWorld()

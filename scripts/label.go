@@ -53,9 +53,10 @@ var labels = map[string]*Label{
 	"成长-标题":        {ix.Position{X: 75, Y: 32}, ix.ColorTitleGray, time.Second},
 	"成长-每日任务":      {ix.Position{X: 80, Y: 100}, ix.Color{}, time.Second},
 	"成长-每周任务":      {ix.Position{X: 80, Y: 160}, ix.Color{}, time.Second},
-	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 3 * time.Second},
-	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 3 * time.Second},
-	"成长-领取确认":      {ix.Position{X: 560, Y: 383}, ix.ColorButtonOrange, 3 * time.Second},
+	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
+	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
+	"成长-领取确认":      {ix.Position{X: 560, Y: 360}, ix.ColorButtonOrange, 2 * time.Second},
+	"成长-领取确认2":     {ix.Position{X: 560, Y: 429}, ix.ColorButtonOrange, 2 * time.Second},
 
 	// 日常
 	"日常-进度":                {ix.Position{X: 706, Y: 93}, ix.ColorButtonGray, time.Second},
