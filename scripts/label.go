@@ -53,8 +53,8 @@ var labels = map[string]*Label{
 	"成长-标题":        {ix.Position{X: 75, Y: 32}, ix.ColorTitleGray, time.Second},
 	"成长-每日任务":      {ix.Position{X: 80, Y: 100}, ix.Color{}, time.Second},
 	"成长-每周任务":      {ix.Position{X: 80, Y: 160}, ix.Color{}, time.Second},
-	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
-	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
+	"成长-每日任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 3 * time.Second},
+	"成长-每周任务-全部领取": {ix.Position{X: 880, Y: 500}, ix.ColorButtonOrange, 3 * time.Second},
 	"成长-领取确认":      {ix.Position{X: 560, Y: 360}, ix.ColorButtonOrange, 2 * time.Second},
 	"成长-领取确认2":     {ix.Position{X: 560, Y: 429}, ix.ColorButtonOrange, 2 * time.Second},
 
@@ -109,7 +109,7 @@ var labels = map[string]*Label{
 	// 社交
 	"社交-微信好友":        {ix.Position{X: 650, Y: 90}, ix.Color{R: 132, G: 222, B: 66}, 3 * time.Second},
 	"社交-微信好友-背景":     {ix.Position{X: 151, Y: 198}, ix.ColorWhite, time.Second},
-	"社交-微信好友-战斗力":    {ix.Position{X: 716, Y: 139}, ix.Color{}, 2 * time.Second},
+	"社交-微信好友-战斗力":    {ix.Position{X: 733, Y: 133}, ix.Color{}, 2 * time.Second},
 	"社交-微信好友-送人气给3号": {ix.Position{X: 917, Y: 302}, ix.Color{R: 255, G: 123, B: 80}, time.Second},
 	"社交-微信好友-送人气给4号": {ix.Position{X: 917, Y: 363}, ix.Color{R: 255, G: 123, B: 80}, time.Second},
 	"社交-送人气":         {ix.Position{X: 379, Y: 268}, ix.Color{}, time.Second},
