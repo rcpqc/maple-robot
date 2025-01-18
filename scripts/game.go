@@ -16,9 +16,9 @@ func init() {
 	context.ProvideTask("自动战斗时间", zdzdsj)
 	context.ProvideTask("公会签到", ghqd)
 	context.ProvideTask("领取个人奖励", lqgrjl)
-	context.ProvideTask("领取个人奖励2", lqgrjl)
 	context.ProvideTask("送人气", srq)
 	context.ProvideTask("领取日常奖励", lqrcjl)
+	context.ProvideTask("领取周常奖励", lqzcjl)
 	context.ProvideTask("补充训练时间", bcxlsj)
 	context.ProvideTask("公会聊天", ghlt)
 	context.ProvideTask("领取公会奖励", lqghjl)
@@ -216,6 +216,16 @@ func lqrcjl(ctx *context.Context) {
 	LabelClick("成长-每日任务-全部领取")
 	LabelClick("成长-领取确认")
 	LabelClick("成长-领取确认2")
+
+	ctx.Schedule()
+	BackWorld()
+}
+
+// lqzcjl 领取周常奖励
+func lqzcjl(ctx *context.Context) {
+	LabelWaitClick("世界-导航", 5*time.Second)
+	LabelWait("导航-枫小喵", 5*time.Second)
+	LabelClick("导航-成长")
 
 	LabelWait("成长-标题", 5*time.Second)
 	LabelClick("成长-每周任务")
