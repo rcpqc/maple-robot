@@ -233,7 +233,10 @@ func LabelWait(name string, timeout time.Duration) {
 		if time.Now().After(ddl) {
 			log.Warnf("LabelWait - label(%s) timeout, pos=%s, current=%s, target=%s\n", name, lbl.Position, cur, lbl.Color)
 		}
-		time.Sleep(time.Second)
+		if ix.WaitOrPass(time.Second) {
+			log.Infof("LabelWait - bypass label(%s) timeout=%v cost=%v\n", name, timeout, time.Since(st))
+			return
+		}
 	}
 }
 
