@@ -15,13 +15,20 @@ type Label struct {
 
 var labels = map[string]*Label{
 	// 世界
-	"世界-导航":   {ix.Position{X: 939, Y: 19}, ix.Color{R: 255, G: 255, B: 255}, time.Second},
-	"世界-经验条":  {ix.Position{X: 2, Y: 538}, ix.Color{R: 254, G: 167, B: 14}, 0},
-	"世界-电量":   {ix.Position{X: 204, Y: 528}, ix.Color{R: 122, G: 195, B: 0}, 0},
-	"世界-技能8":  {ix.Position{X: 820, Y: 500}, ix.Color{}, time.Second},
-	"世界-自动战斗": {ix.Position{X: 316, Y: 495}, ix.Color{}, time.Second},
-	"世界-聊天栏":  {ix.Position{X: 475, Y: 520}, ix.Color{}, 2 * time.Second},
-
+	"世界-导航":     {ix.Position{X: 939, Y: 19}, ix.Color{R: 255, G: 255, B: 255}, time.Second},
+	"世界-经验条":    {ix.Position{X: 2, Y: 538}, ix.Color{R: 254, G: 167, B: 14}, 0},
+	"世界-电量":     {ix.Position{X: 204, Y: 528}, ix.Color{R: 122, G: 195, B: 0}, 0},
+	"世界-技能8":    {ix.Position{X: 820, Y: 500}, ix.Color{}, time.Second},
+	"世界-自动战斗":   {ix.Position{X: 316, Y: 495}, ix.Color{}, time.Second},
+	"世界-聊天栏":    {ix.Position{X: 475, Y: 520}, ix.Color{}, 2 * time.Second},
+	"世界-邮箱":     {ix.Position{X: 786, Y: 27}, ix.ColorWhite, 3 * time.Second},
+	"世界-日常":     {ix.Position{X: 742, Y: 27}, ix.ColorWhite, 3 * time.Second},
+	"世界-角色":     {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
+	"世界-成长":     {ix.Position{X: 651, Y: 26}, ix.ColorWhite, 3 * time.Second},
+	"世界-公会":     {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 3 * time.Second},
+	"世界-社交":     {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
+	"世界-贸易":     {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
+	"世界-领取日常":   {ix.Position{X: 610, Y: 300}, ix.ColorButtonBlue, 2 * time.Second},
 	"聊天栏-公会":    {ix.Position{X: 24, Y: 120}, ix.Color{R: 11, G: 13, B: 17}, time.Second},
 	"聊天栏-表情":    {ix.Position{X: 284, Y: 506}, ix.ColorWhite, time.Second},
 	"聊天栏-表情-害羞": {ix.Position{X: 745, Y: 95}, ix.Color{R: 255, G: 219, B: 85}, time.Second},

@@ -18,8 +18,6 @@ func init() {
 	context.ProvideTask("领取个人奖励", lqgrjl)
 	context.ProvideTask("送人气", srq)
 	context.ProvideTask("领取日常奖励", lqrcjl)
-	context.ProvideTask("领取周常奖励", lqzcjl)
-	context.ProvideTask("补充训练时间", bcxlsj)
 	context.ProvideTask("公会聊天", ghlt)
 	context.ProvideTask("领取公会奖励", lqghjl)
 	context.ProvideTask("怪物乐园跳关", gwlytg)
@@ -27,9 +25,8 @@ func init() {
 
 // tkdmy 天空岛贸易
 func tkdmy(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-天空岛贸易")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-贸易", 5*time.Second)
 	LabelWaitClick("天空岛贸易-前往获取战利品", 5*time.Second)
 	LabelWaitClick("天空岛贸易-入场", 5*time.Second)
 	ctx.Schedule()
@@ -42,25 +39,23 @@ func tkdmy(ctx *context.Context) {
 
 // wldc 武陵道场
 func wldc(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-日常")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式5号")
 	LabelWaitClick("武陵道场-入场", 5*time.Second)
 	LabelWaitClick("武陵道场-进入", 5*time.Second)
 	ctx.Schedule()
 	LabelWaitClick("副本-退出", 15*time.Second)
-	time.Sleep(6500 * time.Millisecond)
+	time.Sleep(6 * time.Second)
 	LabelWaitClick("武陵道场-退出", 5*time.Second)
 	LabelWaitClick("武陵道场-离开", 10*time.Second)
 }
 
 // zcfb 周常副本
 func zcfb(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-日常")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式3号")
 	LabelWait("周常副本-入场", 5*time.Second)
@@ -77,9 +72,8 @@ func zcfb(ctx *context.Context) {
 
 // jyfb 精英副本
 func jyfb(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-日常")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式2号")
 	LabelWait("精英副本-普通", 5*time.Second)
@@ -106,9 +100,8 @@ func jyfb(ctx *context.Context) {
 
 // clfb 材料副本
 func clfb(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-日常")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式1号")
 	LabelWait("材料副本-入场", 5*time.Second)
@@ -129,9 +122,8 @@ func clfb(ctx *context.Context) {
 
 // ntdjzt 奈特的金字塔
 func ntdjzt(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-日常")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式4号")
 	LabelWaitClick("奈特的金字塔-快速组队", 5*time.Second)
@@ -153,9 +145,8 @@ func zdzdsj(ctx *context.Context) {
 
 // ghqd 公会签到
 func ghqd(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-公会")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-公会", 5*time.Second)
 	LabelWait("公会-领地树", 5*time.Second)
 
 	if flag := ctx.GetOption("领地树祝福"); flag != "NO" {
@@ -165,16 +156,15 @@ func ghqd(ctx *context.Context) {
 		LabelClick("公会-领地树-祝福领取取消")
 	}
 
-	LabelClick("公会-领取")
+	// LabelClick("公会-领取")
 	ctx.Schedule()
 	BackWorld()
 }
 
 // lqgrjl 领取个人奖励
 func lqgrjl(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-邮箱")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-邮箱", 5*time.Second)
 	LabelWait("邮箱-通用", 5*time.Second)
 	LabelClick("邮箱-个人")
 	LabelClick("邮箱-全部领取")
@@ -185,9 +175,8 @@ func lqgrjl(ctx *context.Context) {
 
 // srq 送人气
 func srq(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-社交")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-社交", 5*time.Second)
 	LabelWaitClick("社交-微信好友", 5*time.Second)
 	LabelWait("社交-微信好友-背景", 5*time.Second)
 	LabelClick("社交-微信好友-战斗力")
@@ -202,60 +191,12 @@ func srq(ctx *context.Context) {
 
 // lqrcjl 领取日常奖励
 func lqrcjl(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-成长")
-
-	LabelWait("成长-标题", 5*time.Second)
-	LabelClick("成长-每日任务")
-
-	LabelClick("成长-每日任务-全部领取")
-	LabelClick("成长-领取确认")
-	LabelClick("成长-领取确认2")
-	LabelWait("成长-标题", 5*time.Second)
-	LabelClick("成长-每日任务-全部领取")
-	LabelClick("成长-领取确认")
-	LabelClick("成长-领取确认2")
-
+	LabelWait("世界-电量", 5*time.Second)
+	for LabelCheck("世界-领取日常") {
+		LabelClick("世界-领取日常")
+		BackWorld()
+	}
 	ctx.Schedule()
-	BackWorld()
-}
-
-// lqzcjl 领取周常奖励
-func lqzcjl(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-成长")
-
-	LabelWait("成长-标题", 5*time.Second)
-	LabelClick("成长-每周任务")
-
-	LabelClick("成长-每周任务-全部领取")
-	LabelClick("成长-领取确认")
-	LabelClick("成长-领取确认2")
-	LabelWait("成长-标题", 5*time.Second)
-	LabelClick("成长-每周任务-全部领取")
-	LabelClick("成长-领取确认")
-	LabelClick("成长-领取确认2")
-	LabelWait("成长-标题", 5*time.Second)
-	LabelClick("成长-每周任务-全部领取")
-	LabelClick("成长-领取确认")
-	LabelClick("成长-领取确认2")
-
-	ctx.Schedule()
-	BackWorld()
-}
-
-// bcxlsj 补充训练时间
-func bcxlsj(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-角色训练场")
-	LabelWaitClick("角色训练场-补充时间", 5*time.Second)
-	LabelClick("角色训练场-补充时间-使用")
-	LabelClick("角色训练场-补充时间-使用")
-	ctx.Schedule()
-	LabelWaitClick("角色训练场-补充时间-确定", 5*time.Second)
 	BackWorld()
 }
 
@@ -273,9 +214,8 @@ func ghlt(ctx *context.Context) {
 
 // lqghjl 领取公会奖励
 func lqghjl(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-公会")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-公会", 5*time.Second)
 	LabelClick("公会-公会任务")
 	LabelClick("公会-公会任务-每日任务")
 	LabelClick("公会-公会任务-全部领取")
@@ -287,19 +227,14 @@ func lqghjl(ctx *context.Context) {
 
 // gwlytg 怪物乐园跳关
 func gwlytg(ctx *context.Context) {
-	LabelWaitClick("世界-导航", 5*time.Second)
-	LabelWait("导航-枫小喵", 5*time.Second)
-	LabelClick("导航-日常")
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWaitClick("日常-进度", 5*time.Second)
 	LabelWait("日常-进度-关闭", 5*time.Second)
 	ix.Swipe(ix.Position{X: 579, Y: 481}, ix.Position{X: 579, Y: 50}, 1500)
 	LabelWaitClick("日常-进度-怪物乐园跳关", 5*time.Second)
 	LabelWait("日常-进度-怪物乐园跳关-标题", 5*time.Second)
-	if name := ctx.GetOption("副本名"); name != "" {
-		LabelWaitClick("日常-进度-怪物乐园跳关-"+name, 5*time.Second)
-	} else {
-		LabelWaitClick("日常-进度-怪物乐园跳关-隐匿痕迹", 5*time.Second)
-	}
+	// LabelWaitClick("日常-进度-怪物乐园跳关-隐匿痕迹", 5*time.Second)
 	LabelWaitClick("日常-进度-怪物乐园跳关-使用战斗跳关券", 5*time.Second)
 	LabelWaitClick("日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 	ctx.Schedule()

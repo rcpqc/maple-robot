@@ -1,10 +1,8 @@
 tasks:
   - name: 自动战斗时间
+  - name: 送人气
   - name: 公会签到
   - name: 领取个人奖励
-  - name: 怪物乐园跳关
-    options: 
-      副本名: 大木林
   - name: 天空岛贸易
   - name: 周常副本
   - name: 武陵道场
@@ -17,11 +15,6 @@ tasks:
     condition: '560'
   - name: 材料副本
     options:
-      副本名: 神木村
-    subs:
-      # - name: 补充训练时间
-      - name: 送人气
-      - name: 领取日常奖励
-      - name: 领取公会奖励
-  - name: 领取周常奖励
-    condition: '560'
+      副本名: 龙之峡谷
+  - name: 领取日常奖励
+  - name: 领取公会奖励
