@@ -137,7 +137,7 @@ var labels = map[string]*Label{
 	"材料副本-武陵桃源":      {ix.Position{X: 72, Y: 445}, ix.Color{}, time.Second},
 	"材料副本-入场":        {ix.Position{X: 830, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"材料副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"材料副本-进入副本-全部解除": {ix.Position{X: 843, Y: 426}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
+	"材料副本-进入副本-全部解除": {ix.Position{X: 843, Y: 426}, ix.ColorButtonWine, time.Second},
 	"材料副本-进入副本-确定":   {ix.Position{X: 560, Y: 480}, ix.ColorButtonOrange, time.Second},
 	"材料副本-副本结算-退出":   {ix.Position{X: 228, Y: 423}, ix.ColorButtonBlue, 3 * time.Second},
 
@@ -151,6 +151,7 @@ var labels = map[string]*Label{
 	"精英副本-副本结算-单人离开": {ix.Position{X: 322, Y: 440}, ix.ColorButtonBlue, 3 * time.Second},
 	"精英副本-副本结算-离开":   {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 3 * time.Second},
 	// 周常副本
+	"周常副本-特殊":      {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, time.Second},
 	"周常副本-星期五":     {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
 	"周常副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"周常副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
@@ -174,6 +175,7 @@ var labels = map[string]*Label{
 	"武陵道场-进入": {ix.Position{X: 400, Y: 462}, ix.ColorButtonOrange, time.Second},
 	"武陵道场-退出": {ix.Position{X: 555, Y: 406}, ix.ColorButtonOrange, time.Second},
 	"武陵道场-离开": {ix.Position{X: 347, Y: 483}, ix.ColorButtonBlue, time.Second},
+
 	// 太初森林
 	"太初森林-精灵": {ix.Position{X: 477, Y: 133}, ix.Color{R: 222, G: 156, B: 143}, time.Second},
 	// "太初森林-精灵": {ix.Position{X: 477, Y: 133}, ix.Color{R: 206, G: 107, B: 103}, time.Second},
@@ -181,6 +183,18 @@ var labels = map[string]*Label{
 	"太初森林-退出":   {ix.Position{X: 926, Y: 214}, ix.Color{}, time.Second},
 	"太初森林-退出确认": {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
 	"太初森林-结果确认": {ix.Position{X: 450, Y: 430}, ix.ColorButtonBlue, 2 * time.Second},
+
+	// 金钩海兵王
+	"金钩海兵王-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"金钩海兵王-快速组队-入场确认": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"金钩海兵王-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 3 * time.Second},
+
+	// 怪物乐园
+	"怪物乐园-入场":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-入场-票券确认": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-入场-经验增益": {ix.Position{X: 600, Y: 400}, ix.ColorButtonYellow, time.Second},
+	"怪物乐园-入场-入场":   {ix.Position{X: 550, Y: 480}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-副本结算-退出": {ix.Position{X: 250, Y: 488}, ix.ColorButtonBlue, 3 * time.Second},
 
 	// 更改角色
 	"更改角色-选择角色": {ix.Position{X: 269, Y: 480}, ix.Color{}, time.Second},

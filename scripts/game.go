@@ -8,11 +8,14 @@ import (
 
 func init() {
 	context.ProvideTask("天空岛贸易", tkdmy)
-	context.ProvideTask("武陵道场", wldc)
-	context.ProvideTask("周常副本", zcfb)
-	context.ProvideTask("精英副本", jyfb)
 	context.ProvideTask("材料副本", clfb)
+	context.ProvideTask("精英副本", jyfb)
+	context.ProvideTask("周常副本", zcfb)
+	context.ProvideTask("特殊周常副本", zcfb)
 	context.ProvideTask("奈特的金字塔", ntdjzt)
+	context.ProvideTask("武陵道场", wldc)
+	context.ProvideTask("金钩海兵王", jghbw)
+	context.ProvideTask("怪物乐园", gwly)
 	context.ProvideTask("自动战斗时间", zdzdsj)
 	context.ProvideTask("公会签到", ghqd)
 	context.ProvideTask("领取个人奖励", lqgrjl)
@@ -35,6 +38,7 @@ func tkdmy(ctx *context.Context) {
 	LabelWaitClick("副本-退出", 5*time.Second)
 	LabelWaitClick("太初森林-退出确认", 5*time.Second)
 	LabelWaitClick("太初森林-结果确认", 5*time.Second)
+	BackWorld()
 }
 
 // wldc 武陵道场
@@ -50,6 +54,7 @@ func wldc(ctx *context.Context) {
 	time.Sleep(6 * time.Second)
 	LabelWaitClick("武陵道场-退出", 5*time.Second)
 	LabelWaitClick("武陵道场-离开", 10*time.Second)
+	BackWorld()
 }
 
 // zcfb 周常副本
@@ -58,6 +63,9 @@ func zcfb(ctx *context.Context) {
 	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式3号")
+	if mode := ctx.GetOption("模式"); mode == "特殊" {
+		LabelClick("周常副本-特殊")
+	}
 	LabelWait("周常副本-入场", 5*time.Second)
 	if time.Now().Weekday() == time.Saturday || time.Now().Weekday() == time.Sunday {
 		LabelClick("周常副本-星期五")
@@ -68,6 +76,7 @@ func zcfb(ctx *context.Context) {
 	ctx.Schedule()
 	ctx.ExecuteSubs()
 	LabelWaitClick("周常副本-副本结算-退出", 90*time.Second)
+	BackWorld()
 }
 
 // jyfb 精英副本
@@ -86,7 +95,7 @@ func jyfb(ctx *context.Context) {
 		LabelWaitClick("精英副本-集结地-开始", 5*time.Second)
 		ctx.Schedule()
 		ctx.ExecuteSubs()
-		LabelWaitClick("精英副本-副本结算-单人离开", 60*time.Second)
+		LabelWaitClick("精英副本-副本结算-单人离开", 90*time.Second)
 	} else {
 		LabelWaitClick("精英副本-快速组队", 5*time.Second)
 		LabelWaitClick("精英副本-入场-确定", 5*time.Second)
@@ -96,6 +105,7 @@ func jyfb(ctx *context.Context) {
 		ctx.ExecuteSubs()
 		LabelWaitClick("精英副本-副本结算-离开", 180*time.Second)
 	}
+	BackWorld()
 }
 
 // clfb 材料副本
@@ -118,6 +128,7 @@ func clfb(ctx *context.Context) {
 	ctx.Schedule()
 	ctx.ExecuteSubs()
 	LabelWaitClick("材料副本-副本结算-退出", 300*time.Second)
+	BackWorld()
 }
 
 // ntdjzt 奈特的金字塔
@@ -133,6 +144,41 @@ func ntdjzt(ctx *context.Context) {
 	ctx.Schedule()
 	ctx.ExecuteSubs()
 	LabelWaitClick("奈特的金字塔-副本结算-退出", 180*time.Second)
+	BackWorld()
+}
+
+// jghbw 金钩海兵王
+func jghbw(ctx *context.Context) {
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
+	LabelWait("日常-进度", 5*time.Second)
+	LabelClick("日常-简化模式6号")
+	LabelWaitClick("金钩海兵王-快速组队", 5*time.Second)
+	LabelWaitClick("金钩海兵王-快速组队-入场确认", 5*time.Second)
+	LabelWait("副本-退出", 60*time.Second)
+	ctx.Schedule()
+	ctx.ExecuteSubs()
+	LabelWaitClick("金钩海兵王-副本结算-退出", 120*time.Second)
+	BackWorld()
+}
+
+// gwly 怪物乐园
+func gwly(ctx *context.Context) {
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-日常", 5*time.Second)
+	LabelWait("日常-进度", 5*time.Second)
+	LabelClick("日常-简化模式7号")
+	buff := ctx.GetOption("经验增益")
+	LabelWaitClick("怪物乐园-入场", 5*time.Second)
+	LabelWaitClick("怪物乐园-入场-票券确认", 5*time.Second)
+	if buff != "" {
+		LabelWaitClick("怪物乐园-入场-经验增益", 5*time.Second)
+	}
+	LabelWaitClick("怪物乐园-入场-入场", 5*time.Second)
+	LabelWait("副本-退出", 10*time.Second)
+	ctx.Schedule()
+	LabelWaitClick("怪物乐园-副本结算-退出", 360*time.Second)
+	BackWorld()
 }
 
 // zdzdsj 自动战斗时间
@@ -141,6 +187,7 @@ func zdzdsj(ctx *context.Context) {
 	LabelClick("自动战斗-使用")
 	ctx.Schedule()
 	LabelClick("自动战斗-关闭")
+	BackWorld()
 }
 
 // ghqd 公会签到

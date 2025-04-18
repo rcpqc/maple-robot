@@ -18,6 +18,7 @@ var (
 	ColorButtonGray        = Color{97, 122, 149}  // 按钮灰色
 	ColorButtonDisable     = Color{195, 195, 195} // 失效按钮
 	ColorButtonYellow      = Color{255, 215, 65}  // 按钮黄色
+	ColorButtonWine        = Color{188, 60, 87}   // 按钮酒红色
 	ColorTitleGray         = Color{65, 80, 102}   // 标题栏灰色
 	ColorWhite             = Color{255, 255, 255} // 白色
 	ColorButtonExitDungeon = Color{255, 204, 0}   // 退出副本按钮橙色
