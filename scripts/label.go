@@ -48,7 +48,7 @@ var labels = map[string]*Label{
 	"导航-公会":    {ix.Position{X: 645, Y: 230}, ix.Color{}, 3 * time.Second},
 	"导航-成长":    {ix.Position{X: 820, Y: 90}, ix.Color{}, 3 * time.Second},
 	"导航-日常":    {ix.Position{X: 860, Y: 230}, ix.Color{}, 3 * time.Second},
-	"导航-社交":    {ix.Position{X: 645, Y: 360}, ix.Color{}, 5 * time.Second},
+	"导航-社交":    {ix.Position{X: 645, Y: 360}, ix.Color{}, 3 * time.Second},
 	"导航-邮箱":    {ix.Position{X: 794, Y: 25}, ix.Color{}, 3 * time.Second},
 	"导航-关闭":    {ix.Position{X: 925, Y: 21}, ix.Color{}, 3 * time.Second},
 	"导航-更改角色":  {ix.Position{X: 881, Y: 497}, ix.Color{}, 3 * time.Second},
@@ -70,7 +70,7 @@ var labels = map[string]*Label{
 	"日常-寻找队伍":              {ix.Position{X: 853, Y: 91}, ix.ColorButtonOrange, time.Second},
 	"日常-进度-金币":             {ix.Position{X: 716, Y: 138}, ix.Color{R: 255, G: 232, B: 70}, time.Second},
 	"日常-进度-关闭":             {ix.Position{X: 858, Y: 139}, ix.ColorWhite, time.Second},
-	"日常-进度-怪物乐园跳关":         {ix.Position{X: 808, Y: 425}, ix.Color{R: 255, G: 123, B: 80}, time.Second},
+	"日常-进度-怪物乐园跳关":         {ix.Position{X: 774, Y: 472}, ix.Color{R: 255, G: 123, B: 80}, time.Second},
 	"日常-进度-怪物乐园跳关-标题":      {ix.Position{X: 161, Y: 68}, ix.ColorTitleGray, time.Second},
 	"日常-进度-怪物乐园跳关-隐匿痕迹":    {ix.Position{X: 200, Y: 250}, ix.Color{R: 187, G: 194, B: 202}, time.Second},
 	"日常-进度-怪物乐园跳关-大木林":     {ix.Position{X: 400, Y: 250}, ix.Color{R: 187, G: 194, B: 202}, time.Second},
@@ -103,7 +103,7 @@ var labels = map[string]*Label{
 	"公会-公会任务":       {ix.Position{X: 100, Y: 370}, ix.Color{R: 43, G: 54, B: 70}, time.Second},
 	"公会-公会任务-每日任务":  {ix.Position{X: 216, Y: 92}, ix.Color{}, time.Second},
 	"公会-公会任务-每周任务":  {ix.Position{X: 370, Y: 92}, ix.Color{}, time.Second},
-	"公会-公会任务-全部领取":  {ix.Position{X: 830, Y: 510}, ix.ColorButtonOrange, 3 * time.Second},
+	"公会-公会任务-全部领取":  {ix.Position{X: 830, Y: 510}, ix.ColorButtonOrange, 2 * time.Second},
 
 	// 邮箱
 	"邮箱-通用": {ix.Position{X: 143, Y: 101}, ix.Color{R: 238, G: 117, B: 70}, time.Second},
@@ -171,10 +171,11 @@ var labels = map[string]*Label{
 	"天空岛贸易-退出确认":    {ix.Position{X: 590, Y: 400}, ix.Color{}, time.Second},
 
 	// 武陵道场
-	"武陵道场-入场": {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"武陵道场-进入": {ix.Position{X: 400, Y: 462}, ix.ColorButtonOrange, time.Second},
-	"武陵道场-退出": {ix.Position{X: 555, Y: 406}, ix.ColorButtonOrange, time.Second},
-	"武陵道场-离开": {ix.Position{X: 347, Y: 483}, ix.ColorButtonBlue, time.Second},
+	"武陵道场-入场":     {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"武陵道场-进入":     {ix.Position{X: 400, Y: 462}, ix.ColorButtonOrange, time.Second},
+	"武陵道场-挑战武陵道场": {ix.Position{X: 382, Y: 489}, ix.ColorButtonOrange, time.Second},
+	"武陵道场-退出":     {ix.Position{X: 555, Y: 406}, ix.ColorButtonOrange, time.Second},
+	"武陵道场-离开":     {ix.Position{X: 347, Y: 483}, ix.ColorButtonBlue, time.Second},
 
 	// 太初森林
 	"太初森林-精灵": {ix.Position{X: 477, Y: 133}, ix.Color{R: 222, G: 156, B: 143}, time.Second},

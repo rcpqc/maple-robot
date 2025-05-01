@@ -3,6 +3,7 @@ tasks:
   - name: 送人气
   - name: 公会签到
   - name: 领取个人奖励
+  - name: 怪物乐园
   - name: 天空岛贸易
   - name: 周常副本
   - name: 武陵道场

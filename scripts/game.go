@@ -47,6 +47,8 @@ func wldc(ctx *context.Context) {
 	LabelWaitClick("世界-日常", 5*time.Second)
 	LabelWait("日常-进度", 5*time.Second)
 	LabelClick("日常-简化模式5号")
+	time.Sleep(3 * time.Second)
+	LabelClick("武陵道场-挑战武陵道场")
 	LabelWaitClick("武陵道场-入场", 5*time.Second)
 	LabelWaitClick("武陵道场-进入", 5*time.Second)
 	ctx.Schedule()
@@ -74,7 +76,6 @@ func zcfb(ctx *context.Context) {
 	LabelWaitClick("周常副本-入场-确定", 5*time.Second)
 	LabelWait("副本-退出", 15*time.Second)
 	ctx.Schedule()
-	ctx.ExecuteSubs()
 	LabelWaitClick("周常副本-副本结算-退出", 90*time.Second)
 	BackWorld()
 }
@@ -94,7 +95,6 @@ func jyfb(ctx *context.Context) {
 		LabelWaitClick("精英副本-入场-确定", 5*time.Second)
 		LabelWaitClick("精英副本-集结地-开始", 5*time.Second)
 		ctx.Schedule()
-		ctx.ExecuteSubs()
 		LabelWaitClick("精英副本-副本结算-单人离开", 90*time.Second)
 	} else {
 		LabelWaitClick("精英副本-快速组队", 5*time.Second)
@@ -102,7 +102,6 @@ func jyfb(ctx *context.Context) {
 		LabelWait("副本-退出", 60*time.Second)
 		LabelWait("副本-麦克风", 15*time.Second)
 		ctx.Schedule()
-		ctx.ExecuteSubs()
 		LabelWaitClick("精英副本-副本结算-离开", 180*time.Second)
 	}
 	BackWorld()
@@ -126,7 +125,6 @@ func clfb(ctx *context.Context) {
 	LabelWaitClick("材料副本-进入副本-确定", 5*time.Second)
 	LabelWait("副本-退出", 15*time.Second)
 	ctx.Schedule()
-	ctx.ExecuteSubs()
 	LabelWaitClick("材料副本-副本结算-退出", 300*time.Second)
 	BackWorld()
 }
@@ -142,7 +140,6 @@ func ntdjzt(ctx *context.Context) {
 	LabelWait("副本-退出", 60*time.Second)
 	LabelWait("副本-麦克风", 30*time.Second)
 	ctx.Schedule()
-	ctx.ExecuteSubs()
 	LabelWaitClick("奈特的金字塔-副本结算-退出", 180*time.Second)
 	BackWorld()
 }
@@ -157,7 +154,6 @@ func jghbw(ctx *context.Context) {
 	LabelWaitClick("金钩海兵王-快速组队-入场确认", 5*time.Second)
 	LabelWait("副本-退出", 60*time.Second)
 	ctx.Schedule()
-	ctx.ExecuteSubs()
 	LabelWaitClick("金钩海兵王-副本结算-退出", 120*time.Second)
 	BackWorld()
 }
@@ -186,7 +182,7 @@ func zdzdsj(ctx *context.Context) {
 	LabelClick("世界-自动战斗")
 	LabelClick("自动战斗-使用")
 	ctx.Schedule()
-	LabelClick("自动战斗-关闭")
+	// LabelClick("自动战斗-关闭")
 	BackWorld()
 }
 
@@ -232,7 +228,7 @@ func srq(ctx *context.Context) {
 	LabelClick("社交-送人气确定")
 	LabelClick("社交-送人气不提醒")
 	ctx.Schedule()
-	LabelClick("社交-送人气关闭")
+	// LabelClick("社交-送人气关闭")
 	BackWorld()
 }
 
@@ -266,8 +262,10 @@ func lqghjl(ctx *context.Context) {
 	LabelClick("公会-公会任务")
 	LabelClick("公会-公会任务-每日任务")
 	LabelClick("公会-公会任务-全部领取")
-	LabelClick("公会-公会任务-每周任务")
-	LabelClick("公会-公会任务-全部领取")
+	if time.Now().Weekday() == time.Saturday || time.Now().Weekday() == time.Sunday {
+		LabelClick("公会-公会任务-每周任务")
+		LabelClick("公会-公会任务-全部领取")
+	}
 	ctx.Schedule()
 	BackWorld()
 }
