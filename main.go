@@ -11,6 +11,7 @@ func main() {
 	if err != nil {
 		log.Fatalf(err.Error())
 	}
+	entered := false
 	for _, role := range ctx.Roles {
 		if role.Records == nil {
 			role.Records = make(context.Records)
@@ -25,10 +26,15 @@ func main() {
 		if err != nil {
 			log.Fatalf("[角色-%d] 加载脚本(%s) -> %v", role.Index, role.Script, err)
 		}
-		scripts.Enter(role.Index)
+		if !entered {
+			scripts.Enter(role.Index)
+			entered = true
+		} else {
+			scripts.WaitEnter()
+		}
 		ctx.Lanuch()
 		ctx.Execute(script.Tasks)
-		scripts.Exit()
+		scripts.NextRole()
 		ctx.Finish()
 	}
 }

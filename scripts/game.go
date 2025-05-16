@@ -173,7 +173,15 @@ func gwly(ctx *context.Context) {
 	LabelWaitClick("怪物乐园-入场-入场", 5*time.Second)
 	LabelWait("副本-退出", 10*time.Second)
 	ctx.Schedule()
-	LabelWaitClick("怪物乐园-副本结算-退出", 360*time.Second)
+	extraBonus := ctx.GetOption("追加奖励")
+	if extraBonus != "" {
+		LabelWaitClick("怪物乐园-副本结算-追加奖励", 360*time.Second)
+		LabelWaitClick("怪物乐园-副本结算-追加奖励-确定", 5*time.Second)
+		time.Sleep(2 * time.Second)
+		LabelWaitClick("怪物乐园-副本结算-退出", 5*time.Second)
+	} else {
+		LabelWaitClick("怪物乐园-副本结算-退出", 360*time.Second)
+	}
 	BackWorld()
 }
 
@@ -277,6 +285,7 @@ func gwlytg(ctx *context.Context) {
 	LabelWaitClick("日常-进度", 5*time.Second)
 	LabelWait("日常-进度-关闭", 5*time.Second)
 	ix.Swipe(ix.Position{X: 579, Y: 481}, ix.Position{X: 579, Y: 50}, 1500)
+	time.Sleep(time.Second)
 	LabelWaitClick("日常-进度-怪物乐园跳关", 5*time.Second)
 	LabelWait("日常-进度-怪物乐园跳关-标题", 5*time.Second)
 	// LabelWaitClick("日常-进度-怪物乐园跳关-隐匿痕迹", 5*time.Second)

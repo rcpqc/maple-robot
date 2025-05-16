@@ -178,11 +178,10 @@ var labels = map[string]*Label{
 	"武陵道场-离开":     {ix.Position{X: 347, Y: 483}, ix.ColorButtonBlue, time.Second},
 
 	// 太初森林
-	"太初森林-精灵": {ix.Position{X: 477, Y: 133}, ix.Color{R: 222, G: 156, B: 143}, time.Second},
-	// "太初森林-精灵": {ix.Position{X: 477, Y: 133}, ix.Color{R: 206, G: 107, B: 103}, time.Second},
+	"太初森林-精灵":   {ix.Position{X: 477, Y: 133}, ix.Color{R: 222, G: 156, B: 143}, time.Second},
 	"太初森林-今日":   {ix.Position{X: 855, Y: 61}, ix.Color{R: 97, G: 220, B: 255}, time.Second},
 	"太初森林-退出":   {ix.Position{X: 926, Y: 214}, ix.Color{}, time.Second},
-	"太初森林-退出确认": {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
+	"太初森林-退出确认": {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, 3 * time.Second},
 	"太初森林-结果确认": {ix.Position{X: 450, Y: 430}, ix.ColorButtonBlue, 2 * time.Second},
 
 	// 金钩海兵王
@@ -191,14 +190,23 @@ var labels = map[string]*Label{
 	"金钩海兵王-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 3 * time.Second},
 
 	// 怪物乐园
-	"怪物乐园-入场":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"怪物乐园-入场-票券确认": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"怪物乐园-入场-经验增益": {ix.Position{X: 600, Y: 400}, ix.ColorButtonYellow, time.Second},
-	"怪物乐园-入场-入场":   {ix.Position{X: 550, Y: 480}, ix.ColorButtonOrange, time.Second},
-	"怪物乐园-副本结算-退出": {ix.Position{X: 250, Y: 488}, ix.ColorButtonBlue, 3 * time.Second},
+	"怪物乐园-入场":           {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-入场-票券确认":      {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-入场-经验增益":      {ix.Position{X: 600, Y: 400}, ix.ColorButtonYellow, time.Second},
+	"怪物乐园-入场-入场":        {ix.Position{X: 550, Y: 480}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-副本结算-追加奖励":    {ix.Position{X: 606, Y: 388}, ix.Color{R: 232, G: 188, B: 0}, time.Second},
+	"怪物乐园-副本结算-追加奖励-确定": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"怪物乐园-副本结算-退出":      {ix.Position{X: 250, Y: 488}, ix.ColorButtonBlue, 3 * time.Second},
 
 	// 更改角色
-	"更改角色-选择角色": {ix.Position{X: 269, Y: 480}, ix.Color{}, time.Second},
+	"更改角色-选择角色": {ix.Position{X: 220, Y: 480}, ix.ColorButtonBlue, time.Second},
+	"更改角色-上左":   {ix.Position{X: 360, Y: 180}, ix.ColorButtonYellow, time.Second},
+	"更改角色-上右":   {ix.Position{X: 660, Y: 180}, ix.ColorButtonYellow, time.Second},
+	"更改角色-中左":   {ix.Position{X: 360, Y: 270}, ix.ColorButtonYellow, time.Second},
+	"更改角色-中右":   {ix.Position{X: 660, Y: 270}, ix.ColorButtonYellow, time.Second},
+	"更改角色-下左":   {ix.Position{X: 360, Y: 360}, ix.ColorButtonYellow, time.Second},
+	"更改角色-下右":   {ix.Position{X: 660, Y: 360}, ix.ColorButtonYellow, time.Second},
+	"更改角色-变更":   {ix.Position{X: 650, Y: 480}, ix.ColorButtonOrange, 3 * time.Second},
 
 	// 角色选择
 	"角色选择-服务器":    {ix.Position{X: 890, Y: 125}, ix.Color{R: 229, G: 199, B: 140}, 0},

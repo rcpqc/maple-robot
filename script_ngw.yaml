@@ -13,7 +13,7 @@ tasks:
     options:
       模式: 单人
   - name: 奈特的金字塔
-    condition: '560'
+    condition: '56'
   - name: 材料副本
     options:
       副本名: 龙之峡谷

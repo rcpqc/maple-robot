@@ -33,6 +33,13 @@ func Enter(index int) {
 	LabelClick("世界-技能8")
 }
 
+func WaitEnter() {
+	// 等待进入
+	LabelWait("世界-电量", 30*time.Second)
+
+	LabelClick("世界-技能8")
+}
+
 func Exit() {
 	log.Infof("返回角色界面\n")
 	for !LabelCheck("通用-游戏结束-否", "通用-游戏结束-返回角色界面", "通用-游戏结束-是") {
@@ -43,12 +50,49 @@ func Exit() {
 
 func BackWorld() {
 	log.Infof("返回世界界面\n")
-	for !LabelCheck("世界-导航", "世界-电量") {
-		Back()
+	for {
+		for !LabelCheck("世界-导航", "世界-电量") {
+			Back()
+		}
+		time.Sleep(2 * time.Second)
+		if LabelCheck("世界-导航", "世界-电量") {
+			break
+		}
 	}
 }
 
 func Back() {
 	ix.Key(ix.KeyCodeEscape)
 	time.Sleep(1500 * time.Millisecond)
+}
+
+func NextRole() bool {
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-角色", 5*time.Second)
+	LabelWait("更改角色-选择角色", 5*time.Second)
+	if LabelCheck("更改角色-上左") {
+		LabelClick("更改角色-上右")
+		LabelWaitClick("更改角色-变更", 5*time.Second)
+		return true
+	} else if LabelCheck("更改角色-上右") {
+		LabelClick("更改角色-中左")
+		LabelWaitClick("更改角色-变更", 5*time.Second)
+		return true
+	} else if LabelCheck("更改角色-中左") {
+		LabelClick("更改角色-中右")
+		LabelWaitClick("更改角色-变更", 5*time.Second)
+		return true
+	} else if LabelCheck("更改角色-中右") {
+		LabelClick("更改角色-下左")
+		LabelWaitClick("更改角色-变更", 5*time.Second)
+		return true
+	} else if LabelCheck("更改角色-下左") {
+		LabelClick("更改角色-下右")
+		LabelWaitClick("更改角色-变更", 5*time.Second)
+		return true
+	} else if LabelCheck("更改角色-下右") {
+		LabelClick("更改角色-选择角色")
+		return false
+	}
+	return false
 }
