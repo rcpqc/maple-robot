@@ -1,8 +1,10 @@
 package scripts
 
 import (
+	"fmt"
 	"maple-robot/context"
 	"maple-robot/ix"
+	"strconv"
 	"time"
 )
 
@@ -24,6 +26,7 @@ func init() {
 	context.ProvideTask("公会聊天", ghlt)
 	context.ProvideTask("领取公会奖励", lqghjl)
 	context.ProvideTask("怪物乐园跳关", gwlytg)
+	context.ProvideTask("委托佣兵", wtyb)
 }
 
 // tkdmy 天空岛贸易
@@ -293,5 +296,53 @@ func gwlytg(ctx *context.Context) {
 	LabelWaitClick("日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 	ctx.Schedule()
 	LabelWaitClick("日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
+	BackWorld()
+}
+
+// 委托佣兵
+func wtyb(ctx *context.Context) {
+	LabelWait("世界-电量", 5*time.Second)
+	LabelWaitClick("世界-委托", 5*time.Second)
+	LabelWait("委托-切换", 5*time.Second)
+	maxChange, _ := strconv.ParseInt(ctx.GetOption("最大切换"), 10, 64)
+	maxChange = min(max(maxChange, 0), 5)
+	maxAccept, _ := strconv.ParseInt(ctx.GetOption("最大接受"), 10, 64)
+	maxAccept = min(max(maxAccept, 1), 3)
+
+	// 接受委托
+	change, pos := 0, 1
+	for LabelColor(fmt.Sprintf("委托-接受%d号位", maxAccept)) == ix.ColorMissionEmpty {
+		if LabelColor(fmt.Sprintf("委托-发布%d号位", pos)) == ix.ColorMissionHard {
+			LabelClick(fmt.Sprintf("委托-发布%d号位", pos))
+			LabelWaitClick("委托-发布接受", 5*time.Second)
+		}
+		pos++
+		// 判定完成一页
+		if pos > 5 {
+			if change < int(maxChange) {
+				LabelClick("委托-切换")
+				change++
+				pos = 1
+			} else {
+				break
+			}
+		}
+	}
+	// 委托雇佣
+	for accept := 1; accept <= int(maxAccept); accept++ {
+		mission := fmt.Sprintf("委托-接受%d号位", accept)
+		if LabelColor(mission) == ix.ColorMissionExist {
+			LabelClick(mission)
+			if LabelCheck("委托-接受佣兵团") {
+				LabelClick("委托-接受佣兵团")
+				LabelWaitClick("委托-领取奖励", 5*time.Second)
+				LabelClick("委托-接受1号位")
+			} else {
+				break
+			}
+		}
+	}
+
+	ctx.Schedule()
 	BackWorld()
 }

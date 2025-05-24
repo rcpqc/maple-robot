@@ -7,13 +7,18 @@ tasks:
   - name: 天空岛贸易
   - name: 周常副本
   - name: 武陵道场
-    condition: '1234'
-  - name: 精英副本
-    condition: '1234'
-    options:
-      模式: 单人
+    condition: '1245'
+  # - name: 精英副本
+  #   condition: '560'
+  #   options:
+  #     模式: 单人
   - name: 奈特的金字塔
-    condition: '56'
+    condition: '60'
+  - name: 委托佣兵
+    condition: '12456'
+    options: 
+      最大切换: 2
+      最大接受: 3
   - name: 材料副本
     options:
       副本名: 龙之峡谷

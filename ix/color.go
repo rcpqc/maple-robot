@@ -23,6 +23,11 @@ var (
 	ColorWhite             = Color{255, 255, 255} // 白色
 	ColorButtonExitDungeon = Color{255, 204, 0}   // 退出副本按钮橙色
 	ColorButtonRedDot      = Color{252, 48, 15}   // 红点
+	ColorMissionEasy       = Color{95, 155, 10}   // 委托任务简单
+	ColorMissionNormal     = Color{234, 155, 0}   // 委托任务推荐
+	ColorMissionHard       = Color{218, 62, 41}   // 委托任务困难
+	ColorMissionEmpty      = Color{164, 139, 117} // 委托任务空缺
+	ColorMissionExist      = Color{116, 76, 27}   // 委托任务存在
 )
 
 func (o Color) Equals(c Color) bool {

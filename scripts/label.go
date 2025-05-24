@@ -28,6 +28,7 @@ var labels = map[string]*Label{
 	"世界-公会":     {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 3 * time.Second},
 	"世界-社交":     {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
 	"世界-贸易":     {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
+	"世界-委托":     {ix.Position{X: 470, Y: 15}, ix.ColorWhite, 3 * time.Second},
 	"世界-领取日常":   {ix.Position{X: 610, Y: 300}, ix.ColorButtonBlue, 2 * time.Second},
 	"聊天栏-公会":    {ix.Position{X: 24, Y: 120}, ix.Color{R: 11, G: 13, B: 17}, time.Second},
 	"聊天栏-表情":    {ix.Position{X: 284, Y: 506}, ix.ColorWhite, time.Second},
@@ -229,6 +230,22 @@ var labels = map[string]*Label{
 	"角色训练场-补充时间":    {ix.Position{X: 819, Y: 384}, ix.ColorButtonBlue, 2 * time.Second},
 	"角色训练场-补充时间-使用": {ix.Position{X: 485, Y: 240}, ix.ColorButtonYellow, time.Second},
 	"角色训练场-补充时间-确定": {ix.Position{X: 431, Y: 469}, ix.ColorButtonOrange, time.Second},
+
+	// 委托
+	"委托-发布1号位": {ix.Position{X: 187, Y: 141}, ix.Color{}, time.Second},
+	"委托-发布2号位": {ix.Position{X: 193, Y: 317}, ix.Color{}, time.Second},
+	"委托-发布3号位": {ix.Position{X: 390, Y: 213}, ix.Color{}, time.Second},
+	"委托-发布4号位": {ix.Position{X: 588, Y: 132}, ix.Color{}, time.Second},
+	"委托-发布5号位": {ix.Position{X: 591, Y: 315}, ix.Color{}, time.Second},
+	"委托-发布接受":  {ix.Position{X: 405, Y: 372}, ix.Color{R: 255, G: 255, B: 70}, 2 * time.Second},
+
+	"委托-接受1号位": {ix.Position{X: 862, Y: 155}, ix.ColorMissionExist, 2 * time.Second},
+	"委托-接受2号位": {ix.Position{X: 862, Y: 234}, ix.ColorMissionExist, 2 * time.Second},
+	"委托-接受3号位": {ix.Position{X: 862, Y: 313}, ix.ColorMissionExist, 2 * time.Second},
+
+	"委托-接受佣兵团": {ix.Position{X: 800, Y: 465}, ix.Color{R: 248, G: 197, B: 35}, 4 * time.Second},
+	"委托-领取奖励":  {ix.Position{X: 428, Y: 482}, ix.ColorButtonOrange, 3 * time.Second},
+	"委托-切换":    {ix.Position{X: 315, Y: 499}, ix.Color{R: 248, G: 197, B: 35}, 2 * time.Second},
 }
 
 func LabelCheck(names ...string) bool {
@@ -286,4 +303,13 @@ func LabelClick(name string) {
 func LabelWaitClick(name string, timeout time.Duration) {
 	LabelWait(name, timeout)
 	LabelClick(name)
+}
+
+func LabelColor(name string) ix.Color {
+	lbl, ok := labels[name]
+	if !ok {
+		log.Errorf("LabelColor - label(%s) not found\n", name)
+		return ix.Color{}
+	}
+	return ix.GetPixel(lbl.Position)
 }
