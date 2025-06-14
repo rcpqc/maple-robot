@@ -193,7 +193,7 @@ var labels = map[string]*Label{
 	// 怪物乐园
 	"怪物乐园-入场":           {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"怪物乐园-入场-票券确认":      {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"怪物乐园-入场-经验增益":      {ix.Position{X: 600, Y: 400}, ix.ColorButtonYellow, time.Second},
+	"怪物乐园-入场-经验增益":      {ix.Position{X: 600, Y: 367}, ix.ColorButtonYellow, time.Second},
 	"怪物乐园-入场-入场":        {ix.Position{X: 550, Y: 480}, ix.ColorButtonOrange, time.Second},
 	"怪物乐园-副本结算-追加奖励":    {ix.Position{X: 606, Y: 388}, ix.Color{R: 232, G: 188, B: 0}, time.Second},
 	"怪物乐园-副本结算-追加奖励-确定": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},

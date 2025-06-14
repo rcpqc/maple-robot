@@ -79,7 +79,7 @@ func zcfb(ctx *context.Context) {
 	LabelWaitClick("周常副本-入场-确定", 5*time.Second)
 	LabelWait("副本-退出", 15*time.Second)
 	ctx.Schedule()
-	LabelWaitClick("周常副本-副本结算-退出", 90*time.Second)
+	LabelWaitClick("周常副本-副本结算-退出", 180*time.Second)
 	BackWorld()
 }
 
