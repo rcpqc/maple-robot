@@ -15,7 +15,7 @@ tasks:
   - name: 奈特的金字塔
     condition: '60'
   - name: 委托佣兵
-    condition: '12456'
+    condition: '123456'
     options: 
       最大切换: 2
       最大接受: 3
