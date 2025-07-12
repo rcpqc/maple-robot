@@ -1,40 +1,56 @@
 package main
 
 import (
-	"maple-robot/context"
+	"context"
+	"io"
+	"os"
+	"time"
+
 	"maple-robot/log"
+	"maple-robot/record"
 	"maple-robot/scripts"
 )
 
 func main() {
-	ctx, err := context.Load("context.yaml")
+	f, err := os.OpenFile("logs/"+time.Now().Format(time.DateOnly)+".log", os.O_CREATE|os.O_APPEND|os.O_RDWR, os.ModePerm)
 	if err != nil {
-		log.Fatalf(err.Error())
+		panic(err)
+	}
+	defer f.Close()
+
+	baseLogger := log.New(io.MultiWriter(os.Stdout, f))
+
+	c, err := record.Load("context.yaml")
+	if err != nil {
+		panic(err)
 	}
 	entered := false
-	for _, role := range ctx.Roles {
+	for _, role := range c.Roles {
+		ctx := log.WithLogger(context.Background(), baseLogger.With("role", role.Index))
 		if role.Records == nil {
-			role.Records = make(context.Records)
+			role.Records = make(record.Records)
 		}
-		ctx.SetRole(role)
+		c.SetRole(role)
 		// 角色已完成, 则跳过
 		if role.Records.DailyDone("角色") {
-			log.Infof("[角色-%d] 已完成\n", role.Index)
+			log.Info(ctx, "角色日常完成")
 			continue
 		}
+		log.Info(ctx, "角色日常开始")
 		script, err := scripts.Load(role.Script)
 		if err != nil {
-			log.Fatalf("[角色-%d] 加载脚本(%s) -> %v", role.Index, role.Script, err)
+			log.Error(ctx, "脚本加载", "script", role.Script, "err", err)
 		}
 		if !entered {
-			scripts.Enter(role.Index)
+			scripts.Enter(ctx, role.Index)
 			entered = true
 		} else {
-			scripts.WaitEnter()
+			scripts.WaitEnter(ctx)
 		}
-		ctx.Lanuch()
-		ctx.Execute(script.Tasks)
-		scripts.NextRole()
-		ctx.Finish()
+		c.Lanuch()
+		c.Execute(ctx, script.Tasks)
+		scripts.NextRole(ctx)
+		log.Info(ctx, "角色日常结束")
+		c.Finish()
 	}
 }

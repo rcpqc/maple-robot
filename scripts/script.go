@@ -1,14 +1,15 @@
 package scripts
 
 import (
-	"maple-robot/context"
 	"os"
+
+	"maple-robot/record"
 
 	"gopkg.in/yaml.v3"
 )
 
 type Script struct {
-	Tasks []*context.Task `yaml:"tasks"`
+	Tasks []*record.Task `yaml:"tasks"`
 }
 
 func Load(file string) (*Script, error) {

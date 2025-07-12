@@ -1,13 +1,14 @@
-package context
+package record
 
 import (
+	"context"
 	"maple-robot/log"
 	"strconv"
 	"strings"
 	"time"
 )
 
-var tasks = map[string]func(ctx *Context){}
+var tasks = map[string]func(ctx context.Context, c *Context){}
 
 type Task struct {
 	Name      string            `yaml:"name"`
@@ -25,15 +26,17 @@ func (o Condition) Match() bool {
 	return strings.Contains(string(o), strconv.FormatInt(int64(time.Now().Weekday()), 10))
 }
 
-func ProvideTask(name string, handler func(ctx *Context)) {
+func ProvideTask(name string, handler func(ctx context.Context, c *Context)) {
 	tasks[name] = handler
 }
 
-func ExecuteTask(ctx *Context, name string) {
+func ExecuteTask(ctx context.Context, c *Context, name string) {
 	if handler := tasks[name]; handler != nil {
-		handler(ctx)
-		ctx.Complete()
+		log.Info(ctx, "任务开始", "task", name)
+		handler(ctx, c)
+		log.Info(ctx, "任务完成", "task", name)
+		c.Complete()
 	} else {
-		log.Warnf("task(%s) not provided", name)
+		log.Error(ctx, "任务缺失", "task", name)
 	}
 }

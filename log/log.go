@@ -1,34 +1,29 @@
 package log
 
 import (
-	"fmt"
-	"time"
+	"context"
+	"io"
+	"log/slog"
+	"maple-robot/ix"
 )
 
-func Infof(format string, args ...any) {
-	fmt.Print(time.Now().Format("2006-01-02 15:04:05"))
-	fmt.Printf(" [INFO] "+format, args...)
+func New(w io.Writer) *slog.Logger {
+	return slog.New(NewHandler(w))
 }
 
-func Warnf(format string, args ...any) {
-	fmt.Print(time.Now().Format("2006-01-02 15:04:05"))
-	fmt.Printf(" [WARN] "+format, args...)
-	fnMessageBeep.Call(0xffffffff)
+func Debug(ctx context.Context, msg string, args ...any) {
+	GetLogger(ctx).Debug(msg, args...)
+}
+func Info(ctx context.Context, msg string, args ...any) {
+	GetLogger(ctx).Info(msg, args...)
 }
 
-func Errorf(format string, args ...any) {
-	fmt.Print(time.Now().Format("2006-01-02 15:04:05"))
-	fmt.Printf(" [ERROR] "+format, args...)
-	fnMessageBeep.Call(0xffffffff)
+func Warn(ctx context.Context, msg string, args ...any) {
+	GetLogger(ctx).Warn(msg, args...)
+	ix.Beep()
 }
 
-func Fatalf(format string, args ...any) {
-	fmt.Print(time.Now().Format("2006-01-02 15:04:05"))
-	fmt.Printf(" [FATAL] "+format, args...)
-	fnMessageBeep.Call(0xffffffff)
-	panic(-1)
-}
-
-func Printf(format string, args ...any) {
-	fmt.Printf(format, args...)
+func Error(ctx context.Context, msg string, args ...any) {
+	GetLogger(ctx).Error(msg, args...)
+	ix.Beep()
 }

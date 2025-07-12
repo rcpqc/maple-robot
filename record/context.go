@@ -1,6 +1,7 @@
-package context
+package record
 
 import (
+	"context"
 	"os"
 
 	"gopkg.in/yaml.v3"
@@ -47,7 +48,7 @@ func (o *Context) Finish() {
 	o.Save()
 }
 
-func (o *Context) Execute(tasks []*Task) {
+func (o *Context) Execute(ctx context.Context, tasks []*Task) {
 	for _, task := range tasks {
 		if !task.Condition.Match() {
 			continue
@@ -58,13 +59,13 @@ func (o *Context) Execute(tasks []*Task) {
 			continue
 		}
 		o.curRole.Records.Start(task.Name)
-		ExecuteTask(o, task.Name)
+		ExecuteTask(ctx, o, task.Name)
 	}
 }
 
-func (o *Context) ExecuteSubs() {
+func (o *Context) ExecuteSubs(ctx context.Context) {
 	backupTask := o.curTask
-	o.Execute(o.curTask.Subs)
+	o.Execute(ctx, o.curTask.Subs)
 	o.curTask = backupTask
 }
 

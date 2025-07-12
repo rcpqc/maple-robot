@@ -5,7 +5,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"image"
-	"maple-robot/log"
+	"log"
 	"os/exec"
 	"time"
 )
@@ -54,7 +54,7 @@ func (o *Screen) update(interval time.Duration) {
 		ticker := time.NewTicker(interval)
 		for range ticker.C {
 			if err := o.take(); err != nil {
-				log.Infof("take -> %v\n", err)
+				log.Printf("take -> %v\n", err)
 			}
 		}
 	}()

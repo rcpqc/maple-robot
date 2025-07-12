@@ -1,4 +1,4 @@
-package context
+package record
 
 type Role struct {
 	Index   int     `yaml:"index"`

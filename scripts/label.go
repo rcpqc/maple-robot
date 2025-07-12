@@ -1,10 +1,11 @@
 package scripts
 
 import (
+	"context"
+	"time"
+
 	"maple-robot/ix"
 	"maple-robot/log"
-	"strings"
-	"time"
 )
 
 type Label struct {
@@ -248,12 +249,12 @@ var labels = map[string]*Label{
 	"委托-切换":    {ix.Position{X: 315, Y: 499}, ix.Color{R: 248, G: 197, B: 35}, 2 * time.Second},
 }
 
-func LabelCheck(names ...string) bool {
-	log.Infof("LabelCheck - label(%s)\n", strings.Join(names, ", "))
+func LabelCheck(ctx context.Context, names ...string) bool {
+	// log.Printf("LabelCheck - label(%s)\n", strings.Join(names, ", "))
 	for _, name := range names {
 		lbl, ok := labels[name]
 		if !ok {
-			log.Errorf("LabelCheck - label(%s) not found\n", name)
+			log.Error(ctx, "标签检查", "label", name, "err", "missing")
 			return false
 		}
 		if !ix.GetPixel(lbl.Position).Equals(lbl.Color) {
@@ -263,35 +264,36 @@ func LabelCheck(names ...string) bool {
 	return true
 }
 
-func LabelWait(name string, timeout time.Duration) {
-	log.Infof("LabelWait - label(%s) timeout=%v\n", name, timeout)
+func LabelWait(ctx context.Context, name string, timeout time.Duration) {
+	log.Info(ctx, "标签等待", "label", name, "timeout", timeout)
 	lbl, ok := labels[name]
 	if !ok {
-		log.Errorf("LabelWait - label(%s) not found\n", name)
+		log.Error(ctx, "标签等待", "label", name, "err", "missing")
 	}
 	st := time.Now()
 	ddl := st.Add(timeout)
 	for {
 		cur := ix.GetPixel(lbl.Position)
 		if cur.Equals(lbl.Color) {
-			log.Infof("LabelWait - label(%s) timeout=%v cost=%v\n", name, timeout, time.Since(st))
+			log.Debug(ctx, "标签等待完成", "label", name, "timeout", timeout, "cost", time.Since(st))
 			return
 		}
 		if time.Now().After(ddl) {
-			log.Warnf("LabelWait - label(%s) timeout, pos=%s, current=%s, target=%s\n", name, lbl.Position, cur, lbl.Color)
+			log.Info(ctx, "标签等待", "label", name, "timeout", timeout, "position", lbl.Position, "color", cur, "target", lbl.Color)
+			ix.Beep()
 		}
 		if ix.WaitOrPass(time.Second) {
-			log.Infof("LabelWait - bypass label(%s) timeout=%v cost=%v\n", name, timeout, time.Since(st))
+			log.Debug(ctx, "标签等待中止", "label", name, "timeout", timeout, "cost", time.Since(st), time.Since(st))
 			return
 		}
 	}
 }
 
-func LabelClick(name string) {
-	log.Infof("LabelClick - label(%s)\n", name)
+func LabelClick(ctx context.Context, name string) {
+	log.Debug(ctx, "标签点击", "label", name)
 	lbl, ok := labels[name]
 	if !ok {
-		log.Errorf("LabelClick - label(%s) not found\n", name)
+		log.Error(ctx, "标签点击", "label", name, "err", "missing")
 		return
 	}
 	ix.Tap(lbl.Position)
@@ -300,15 +302,15 @@ func LabelClick(name string) {
 	}
 }
 
-func LabelWaitClick(name string, timeout time.Duration) {
-	LabelWait(name, timeout)
-	LabelClick(name)
+func LabelWaitClick(ctx context.Context, name string, timeout time.Duration) {
+	LabelWait(ctx, name, timeout)
+	LabelClick(ctx, name)
 }
 
-func LabelColor(name string) ix.Color {
+func LabelColor(ctx context.Context, name string) ix.Color {
 	lbl, ok := labels[name]
 	if !ok {
-		log.Errorf("LabelColor - label(%s) not found\n", name)
+		log.Error(ctx, "标签颜色", "label", name, "err", "missing")
 		return ix.Color{}
 	}
 	return ix.GetPixel(lbl.Position)
