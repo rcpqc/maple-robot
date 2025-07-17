@@ -29,16 +29,11 @@ func Enter(ctx context.Context, index int) {
 	// 游戏开始
 	LabelClick(ctx, "角色选择-游戏开始")
 
-	// 等待进入
-	LabelWait(ctx, "世界-电量", 30*time.Second)
-
-	LabelClick(ctx, "世界-技能8")
 }
 
 func WaitEnter(ctx context.Context) {
 	// 等待进入
 	LabelWait(ctx, "世界-电量", 30*time.Second)
-
 	LabelClick(ctx, "世界-技能8")
 }
 
@@ -69,33 +64,24 @@ func Back(ctx context.Context) {
 	time.Sleep(1500 * time.Millisecond)
 }
 
-func NextRole(ctx context.Context) bool {
+func NextRole(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-角色", 5*time.Second)
 	LabelWait(ctx, "更改角色-选择角色", 5*time.Second)
 	if LabelCheck(ctx, "更改角色-上左") {
 		LabelClick(ctx, "更改角色-上右")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-		return true
 	} else if LabelCheck(ctx, "更改角色-上右") {
 		LabelClick(ctx, "更改角色-中左")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-		return true
 	} else if LabelCheck(ctx, "更改角色-中左") {
 		LabelClick(ctx, "更改角色-中右")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-		return true
 	} else if LabelCheck(ctx, "更改角色-中右") {
 		LabelClick(ctx, "更改角色-下左")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-		return true
 	} else if LabelCheck(ctx, "更改角色-下左") {
 		LabelClick(ctx, "更改角色-下右")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-		return true
-	} else if LabelCheck(ctx, "更改角色-下右") {
-		LabelClick(ctx, "更改角色-选择角色")
-		return false
 	}
-	return false
 }

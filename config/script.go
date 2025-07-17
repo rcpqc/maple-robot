@@ -1,18 +1,16 @@
-package scripts
+package config
 
 import (
 	"os"
-
-	"maple-robot/record"
 
 	"gopkg.in/yaml.v3"
 )
 
 type Script struct {
-	Tasks []*record.Task `yaml:"tasks"`
+	Tasks []*Task `yaml:"tasks"`
 }
 
-func Load(file string) (*Script, error) {
+func LoadScript(file string) (*Script, error) {
 	bytes, err := os.ReadFile(file)
 	if err != nil {
 		return nil, err

@@ -1,0 +1,70 @@
+roles:
+  - id: 101
+    class: 黑骑士
+    script: script_nuo.yaml
+  - id: 102
+    class: 暗隐双刀
+  - id: 103
+    class: 火毒魔导师
+  - id: 104
+    class: 龙神
+  - id: 105
+    class: 恶魔复仇者
+  - id: 106
+    class: 恶魔猎手
+  - id: 107
+    class: 唤灵斗师
+  - id: 201
+    class: 侠影
+  - id: 202
+    class: 机械师
+  - id: 203
+    class: 战神
+  - id: 204
+    class: 幻影
+  - id: 205
+    class: 墨玄
+  - id: 206
+    class: 夜光法师
+  - id: 207
+    class: 光之魔导师
+  - id: 301
+    class: 夜行者
+  - id: 302
+    class: 奇袭着
+  - id: 303
+    class: 双弩精灵
+  - id: 304
+    class: 火炮手
+  - id: 305
+    class: 冰雷魔导师
+  - id: 306
+    class: 炎术士
+  - id: 307
+    class: 圣骑士
+  - id: 401
+    class: 魂骑士
+  - id: 402
+    class: 冲锋队长
+  - id: 403
+    class: 英雄
+  - id: 404
+    class: 风灵使者
+  - id: 405
+    class: 箭神
+  - id: 406
+    class: 神射手
+  - id: 407
+    class: 船长
+  - id: 501
+    class: 隐月
+  - id: 502
+    class: 隐士
+  - id: 503
+    class: 施亚
+  - id: 504
+    class: 尖兵
+    script: script_ngw.yaml
+  - id: 505
+    class: 豹弩游侠
+    script: script_ngw.yaml
