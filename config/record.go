@@ -75,17 +75,15 @@ func ParseRecord(line string) (*slog.Record, error) {
 	return r, nil
 }
 
-// LoadTaskRecords 加载记录, 角色-任务-事件=时间戳
-func LoadTaskRecords(file string) (Records, error) {
-
+// LoadRecords 加载记录, 角色-任务-事件=时间戳
+func LoadRecords(file string) ([]*slog.Record, error) {
 	f, err := os.Open(file)
 	if err != nil {
 		return nil, fmt.Errorf("open(%s): %w", file, err)
 	}
 	defer f.Close()
 
-	records := Records{}
-
+	records := []*slog.Record{}
 	br := bufio.NewReaderSize(f, 0x1000)
 	for i := 0; ; i++ {
 		line, _, err := br.ReadLine()
@@ -99,21 +97,38 @@ func LoadTaskRecords(file string) (Records, error) {
 		if err != nil {
 			return nil, fmt.Errorf("parse(%s): %w", string(line), err)
 		}
+		records = append(records, r)
+	}
+	return records, nil
+}
+
+func GetRecordAttr(r *slog.Record, key string) string {
+	value := ""
+	r.Attrs(func(a slog.Attr) bool {
+		if a.Key == key {
+			value = a.Value.String()
+			return false
+		}
+		return true
+	})
+	return value
+}
+
+// LoadTaskRecords 加载任务记录, 角色-任务-事件=时间戳
+func LoadTaskRecords(file string) (Records, error) {
+	records, err := LoadRecords(file)
+	if err != nil {
+		return nil, err
+	}
+	mr := Records{}
+	for _, r := range records {
 		event := r.Message
 		if _, ok := Events[event]; !ok {
 			continue
 		}
-		var role, task string
-		r.Attrs(func(a slog.Attr) bool {
-			switch a.Key {
-			case "role":
-				role = a.Value.String()
-			case "task":
-				task = a.Value.String()
-			}
-			return true
-		})
-		records[role+"-"+task+"-"+event] = r.Time
+		role := GetRecordAttr(r, "role")
+		task := GetRecordAttr(r, "task")
+		mr[role+"-"+task+"-"+event] = r.Time
 	}
-	return records, nil
+	return mr, nil
 }
