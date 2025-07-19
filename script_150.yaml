@@ -13,11 +13,11 @@ tasks:
   #   options:
   #     模式: 单人
   - name: 奈特的金字塔
-    condition: '60'
+    condition: '6'
   - name: 委托佣兵
-    condition: '123456'
+    condition: '12345'
     options: 
-      最大切换: 2
+      最大切换: 3
       最大接受: 3
   - name: 材料副本
     options:

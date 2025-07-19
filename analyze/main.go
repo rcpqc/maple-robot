@@ -89,7 +89,7 @@ func main() {
 	slices.Sort(names)
 
 	// 输出
-	fOut, _ := os.Create("./" + date + ".csv")
+	fOut, _ := os.Create("./reports/" + date + ".csv")
 	headers := []string{"id", "角色", "角色耗时(s)", "任务耗时(s)", "角色切换"}
 	headers = append(headers, names...)
 	fOut.WriteString(strings.Join(headers, ",") + "\n")

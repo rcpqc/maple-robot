@@ -26,7 +26,7 @@ var labels = map[string]*Label{
 	"世界-日常":     {ix.Position{X: 742, Y: 27}, ix.ColorWhite, 3 * time.Second},
 	"世界-角色":     {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
 	"世界-成长":     {ix.Position{X: 651, Y: 26}, ix.ColorWhite, 3 * time.Second},
-	"世界-公会":     {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 3 * time.Second},
+	"世界-公会":     {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 5 * time.Second},
 	"世界-社交":     {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
 	"世界-贸易":     {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
 	"世界-委托":     {ix.Position{X: 470, Y: 15}, ix.ColorWhite, 3 * time.Second},
