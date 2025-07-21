@@ -1,6 +1,8 @@
 package main
 
 import (
+	"flag"
+	"fmt"
 	"log"
 	"maps"
 	"os"
@@ -37,8 +39,10 @@ type Role struct {
 }
 
 func main() {
-	date := "2025-07-19"
-	records, err := config.LoadRecords("../logs/" + date + ".log")
+	today := time.Now().Format(time.DateOnly)
+	logFile := flag.String("logfile", fmt.Sprintf("logs/%s.log", today), "日志文件")
+	outFile := flag.String("outfile", fmt.Sprintf("reports/%s.csv", today), "输出文件")
+	records, err := config.LoadRecords(*logFile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -89,7 +93,7 @@ func main() {
 	slices.Sort(names)
 
 	// 输出
-	fOut, _ := os.Create("./reports/" + date + ".csv")
+	fOut, _ := os.Create(*outFile)
 	headers := []string{"id", "角色", "角色耗时(s)", "任务耗时(s)", "角色切换"}
 	headers = append(headers, names...)
 	fOut.WriteString(strings.Join(headers, ",") + "\n")

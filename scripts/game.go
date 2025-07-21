@@ -322,6 +322,7 @@ func wtyb(ctx context.Context, name string) {
 		if LabelColor(ctx, fmt.Sprintf("委托-发布%d号位", pos)) == ix.ColorMissionHard {
 			LabelClick(ctx, fmt.Sprintf("委托-发布%d号位", pos))
 			LabelWaitClick(ctx, "委托-发布接受", 5*time.Second)
+			continue
 		}
 		pos++
 		// 判定完成一页
@@ -344,8 +345,6 @@ func wtyb(ctx context.Context, name string) {
 				LabelClick(ctx, "委托-接受佣兵团")
 				LabelWaitClick(ctx, "委托-领取奖励", 5*time.Second)
 				LabelClick(ctx, "委托-接受1号位")
-			} else {
-				break
 			}
 		}
 	}

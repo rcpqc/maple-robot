@@ -17,7 +17,7 @@ tasks:
   - name: 委托佣兵
     condition: '12345'
     options: 
-      最大切换: 3
+      最大切换: 2
       最大接受: 3
   - name: 材料副本
     options:
