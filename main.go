@@ -8,9 +8,16 @@ import (
 	"time"
 
 	"maple-robot/config"
+	"maple-robot/ix"
 	"maple-robot/log"
 	"maple-robot/scripts"
 )
+
+func init() {
+	if err := ix.Check(); err != nil {
+		panic(err)
+	}
+}
 
 func main() {
 	logFile := "logs/" + time.Now().Format(time.DateOnly) + ".log"

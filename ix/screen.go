@@ -10,14 +10,14 @@ import (
 	"time"
 )
 
-var Display *Screen
+var Display *Screen = &Screen{}
 
-func init() {
-	Display = &Screen{}
+func Check() error {
 	if err := Display.take(); err != nil {
-		log.Fatalf("screen take -> %v\n", err)
+		return fmt.Errorf("screen take -> %w", err)
 	}
 	Display.update(time.Second)
+	return nil
 }
 
 type Screen struct {
