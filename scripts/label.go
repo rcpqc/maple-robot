@@ -141,7 +141,7 @@ var labels = map[string]*Label{
 	"材料副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"材料副本-进入副本-全部解除": {ix.Position{X: 843, Y: 426}, ix.ColorButtonWine, time.Second},
 	"材料副本-进入副本-确定":   {ix.Position{X: 560, Y: 480}, ix.ColorButtonOrange, time.Second},
-	"材料副本-副本结算-退出":   {ix.Position{X: 228, Y: 423}, ix.ColorButtonBlue, 3 * time.Second},
+	"材料副本-副本结算-退出":   {ix.Position{X: 228, Y: 423}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 精英副本
 	"精英副本-普通":        {ix.Position{X: 80, Y: 90}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
@@ -150,20 +150,20 @@ var labels = map[string]*Label{
 	"精英副本-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"精英副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"精英副本-集结地-开始":    {ix.Position{X: 154, Y: 164}, ix.ColorButtonOrange, time.Second},
-	"精英副本-副本结算-单人离开": {ix.Position{X: 322, Y: 440}, ix.ColorButtonBlue, 3 * time.Second},
-	"精英副本-副本结算-离开":   {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 3 * time.Second},
+	"精英副本-副本结算-单人离开": {ix.Position{X: 322, Y: 440}, ix.ColorButtonBlue, 5 * time.Second},
+	"精英副本-副本结算-离开":   {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 5 * time.Second},
 	// 周常副本
 	"周常副本-特殊":      {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, time.Second},
 	"周常副本-星期五":     {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
 	"周常副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"周常副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"周常副本-副本结算-退出": {ix.Position{X: 267, Y: 421}, ix.ColorButtonBlue, 3 * time.Second},
+	"周常副本-副本结算-退出": {ix.Position{X: 267, Y: 421}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 奈特的金字塔
 	"奈特的金字塔-快速组队":      {ix.Position{X: 810, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"奈特的金字塔-快速组队-入场确定": {ix.Position{X: 622, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"奈特的金字塔-混沌":        {ix.Position{X: 106, Y: 215}, ix.Color{}, time.Second},
-	"奈特的金字塔-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 3 * time.Second},
+	"奈特的金字塔-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 天空岛贸易
 	"天空岛贸易-船长":      {ix.Position{X: 623, Y: 190}, ix.Color{}, time.Second},
@@ -189,7 +189,7 @@ var labels = map[string]*Label{
 	// 金钩海兵王
 	"金钩海兵王-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"金钩海兵王-快速组队-入场确认": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"金钩海兵王-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 3 * time.Second},
+	"金钩海兵王-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 怪物乐园
 	"怪物乐园-入场":           {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},

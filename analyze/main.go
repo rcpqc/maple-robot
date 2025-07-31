@@ -42,6 +42,7 @@ func main() {
 	today := time.Now().Format(time.DateOnly)
 	logFile := flag.String("logfile", fmt.Sprintf("logs/%s.log", today), "日志文件")
 	outFile := flag.String("outfile", fmt.Sprintf("logs/%s.csv", today), "输出文件")
+	flag.Parse()
 	log.Printf("analyze %s => %s", *logFile, *outFile)
 
 	records, err := config.LoadRecords(*logFile)

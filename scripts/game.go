@@ -33,12 +33,12 @@ func init() {
 }
 
 // tkdmy 天空岛贸易
-func tkdmy(ctx context.Context, name string) {
+func tkdmy(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-贸易", 5*time.Second)
 	LabelWaitClick(ctx, "天空岛贸易-前往获取战利品", 5*time.Second)
 	LabelWaitClick(ctx, "天空岛贸易-入场", 5*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWait(ctx, "太初森林-今日", 5*time.Second)
 	LabelClick(ctx, "太初森林-精灵")
 	LabelWaitClick(ctx, "副本-退出", 5*time.Second)
@@ -48,7 +48,7 @@ func tkdmy(ctx context.Context, name string) {
 }
 
 // wldc 武陵道场
-func wldc(ctx context.Context, name string) {
+func wldc(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -57,7 +57,7 @@ func wldc(ctx context.Context, name string) {
 	LabelClick(ctx, "武陵道场-挑战武陵道场")
 	LabelWaitClick(ctx, "武陵道场-入场", 5*time.Second)
 	LabelWaitClick(ctx, "武陵道场-进入", 5*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "副本-退出", 15*time.Second)
 	time.Sleep(6 * time.Second)
 	LabelWaitClick(ctx, "武陵道场-退出", 5*time.Second)
@@ -66,7 +66,7 @@ func wldc(ctx context.Context, name string) {
 }
 
 // zcfb 周常副本
-func zcfb(ctx context.Context, name string) {
+func zcfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -82,13 +82,13 @@ func zcfb(ctx context.Context, name string) {
 	LabelClick(ctx, "周常副本-入场")
 	LabelWaitClick(ctx, "周常副本-入场-确定", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 15*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "周常副本-副本结算-退出", 180*time.Second)
 	BackWorld(ctx)
 }
 
 // jyfb 精英副本
-func jyfb(ctx context.Context, name string) {
+func jyfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -101,21 +101,21 @@ func jyfb(ctx context.Context, name string) {
 		LabelWaitClick(ctx, "精英副本-创建房间", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-集结地-开始", 5*time.Second)
-		log.Info(ctx, "任务入场", "task", name)
+		log.Info(ctx, "任务入场")
 		LabelWaitClick(ctx, "精英副本-副本结算-单人离开", 90*time.Second)
 	} else {
 		LabelWaitClick(ctx, "精英副本-快速组队", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
 		LabelWait(ctx, "副本-退出", 60*time.Second)
 		LabelWait(ctx, "副本-麦克风", 15*time.Second)
-		log.Info(ctx, "任务入场", "task", name)
+		log.Info(ctx, "任务入场")
 		LabelWaitClick(ctx, "精英副本-副本结算-离开", 180*time.Second)
 	}
 	BackWorld(ctx)
 }
 
 // clfb 材料副本
-func clfb(ctx context.Context, name string) {
+func clfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -133,13 +133,13 @@ func clfb(ctx context.Context, name string) {
 	}
 	LabelWaitClick(ctx, "材料副本-进入副本-确定", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 15*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "材料副本-副本结算-退出", 300*time.Second)
 	BackWorld(ctx)
 }
 
 // ntdjzt 奈特的金字塔
-func ntdjzt(ctx context.Context, name string) {
+func ntdjzt(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -148,13 +148,13 @@ func ntdjzt(ctx context.Context, name string) {
 	LabelWaitClick(ctx, "奈特的金字塔-快速组队-入场确定", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 60*time.Second)
 	LabelWait(ctx, "副本-麦克风", 30*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "奈特的金字塔-副本结算-退出", 180*time.Second)
 	BackWorld(ctx)
 }
 
 // jghbw 金钩海兵王
-func jghbw(ctx context.Context, name string) {
+func jghbw(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -162,13 +162,13 @@ func jghbw(ctx context.Context, name string) {
 	LabelWaitClick(ctx, "金钩海兵王-快速组队", 5*time.Second)
 	LabelWaitClick(ctx, "金钩海兵王-快速组队-入场确认", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 60*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "金钩海兵王-副本结算-退出", 120*time.Second)
 	BackWorld(ctx)
 }
 
 // gwly 怪物乐园
-func gwly(ctx context.Context, name string) {
+func gwly(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
@@ -181,7 +181,7 @@ func gwly(ctx context.Context, name string) {
 	}
 	LabelWaitClick(ctx, "怪物乐园-入场-入场", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 10*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 
 	extraBonus := config.GetTaskOptions(ctx, "追加奖励")
 	if extraBonus != "" {
@@ -196,16 +196,16 @@ func gwly(ctx context.Context, name string) {
 }
 
 // zdzdsj 自动战斗时间
-func zdzdsj(ctx context.Context, name string) {
+func zdzdsj(ctx context.Context) {
 	LabelClick(ctx, "世界-自动战斗")
 	LabelClick(ctx, "自动战斗-使用")
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	// LabelClick(ctx, "自动战斗-关闭")
 	BackWorld(ctx)
 }
 
 // ghqd 公会签到
-func ghqd(ctx context.Context, name string) {
+func ghqd(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-公会", 5*time.Second)
 	LabelWait(ctx, "公会-领地树", 5*time.Second)
@@ -218,24 +218,24 @@ func ghqd(ctx context.Context, name string) {
 	}
 
 	// LabelClick(ctx, "公会-领取")
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
 
 // lqgrjl 领取个人奖励
-func lqgrjl(ctx context.Context, name string) {
+func lqgrjl(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-邮箱", 5*time.Second)
 	LabelWait(ctx, "邮箱-通用", 5*time.Second)
 	LabelClick(ctx, "邮箱-个人")
 	LabelClick(ctx, "邮箱-全部领取")
 	LabelClick(ctx, "邮箱-全部领取-确定")
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
 
 // srq 送人气
-func srq(ctx context.Context, name string) {
+func srq(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-社交", 5*time.Second)
 	LabelWaitClick(ctx, "社交-微信好友", 5*time.Second)
@@ -245,36 +245,36 @@ func srq(ctx context.Context, name string) {
 	LabelClick(ctx, "社交-送人气")
 	LabelClick(ctx, "社交-送人气确定")
 	LabelClick(ctx, "社交-送人气不提醒")
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	// LabelClick(ctx, "社交-送人气关闭")
 	BackWorld(ctx)
 }
 
 // lqrcjl 领取日常奖励
-func lqrcjl(ctx context.Context, name string) {
+func lqrcjl(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	for LabelCheck(ctx, "世界-领取日常") {
 		LabelClick(ctx, "世界-领取日常")
 		BackWorld(ctx)
 	}
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
 
 // ghlt 公会聊天
-func ghlt(ctx context.Context, name string) {
+func ghlt(ctx context.Context) {
 	LabelClick(ctx, "世界-聊天栏")
 	LabelWaitClick(ctx, "聊天栏-公会", 5*time.Second)
 	LabelWaitClick(ctx, "聊天栏-表情", 5*time.Second)
 	LabelWaitClick(ctx, "聊天栏-表情-害羞", 5*time.Second)
 	LabelWaitClick(ctx, "聊天栏-发送", 5*time.Second)
 	LabelClick(ctx, "聊天栏-发送")
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
 
 // lqghjl 领取公会奖励
-func lqghjl(ctx context.Context, name string) {
+func lqghjl(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-公会", 5*time.Second)
 	LabelClick(ctx, "公会-公会任务")
@@ -284,12 +284,12 @@ func lqghjl(ctx context.Context, name string) {
 		LabelClick(ctx, "公会-公会任务-每周任务")
 		LabelClick(ctx, "公会-公会任务-全部领取")
 	}
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
 
 // gwlytg 怪物乐园跳关
-func gwlytg(ctx context.Context, name string) {
+func gwlytg(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWaitClick(ctx, "日常-进度", 5*time.Second)
@@ -301,13 +301,13 @@ func gwlytg(ctx context.Context, name string) {
 	// LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-隐匿痕迹", 5*time.Second)
 	LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-使用战斗跳关券", 5*time.Second)
 	LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
 	BackWorld(ctx)
 }
 
 // 委托佣兵
-func wtyb(ctx context.Context, name string) {
+func wtyb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-委托", 5*time.Second)
 	LabelWait(ctx, "委托-切换", 5*time.Second)
@@ -349,6 +349,6 @@ func wtyb(ctx context.Context, name string) {
 		}
 	}
 
-	log.Info(ctx, "任务入场", "task", name)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }

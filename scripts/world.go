@@ -46,6 +46,7 @@ func Exit(ctx context.Context) {
 
 // 返回世界
 func BackWorld(ctx context.Context) {
+	log.Info(ctx, "返回世界")
 	for retry := 0; !LabelCheck(ctx, "世界-导航", "世界-电量"); retry++ {
 		Back(ctx)
 		if retry >= 10 {

@@ -12,6 +12,7 @@ type Color struct {
 }
 
 var (
+	ColorBlack             = Color{0, 0, 0}       // 黑色
 	ColorRolePageSelected  = Color{255, 123, 82}  // 角色页选中
 	ColorButtonOrange      = Color{238, 112, 70}  // 按钮橙色
 	ColorButtonBlue        = Color{76, 135, 176}  // 按钮蓝色

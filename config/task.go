@@ -10,7 +10,7 @@ import (
 
 type taskkey struct{}
 
-var tasks = map[string]func(ctx context.Context, name string){}
+var tasks = map[string]func(ctx context.Context){}
 
 type Task struct {
 	Name      string            `yaml:"name"`
@@ -28,7 +28,7 @@ func (o Condition) Match() bool {
 	return strings.Contains(string(o), strconv.FormatInt(int64(time.Now().Weekday()), 10))
 }
 
-func ProvideTask(name string, handler func(ctx context.Context, name string)) {
+func ProvideTask(name string, handler func(ctx context.Context)) {
 	tasks[name] = handler
 }
 
@@ -45,11 +45,12 @@ func GetTaskOptions(ctx context.Context, key string) string {
 }
 
 func (o *Task) Execute(ctx context.Context) {
+	ctx = log.WithLogger(ctx, log.GetLogger(ctx).With("task", o.Name))
 	if handler := tasks[o.Name]; handler != nil {
-		log.Info(ctx, "任务开始", "task", o.Name)
-		handler(WithTaskOptions(ctx, o.Options), o.Name)
-		log.Info(ctx, "任务完成", "task", o.Name)
+		log.Info(ctx, "任务开始")
+		handler(WithTaskOptions(ctx, o.Options))
+		log.Info(ctx, "任务完成")
 	} else {
-		log.Error(ctx, "任务缺失", "task", o.Name)
+		log.Error(ctx, "任务缺失")
 	}
 }

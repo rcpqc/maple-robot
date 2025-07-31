@@ -20,17 +20,20 @@ func init() {
 }
 
 func main() {
+	// 加载日志记录
 	logFile := "logs/" + time.Now().Format(time.DateOnly) + ".log"
 	records, _ := config.LoadTaskRecords(logFile)
-
 	ctx := config.WithRecords(context.Background(), records)
 
+	// 设置日志输出
 	f, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_RDWR, os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
 	defer f.Close()
 	baseLogger := log.New(io.MultiWriter(os.Stdout, f))
+
+	// 读取角色脚本
 	cfg, err := config.Load("config.yaml")
 	if err != nil {
 		panic(err)
@@ -38,9 +41,7 @@ func main() {
 
 	entered := false
 	for _, role := range cfg.Roles {
-
-		ctx := log.WithLogger(ctx, baseLogger.With("role", role.Id, "class", role.Class))
-
+		ctx = log.WithLogger(ctx, baseLogger.With("role", role.Id, "class", role.Class))
 		// 角色已完成, 则跳过
 		if _, ok := config.GetRecord(ctx, role.Id, "", "角色日常结束"); ok {
 			log.Info(ctx, "角色日常跳过")
@@ -84,5 +85,5 @@ func main() {
 		}
 		log.Info(ctx, "角色日常结束")
 	}
-	scripts.LabelClick(ctx, "更改角色-选择角色")
+	scripts.Exit(ctx)
 }
