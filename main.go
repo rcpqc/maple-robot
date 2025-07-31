@@ -4,6 +4,7 @@ import (
 	"context"
 	"io"
 	"os"
+	"os/exec"
 	"strconv"
 	"time"
 
@@ -30,7 +31,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer f.Close()
+
 	baseLogger := log.New(io.MultiWriter(os.Stdout, f))
 
 	// 读取角色脚本
@@ -86,4 +87,9 @@ func main() {
 		log.Info(ctx, "角色日常结束")
 	}
 	scripts.Exit(ctx)
+
+	f.Close()
+
+	exec.Command("./analyze.exe").Run()
+
 }
