@@ -75,6 +75,9 @@ func zcfb(ctx context.Context) {
 	if mode := config.GetTaskOptions(ctx, "模式"); mode == "特殊" {
 		LabelClick(ctx, "周常副本-特殊")
 	}
+	if difficulty := config.GetTaskOptions(ctx, "难度"); difficulty != "" {
+		LabelClick(ctx, "周常副本-"+difficulty)
+	}
 	LabelWait(ctx, "周常副本-入场", 5*time.Second)
 	if time.Now().Weekday() == time.Saturday || time.Now().Weekday() == time.Sunday {
 		LabelClick(ctx, "周常副本-星期五")

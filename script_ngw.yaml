@@ -6,6 +6,8 @@ tasks:
   - name: 怪物乐园
   - name: 天空岛贸易
   - name: 周常副本
+    options:
+      难度: 超难
   - name: 武陵道场
     condition: '1245'
   # - name: 精英副本

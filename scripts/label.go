@@ -127,8 +127,8 @@ var labels = map[string]*Label{
 	"社交-送人气关闭":       {ix.Position{X: 693, Y: 110}, ix.Color{}, time.Second},
 
 	// 自动战斗
-	"自动战斗-使用": {ix.Position{X: 709, Y: 296}, ix.Color{}, time.Second},
-	"自动战斗-关闭": {ix.Position{X: 747, Y: 86}, ix.Color{}, time.Second},
+	"自动战斗-使用": {ix.Position{X: 675, Y: 460}, ix.Color{}, time.Second},
+	"自动战斗-关闭": {ix.Position{X: 738, Y: 49}, ix.Color{}, time.Second},
 
 	// 材料副本
 	"材料副本-阿里安特":      {ix.Position{X: 72, Y: 195}, ix.Color{}, time.Second},
@@ -153,8 +153,16 @@ var labels = map[string]*Label{
 	"精英副本-副本结算-单人离开": {ix.Position{X: 322, Y: 440}, ix.ColorButtonBlue, 5 * time.Second},
 	"精英副本-副本结算-离开":   {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 5 * time.Second},
 	// 周常副本
-	"周常副本-特殊":      {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, time.Second},
-	"周常副本-星期五":     {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
+	"周常副本-特殊":  {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, time.Second},
+	"周常副本-星期五": {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
+
+	"周常副本-简单": {ix.Position{X: 100, Y: 231}, ix.Color{}, time.Second},
+	"周常副本-普通": {ix.Position{X: 100, Y: 285}, ix.Color{}, time.Second},
+	"周常副本-困难": {ix.Position{X: 100, Y: 337}, ix.Color{}, time.Second},
+	"周常副本-超难": {ix.Position{X: 100, Y: 389}, ix.Color{}, time.Second},
+	"周常副本-极难": {ix.Position{X: 100, Y: 441}, ix.Color{}, time.Second},
+	"周常副本-绝望": {ix.Position{X: 100, Y: 493}, ix.Color{}, time.Second},
+
 	"周常副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"周常副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"周常副本-副本结算-退出": {ix.Position{X: 267, Y: 421}, ix.ColorButtonBlue, 5 * time.Second},
