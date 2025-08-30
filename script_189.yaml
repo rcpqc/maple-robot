@@ -10,12 +10,10 @@ tasks:
       难度: 超难
   - name: 武陵道场
     condition: '1234'
-  # - name: 精英副本
-  #   condition: '560'
-  #   options:
-  #     模式: 单人
-  # - name: 奈特的金字塔
-  #   condition: '6'
+  - name: 精英副本
+    condition: '1234'
+  - name: 奈特的金字塔
+    condition: '124'
   - name: 购买委托书
     condition: '1'
     options: 
@@ -27,6 +25,6 @@ tasks:
       最大接受: 3
   - name: 材料副本
     options:
-      副本名: 龙之峡谷
+      副本名: 玩具城
   - name: 领取日常奖励
   - name: 领取公会奖励

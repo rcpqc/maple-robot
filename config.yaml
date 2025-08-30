@@ -4,12 +4,16 @@ roles:
     script: script_nuo.yaml
   - id: 102
     class: 暗隐双刀
+    script: script_189.yaml
   - id: 103
     class: 火毒魔导师
+    script: script_189.yaml
   - id: 104
     class: 龙神
+    script: script_189.yaml
   - id: 105
     class: 恶魔复仇者
+    script: script_189.yaml
   - id: 106
     class: 恶魔猎手
   - id: 107
@@ -68,3 +72,6 @@ roles:
   - id: 505
     class: 豹弩游侠
     script: script_ngw.yaml
+  - id: 506
+    class: 爆莉萌灵使
+    script: script_ngw.yaml    

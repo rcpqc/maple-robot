@@ -16,20 +16,22 @@ type Label struct {
 
 var labels = map[string]*Label{
 	// 世界
-	"世界-导航":     {ix.Position{X: 939, Y: 19}, ix.Color{R: 255, G: 255, B: 255}, time.Second},
-	"世界-经验条":    {ix.Position{X: 2, Y: 538}, ix.Color{R: 254, G: 167, B: 14}, 0},
-	"世界-电量":     {ix.Position{X: 204, Y: 528}, ix.Color{R: 122, G: 195, B: 0}, 0},
-	"世界-技能8":    {ix.Position{X: 820, Y: 500}, ix.Color{}, time.Second},
-	"世界-自动战斗":   {ix.Position{X: 316, Y: 495}, ix.Color{}, time.Second},
-	"世界-聊天栏":    {ix.Position{X: 475, Y: 520}, ix.Color{}, 2 * time.Second},
-	"世界-邮箱":     {ix.Position{X: 786, Y: 27}, ix.ColorWhite, 3 * time.Second},
-	"世界-日常":     {ix.Position{X: 742, Y: 27}, ix.ColorWhite, 3 * time.Second},
-	"世界-角色":     {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
-	"世界-成长":     {ix.Position{X: 651, Y: 26}, ix.ColorWhite, 3 * time.Second},
-	"世界-公会":     {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 5 * time.Second},
-	"世界-社交":     {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
-	"世界-贸易":     {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
-	"世界-委托":     {ix.Position{X: 470, Y: 15}, ix.ColorWhite, 3 * time.Second},
+	"世界-导航":   {ix.Position{X: 939, Y: 19}, ix.Color{R: 255, G: 255, B: 255}, time.Second},
+	"世界-经验条":  {ix.Position{X: 2, Y: 538}, ix.Color{R: 254, G: 167, B: 14}, 0},
+	"世界-电量":   {ix.Position{X: 204, Y: 528}, ix.Color{R: 122, G: 195, B: 0}, 0},
+	"世界-技能8":  {ix.Position{X: 820, Y: 500}, ix.Color{}, time.Second},
+	"世界-自动战斗": {ix.Position{X: 316, Y: 495}, ix.Color{}, time.Second},
+	"世界-聊天栏":  {ix.Position{X: 475, Y: 520}, ix.Color{}, 2 * time.Second},
+	// 世界自定义标签
+	"世界-邮箱": {ix.Position{X: 786, Y: 27}, ix.ColorWhite, 3 * time.Second},
+	"世界-日常": {ix.Position{X: 742, Y: 27}, ix.ColorWhite, 3 * time.Second},
+	"世界-角色": {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
+	"世界-商店": {ix.Position{X: 654, Y: 22}, ix.ColorWhite, 3 * time.Second},
+	"世界-公会": {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 5 * time.Second},
+	"世界-社交": {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
+	"世界-贸易": {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
+	"世界-委托": {ix.Position{X: 470, Y: 15}, ix.ColorWhite, 3 * time.Second},
+
 	"世界-领取日常":   {ix.Position{X: 610, Y: 300}, ix.ColorButtonBlue, 2 * time.Second},
 	"聊天栏-公会":    {ix.Position{X: 24, Y: 120}, ix.Color{R: 11, G: 13, B: 17}, time.Second},
 	"聊天栏-表情":    {ix.Position{X: 284, Y: 506}, ix.ColorWhite, time.Second},
@@ -146,7 +148,7 @@ var labels = map[string]*Label{
 	// 精英副本
 	"精英副本-普通":        {ix.Position{X: 80, Y: 90}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
 	"精英副本-鬼怪蘑菇王":     {ix.Position{X: 94, Y: 147}, ix.Color{}, time.Second},
-	"精英副本-创建房间":      {ix.Position{X: 625, Y: 500}, ix.ColorButtonBlue, time.Second},
+	"精英副本-创建队伍":      {ix.Position{X: 777, Y: 490}, ix.ColorButtonOrange, time.Second},
 	"精英副本-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"精英副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"精英副本-集结地-开始":    {ix.Position{X: 154, Y: 164}, ix.ColorButtonOrange, time.Second},
@@ -255,6 +257,15 @@ var labels = map[string]*Label{
 	"委托-接受佣兵团": {ix.Position{X: 800, Y: 465}, ix.Color{R: 248, G: 197, B: 35}, 4 * time.Second},
 	"委托-领取奖励":  {ix.Position{X: 428, Y: 482}, ix.ColorButtonOrange, 3 * time.Second},
 	"委托-切换":    {ix.Position{X: 315, Y: 499}, ix.Color{R: 248, G: 197, B: 35}, 2 * time.Second},
+	"委托-福利":    {ix.Position{X: 881, Y: 85}, ix.Color{R: 56, G: 221, B: 219}, 2 * time.Second},
+	"委托-福利-购买": {ix.Position{X: 536, Y: 424}, ix.ColorButtonOrange, 2 * time.Second},
+	// 商店
+	"商店-收藏-1号商品":   {ix.Position{X: 155, Y: 200}, ix.ColorButtonYellow, 2 * time.Second},
+	"商店-收藏-2号商品":   {ix.Position{X: 288, Y: 200}, ix.ColorButtonYellow, 2 * time.Second},
+	"商店-商品详情-收藏图标": {ix.Position{X: 509, Y: 486}, ix.Color{R: 234, G: 160, B: 0}, 2 * time.Second},
+	"商店-商品详情-购买":   {ix.Position{X: 815, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
+	"商店-商品详情-关闭":   {ix.Position{X: 918, Y: 34}, ix.ColorWhite, 2 * time.Second},
+	"商店-购买道具-购买":   {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
 }
 
 func LabelCheck(ctx context.Context, names ...string) bool {

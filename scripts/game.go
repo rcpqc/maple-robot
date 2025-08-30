@@ -3,6 +3,7 @@ package scripts
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"maple-robot/config"
 	"maple-robot/ix"
@@ -30,6 +31,7 @@ func init() {
 	config.ProvideTask("领取公会奖励", lqghjl)
 	config.ProvideTask("怪物乐园跳关", gwlytg)
 	config.ProvideTask("委托佣兵", wtyb)
+	config.ProvideTask("购买委托书", gmwts)
 }
 
 // tkdmy 天空岛贸易
@@ -101,7 +103,7 @@ func jyfb(ctx context.Context) {
 		ix.Swipe(ix.Position{X: 100, Y: 120}, ix.Position{X: 100, Y: 520}, 1500)
 		time.Sleep(time.Second)
 		LabelClick(ctx, "精英副本-鬼怪蘑菇王")
-		LabelWaitClick(ctx, "精英副本-创建房间", 5*time.Second)
+		LabelWaitClick(ctx, "精英副本-创建队伍", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-集结地-开始", 5*time.Second)
 		log.Info(ctx, "任务入场")
@@ -193,7 +195,7 @@ func gwly(ctx context.Context) {
 		time.Sleep(2 * time.Second)
 		LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 5*time.Second)
 	} else {
-		LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 360*time.Second)
+		LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 600*time.Second)
 	}
 	BackWorld(ctx)
 }
@@ -352,6 +354,34 @@ func wtyb(ctx context.Context) {
 		}
 	}
 
+	clr := ix.Color{R: 56, G: 221, B: 219}
+	if LabelColor(ctx, "委托-福利") == clr {
+		LabelClick(ctx, "委托-福利")
+		LabelWaitClick(ctx, "委托-福利-购买", 5*time.Second)
+	}
 	log.Info(ctx, "任务入场")
+	BackWorld(ctx)
+}
+
+// gmwts 购买委托书
+func gmwts(ctx context.Context) {
+	list := config.GetTaskOptions(ctx, "商品列表")
+	if list == "" {
+		return
+	}
+	goods := strings.Split(list, ",")
+	LabelWaitClick(ctx, "世界-商店", 5*time.Second)
+
+	for _, good := range goods {
+		LabelWaitClick(ctx, "商店-收藏-"+good, 5*time.Second)
+		LabelWait(ctx, "商店-商品详情-收藏图标", 5*time.Second)
+		if LabelColor(ctx, "商店-商品详情-购买") == ix.ColorButtonOrange {
+			LabelClick(ctx, "商店-商品详情-购买")
+			LabelWaitClick(ctx, "商店-购买道具-购买", 5*time.Second)
+		} else {
+			LabelClick(ctx, "商店-商品详情-关闭")
+		}
+	}
+
 	BackWorld(ctx)
 }
