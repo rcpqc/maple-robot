@@ -1,77 +1,57 @@
 roles:
-  - id: 101
-    class: 黑骑士
+  # 1
+  - class: 黑骑士
     script: script_nuo.yaml
-  - id: 102
-    class: 暗隐双刀
+  - class: 爆莉萌灵使
+    script: script_200.yaml    
+  - class: 暗隐双刀
     script: script_189.yaml
-  - id: 103
-    class: 火毒魔导师
+  - class: 火毒魔导师
     script: script_189.yaml
-  - id: 104
-    class: 龙神
+  - class: 龙神
     script: script_189.yaml
-  - id: 105
-    class: 恶魔复仇者
+  - class: 恶魔复仇者
     script: script_189.yaml
-  - id: 106
-    class: 恶魔猎手
-  - id: 107
-    class: 唤灵斗师
-  - id: 201
-    class: 侠影
-  - id: 202
-    class: 机械师
-  - id: 203
-    class: 战神
-  - id: 204
-    class: 幻影
-  - id: 205
-    class: 墨玄
-  - id: 206
-    class: 夜光法师
-  - id: 207
-    class: 光之魔导师
-  - id: 301
-    class: 夜行者
-  - id: 302
-    class: 奇袭着
-  - id: 303
-    class: 双弩精灵
-  - id: 304
-    class: 火炮手
-  - id: 305
-    class: 冰雷魔导师
-  - id: 306
-    class: 炎术士
-  - id: 307
-    class: 圣骑士
-  - id: 401
-    class: 魂骑士
-  - id: 402
-    class: 冲锋队长
-  - id: 403
-    class: 英雄
-  - id: 404
-    class: 风灵使者
-  - id: 405
-    class: 箭神
-  - id: 406
-    class: 神射手
-  - id: 407
-    class: 船长
-  - id: 501
-    class: 隐月
-  - id: 502
-    class: 隐士
-  - id: 503
-    class: 施亚
-  - id: 504
-    class: 尖兵
-    script: script_ngw.yaml
-  - id: 505
-    class: 豹弩游侠
-    script: script_ngw.yaml
-  - id: 506
-    class: 爆莉萌灵使
-    script: script_ngw.yaml    
+  - class: 恶魔猎手
+    script: script_189.yaml
+  # 2
+  - class: 唤灵斗师
+    script: script_189.yaml
+  - class: 侠影
+    script: script_189.yaml
+  - class: 机械师
+    script: script_189.yaml
+  - class: 墨玄
+    script: script_189.yaml
+  - class: 战神
+    script: script_189.yaml
+  - class: 幻影
+    script: script_189.yaml
+  - class: 双弩精灵
+    script: script_189.yaml
+  # 3
+  - class: 风灵使者
+    script: script_189.yaml
+  - class: 光之魔导师
+  - class: 夜行者
+  - class: 箭神
+  - class: 夜光法师
+  - class: 奇袭着
+  - class: 火炮手
+  # 4
+  - class: 冰雷魔导师
+  - class: 炎术士
+  - class: 圣骑士
+  - class: 魂骑士
+  - class: 冲锋队长
+  - class: 英雄
+  - class: 尖兵
+  # 5
+  - class: 施亚
+  - class: 神射手
+  - class: 船长
+  - class: 隐月
+  - class: 隐士
+  - class: 豹弩游侠
+  - class: 狂龙战士
+    script: script_150.yaml

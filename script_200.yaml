@@ -1,32 +1,35 @@
 tasks:
-  - name: 自动战斗时间
+  # - name: 自动战斗时间
   - name: 送人气
   - name: 公会签到
   - name: 领取个人奖励
   - name: 怪物乐园
+    options:
+      200级列表: 爆莉萌灵使
   - name: 天空岛贸易
   - name: 周常副本
     options:
       难度: 超难
+  # - name: 特殊周常副本
+  #   options:
+  #     模式: 特殊
   - name: 武陵道场
     condition: '1234'
-  # - name: 精英副本
-  #   condition: '560'
-  #   options:
-  #     模式: 单人
-  # - name: 奈特的金字塔
-  #   condition: '6'
+  - name: 精英副本
+    condition: '1234'
+  - name: 奈特的金字塔
+    condition: '12'
   - name: 购买委托书
     condition: '1'
     options: 
       商品列表: 1号商品,2号商品
   - name: 委托佣兵
-    condition: '123456'
+    condition: '12456'
     options: 
       最大切换: 2
       最大接受: 3
   - name: 材料副本
     options:
-      副本名: 龙之峡谷
+      副本名: 武陵桃源
   - name: 领取日常奖励
   - name: 领取公会奖励

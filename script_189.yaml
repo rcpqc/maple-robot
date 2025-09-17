@@ -3,7 +3,9 @@ tasks:
   - name: 送人气
   - name: 公会签到
   - name: 领取个人奖励
-  - name: 怪物乐园跳关
+  - name: 怪物乐园
+    options:
+      跳关排除列表: 箭神,幻影,炎术士,冰雷魔导师
   - name: 天空岛贸易
   - name: 周常副本
     options:
@@ -13,13 +15,13 @@ tasks:
   - name: 精英副本
     condition: '1234'
   - name: 奈特的金字塔
-    condition: '124'
+    condition: '12'
   - name: 购买委托书
     condition: '1'
     options: 
       商品列表: 1号商品,2号商品
   - name: 委托佣兵
-    condition: '123456'
+    condition: '12456'
     options: 
       最大切换: 2
       最大接受: 3

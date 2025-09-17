@@ -86,3 +86,27 @@ func NextRole(ctx context.Context) {
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
 	}
 }
+
+// 背包利用比率
+func BackpackUtilizationRatio() float64 {
+	empty := ix.Color{R: 161, G: 166, B: 173}
+	x := 893
+	for ; x >= 859; x-- {
+		if ix.GetPixel(ix.Position{X: int64(x), Y: 45}) != empty {
+			break
+		}
+	}
+	return float64(x-858+1) / 37.0
+}
+
+// 经验比率
+func ExpRatio() float64 {
+	full := ix.Color{R: 255, G: 168, B: 15}
+	x := 0
+	for ; x < 960; x++ {
+		if ix.GetPixel(ix.Position{X: int64(x), Y: 538}) != full {
+			break
+		}
+	}
+	return float64(x) / 960
+}
