@@ -56,7 +56,7 @@ func main() {
 
 		// 脚本加载
 		if role.Script == "" {
-			role.Script = "script_180.yaml"
+			role.Script = "script_189.yaml"
 		}
 		script, err := config.LoadScript(role.Script)
 		if err != nil {

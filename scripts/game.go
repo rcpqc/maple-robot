@@ -177,17 +177,14 @@ func gwly(ctx context.Context) {
 	role := GetRole(ctx)
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
-	excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
-	twoHundredList := strings.Split(config.GetTaskOptions(ctx, "200级列表"), ",")
+	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
+	excludeList := []string{"黑骑士", "箭神", "幻影", "炎术士", "冰雷魔导师"}
+	pos := config.GetTaskOptions(ctx, "标签位置")
 	if !slices.Contains(excludeList, role.Class) {
 		LabelWaitClick(ctx, "日常-进度", 5*time.Second)
 		LabelWait(ctx, "日常-进度-关闭", 5*time.Second)
 		ix.Swipe(ix.Position{X: 579, Y: 481}, ix.Position{X: 579, Y: 50}, 1500)
 		time.Sleep(time.Second)
-		pos := "倒数2号"
-		if slices.Contains(twoHundredList, role.Class) {
-			pos = "倒数3号"
-		}
 		LabelWaitClick(ctx, "日常-进度-"+pos, 5*time.Second)
 		LabelWait(ctx, "日常-进度-怪物乐园跳关-标题", 5*time.Second)
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-使用战斗跳关券", 5*time.Second)

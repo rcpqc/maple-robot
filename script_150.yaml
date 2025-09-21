@@ -5,7 +5,7 @@ tasks:
   - name: 领取个人奖励
   - name: 怪物乐园
     options:
-      跳关排除列表: 箭神,幻影,炎术士,冰雷魔导师
+      标签位置: 倒数1号
   - name: 天空岛贸易
   - name: 周常副本
     options:

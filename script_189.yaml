@@ -5,17 +5,17 @@ tasks:
   - name: 领取个人奖励
   - name: 怪物乐园
     options:
-      跳关排除列表: 箭神,幻影,炎术士,冰雷魔导师
+      标签位置: 倒数2号
   - name: 天空岛贸易
   - name: 周常副本
     options:
       难度: 超难
   - name: 武陵道场
     condition: '1234'
-  - name: 精英副本
-    condition: '1234'
-  - name: 奈特的金字塔
-    condition: '12'
+  # - name: 精英副本
+  #   condition: '1234'
+  # - name: 奈特的金字塔
+  #   condition: '12'
   - name: 购买委托书
     condition: '1'
     options: 

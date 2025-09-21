@@ -5,7 +5,7 @@ tasks:
   - name: 领取个人奖励
   - name: 怪物乐园
     options:
-      200级列表: 爆莉萌灵使
+      标签位置: 倒数3号
   - name: 天空岛贸易
   - name: 周常副本
     options:

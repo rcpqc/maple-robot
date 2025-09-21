@@ -5,33 +5,20 @@ roles:
   - class: 爆莉萌灵使
     script: script_200.yaml    
   - class: 暗隐双刀
-    script: script_189.yaml
   - class: 火毒魔导师
-    script: script_189.yaml
   - class: 龙神
-    script: script_189.yaml
   - class: 恶魔复仇者
-    script: script_189.yaml
   - class: 恶魔猎手
-    script: script_189.yaml
   # 2
   - class: 唤灵斗师
-    script: script_189.yaml
   - class: 侠影
-    script: script_189.yaml
   - class: 机械师
-    script: script_189.yaml
   - class: 墨玄
-    script: script_189.yaml
   - class: 战神
-    script: script_189.yaml
   - class: 幻影
-    script: script_189.yaml
   - class: 双弩精灵
-    script: script_189.yaml
   # 3
   - class: 风灵使者
-    script: script_189.yaml
   - class: 光之魔导师
   - class: 夜行者
   - class: 箭神
@@ -53,5 +40,6 @@ roles:
   - class: 隐月
   - class: 隐士
   - class: 豹弩游侠
+    script: script_180.yaml
   - class: 狂龙战士
     script: script_150.yaml
