@@ -75,7 +75,10 @@ func main() {
 		}
 
 		// 角色属性获取
-		sExp := scripts.ExpRatio()
+		log.Info(ctx, "角色属性",
+			"bpu", fmt.Sprintf("%.0f%%", scripts.BackpackUtilizationRatio()*100),
+			"exp", fmt.Sprintf("%.2f%%", scripts.ExpRatio()*100),
+		)
 
 		// 任务执行
 		for _, task := range script.Tasks {
@@ -91,15 +94,11 @@ func main() {
 			}
 			task.Execute(ctx)
 		}
-		eExp := scripts.ExpRatio()
-		if eExp < sExp {
-			eExp = 1 + eExp
-		}
 
+		// 角色属性获取
 		log.Info(ctx, "角色属性",
 			"bpu", fmt.Sprintf("%.0f%%", scripts.BackpackUtilizationRatio()*100),
-			"exp", fmt.Sprintf("%.2f%%", eExp*100),
-			"dexp", fmt.Sprintf("%.2f%%", (eExp-sExp)*100),
+			"exp", fmt.Sprintf("%.2f%%", scripts.ExpRatio()*100),
 		)
 
 		log.Info(ctx, "角色日常结束")

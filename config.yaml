@@ -16,9 +16,9 @@ roles:
   - class: 墨玄
   - class: 战神
   - class: 幻影
-  - class: 双弩精灵
-  # 3
   - class: 风灵使者
+  # 3
+  - class: 双弩精灵
   - class: 光之魔导师
   - class: 夜行者
   - class: 箭神
@@ -40,6 +40,5 @@ roles:
   - class: 隐月
   - class: 隐士
   - class: 豹弩游侠
-    script: script_180.yaml
   - class: 狂龙战士
     script: script_150.yaml

@@ -6,6 +6,7 @@ tasks:
   - name: 怪物乐园
     options:
       标签位置: 倒数2号
+      关卡: 隐匿痕迹
   - name: 天空岛贸易
   - name: 周常副本
     options:

@@ -180,6 +180,7 @@ func gwly(ctx context.Context) {
 	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
 	excludeList := []string{"黑骑士", "箭神", "幻影", "炎术士", "冰雷魔导师"}
 	pos := config.GetTaskOptions(ctx, "标签位置")
+	stage := config.GetTaskOptions(ctx, "关卡")
 	if !slices.Contains(excludeList, role.Class) {
 		LabelWaitClick(ctx, "日常-进度", 5*time.Second)
 		LabelWait(ctx, "日常-进度-关闭", 5*time.Second)
@@ -187,6 +188,9 @@ func gwly(ctx context.Context) {
 		time.Sleep(time.Second)
 		LabelWaitClick(ctx, "日常-进度-"+pos, 5*time.Second)
 		LabelWait(ctx, "日常-进度-怪物乐园跳关-标题", 5*time.Second)
+		if stage != "" {
+			LabelClick(ctx, "日常-进度-怪物乐园跳关-"+stage)
+		}
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-使用战斗跳关券", 5*time.Second)
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 		log.Info(ctx, "任务入场")
