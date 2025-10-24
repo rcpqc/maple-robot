@@ -36,6 +36,10 @@ type Role struct {
 	Class     string
 	Intervals []Interval
 	Tasks     map[string]*Task
+	// attrs
+	Exp      string
+	StartExp string
+	Bpu      string
 }
 
 func main() {
@@ -80,6 +84,15 @@ func main() {
 		case "角色日常结束":
 			role := mroles[id]
 			role.Intervals[len(role.Intervals)-1].EndTime = r.Time
+		case "角色属性":
+			exp := config.GetRecordAttr(r, "exp")
+			bpu := config.GetRecordAttr(r, "bpu")
+			role := mroles[id]
+			if role.StartExp == "" {
+				role.StartExp = exp
+			}
+			role.Exp = exp
+			role.Bpu = bpu
 		}
 	}
 
@@ -97,7 +110,7 @@ func main() {
 
 	// 输出
 	fOut, _ := os.Create(*outFile)
-	headers := []string{"id", "角色", "角色耗时(s)", "任务耗时(s)", "角色切换"}
+	headers := []string{"id", "角色", "角色耗时(s)", "任务耗时(s)", "角色切换", "经验值", "经验值增量", "背包利用率"}
 	headers = append(headers, names...)
 	fOut.WriteString(strings.Join(headers, ",") + "\n")
 	for _, role := range roles {
@@ -108,7 +121,8 @@ func main() {
 		}
 		// 计算各个任务耗时
 		taskCost := 0
-		columns := []string{role.Id, role.Class, "", "", ""}
+		// id, class, role_cost, task_cost, _cost, exp, delta_exp, bpu
+		columns := []string{role.Id, role.Class, "", "", "", "", "", ""}
 		for _, name := range names {
 			if task, ok := role.Tasks[name]; ok {
 				cost := task.Interval.Seconds()
@@ -118,9 +132,21 @@ func main() {
 				columns = append(columns, "0")
 			}
 		}
+		var sexp, exp float64
+		fmt.Sscanf(role.StartExp, "%f%%", &sexp)
+		fmt.Sscanf(role.Exp, "%f%%", &exp)
+		dexp := exp - sexp
+		if dexp < 0 {
+			dexp += 100
+		}
 		columns[2] = strconv.Itoa(roleCost)
 		columns[3] = strconv.Itoa(taskCost)
 		columns[4] = strconv.Itoa(roleCost - taskCost)
+
+		columns[5] = role.Exp
+		columns[6] = fmt.Sprintf("%.2f%%", dexp)
+		columns[7] = role.Bpu
+
 		fOut.WriteString(strings.Join(columns, ",") + "\n")
 	}
 	fOut.Close()

@@ -84,7 +84,7 @@ var labels = map[string]*Label{
 	"日常-进度-怪物乐园跳关-停止施工的工地": {ix.Position{X: 200, Y: 310}, ix.Color{R: 187, G: 194, B: 202}, time.Second},
 	"日常-进度-怪物乐园跳关-怪物乐园沙滩":  {ix.Position{X: 400, Y: 310}, ix.Color{R: 187, G: 194, B: 202}, time.Second},
 	"日常-进度-怪物乐园跳关-使用战斗跳关券": {ix.Position{X: 480, Y: 480}, ix.ColorButtonOrange, time.Second},
-	"日常-进度-怪物乐园跳关-入场确认":    {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"日常-进度-怪物乐园跳关-入场确认":    {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
 	"日常-进度-怪物乐园跳关-结算确认":    {ix.Position{X: 430, Y: 430}, ix.ColorButtonBlue, time.Second},
 
 	"日常-简化模式1号":  {ix.Position{X: 93, Y: 235}, ix.Color{}, time.Second},

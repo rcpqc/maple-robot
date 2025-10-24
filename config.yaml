@@ -8,37 +8,39 @@ roles:
   - class: 火毒魔导师
   - class: 龙神
   - class: 恶魔复仇者
-  - class: 恶魔猎手
-  # 2
-  - class: 唤灵斗师
   - class: 侠影
+
+  # 2
+  - class: 恶魔猎手
+  - class: 唤灵斗师
   - class: 机械师
   - class: 墨玄
-  - class: 战神
   - class: 幻影
+  - class: 战神
   - class: 风灵使者
+
   # 3
   - class: 双弩精灵
-  - class: 光之魔导师
-  - class: 夜行者
   - class: 箭神
   - class: 夜光法师
-  - class: 奇袭着
-  - class: 火炮手
-  # 4
-  - class: 冰雷魔导师
   - class: 炎术士
-  - class: 圣骑士
+  - class: 夜行者
+  - class: 光之魔导师
+  - class: 奇袭着
+  # 4
+  - class: 火炮手
+  - class: 冰雷魔导师
   - class: 魂骑士
-  - class: 冲锋队长
   - class: 英雄
+  - class: 冲锋队长
+  - class: 圣骑士
   - class: 尖兵
   # 5
   - class: 施亚
-  - class: 神射手
   - class: 船长
+  - class: 神射手
   - class: 隐月
   - class: 隐士
   - class: 豹弩游侠
   - class: 狂龙战士
-    script: script_150.yaml
+    script: script_180.yaml    

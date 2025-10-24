@@ -92,7 +92,7 @@ func BackpackUtilizationRatio() float64 {
 	empty := ix.Color{R: 161, G: 166, B: 173}
 	x := 893
 	for ; x >= 859; x-- {
-		if ix.GetPixel(ix.Position{X: int64(x), Y: 45}) != empty {
+		if !ix.GetPixel(ix.Position{X: int64(x), Y: 45}).Equals(empty) {
 			break
 		}
 	}
@@ -104,7 +104,7 @@ func ExpRatio() float64 {
 	full := ix.Color{R: 255, G: 168, B: 15}
 	x := 0
 	for ; x < 960; x++ {
-		if ix.GetPixel(ix.Position{X: int64(x), Y: 538}) != full {
+		if !ix.GetPixel(ix.Position{X: int64(x), Y: 538}).Equals(full) {
 			break
 		}
 	}
