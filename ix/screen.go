@@ -73,3 +73,7 @@ func WaitPixel(pos Position, c Color) {
 		time.Sleep(100 * time.Millisecond)
 	}
 }
+
+func SubImage(rc Rect) image.Image {
+	return Display.frameBuffer.SubImage(image.Rect(int(rc.X), int(rc.Y), int(rc.W), int(rc.H)))
+}
