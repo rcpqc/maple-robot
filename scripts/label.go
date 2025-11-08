@@ -156,9 +156,11 @@ var labels = map[string]*Label{
 	"精英副本-集结地-开始":    {ix.Position{X: 154, Y: 164}, ix.ColorButtonOrange, time.Second},
 	"精英副本-副本结算-单人离开": {ix.Position{X: 322, Y: 440}, ix.ColorButtonBlue, 5 * time.Second},
 	"精英副本-副本结算-离开":   {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 5 * time.Second},
+
 	// 周常副本
-	"周常副本-特殊":  {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, time.Second},
-	"周常副本-星期五": {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
+	"周常副本-模式普通": {ix.Position{X: 65, Y: 189}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
+	"周常副本-模式特殊": {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, 2 * time.Second},
+	"周常副本-星期五":  {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
 
 	"周常副本-简单": {ix.Position{X: 100, Y: 231}, ix.Color{}, time.Second},
 	"周常副本-普通": {ix.Position{X: 100, Y: 285}, ix.Color{}, time.Second},

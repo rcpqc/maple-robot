@@ -4,6 +4,7 @@ tasks:
   - name: 特殊周常副本
     options:
       模式: 特殊
+      难度: 普通
   - name: 精英副本
   - name: 金钩海兵王
   - name: 奈特的金字塔

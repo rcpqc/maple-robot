@@ -73,18 +73,17 @@ func zcfb(ctx context.Context) {
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式3号")
-
+	LabelWait(ctx, "周常副本-模式普通", 5*time.Second)
 	if mode := config.GetTaskOptions(ctx, "模式"); mode == "特殊" {
-		LabelClick(ctx, "周常副本-特殊")
+		LabelClick(ctx, "周常副本-模式特殊")
 	}
 	if difficulty := config.GetTaskOptions(ctx, "难度"); difficulty != "" {
 		LabelClick(ctx, "周常副本-"+difficulty)
 	}
-	LabelWait(ctx, "周常副本-入场", 5*time.Second)
 	if time.Now().Weekday() == time.Saturday || time.Now().Weekday() == time.Sunday {
 		LabelClick(ctx, "周常副本-星期五")
 	}
-	LabelClick(ctx, "周常副本-入场")
+	LabelWaitClick(ctx, "周常副本-入场", 5*time.Second)
 	LabelWaitClick(ctx, "周常副本-入场-确定", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 15*time.Second)
 	log.Info(ctx, "任务入场")
@@ -201,8 +200,8 @@ func gwly(ctx context.Context) {
 		buff := config.GetTaskOptions(ctx, "经验增益")
 		LabelWaitClick(ctx, "怪物乐园-入场", 5*time.Second)
 		LabelWaitClick(ctx, "怪物乐园-入场-票券确认", 5*time.Second)
-		if buff != "" {
-			LabelWaitClick(ctx, "怪物乐园-入场-经验增益", 5*time.Second)
+		if buff != "" && LabelCheck(ctx, "怪物乐园-入场-经验增益") {
+			LabelClick(ctx, "怪物乐园-入场-经验增益")
 		}
 		LabelWaitClick(ctx, "怪物乐园-入场-入场", 5*time.Second)
 		LabelWait(ctx, "副本-退出", 10*time.Second)
