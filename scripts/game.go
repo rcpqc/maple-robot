@@ -177,7 +177,7 @@ func gwly(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
-	excludeList := []string{"黑骑士", "箭神", "幻影", "战神", "冰雷魔导师"}
+	excludeList := []string{"黑骑士", "箭神", "幻影", "战神", "冰雷魔导师", "艾利尔"}
 	pos := config.GetTaskOptions(ctx, "标签位置")
 	stage := config.GetTaskOptions(ctx, "关卡")
 	if !slices.Contains(excludeList, role.Class) {

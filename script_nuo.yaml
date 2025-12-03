@@ -1,5 +1,5 @@
 tasks:
-  - name: 天空岛贸易
+  # - name: 天空岛贸易
   - name: 周常副本
   - name: 特殊周常副本
     options:

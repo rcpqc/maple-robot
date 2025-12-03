@@ -13,12 +13,8 @@ tasks:
       难度: 超难
   - name: 武陵道场
     condition: '1234'
-  # - name: 精英副本
-  #   condition: '560'
-  #   options:
-  #     模式: 单人
-  # - name: 奈特的金字塔
-  #   condition: '6'
+  - name: 精英副本
+  - name: 奈特的金字塔
   - name: 购买委托书
     condition: '1'
     options: 
@@ -28,6 +24,7 @@ tasks:
     options: 
       最大切换: 2
       最大接受: 3
+  - name: 金钩海兵王
   - name: 材料副本
     options:
       副本名: 龙之峡谷

@@ -17,19 +17,20 @@ roles:
   - class: 墨玄
   - class: 幻影
   - class: 战神
-  - class: 风灵使者
+  - class: 双弩精灵
 
   # 3
-  - class: 双弩精灵
+  - class: 风灵使者
   - class: 箭神
+  - class: 冰雷魔导师
   - class: 夜光法师
   - class: 炎术士
   - class: 夜行者
   - class: 光之魔导师
-  - class: 奇袭着
+
   # 4
+  - class: 奇袭着
   - class: 火炮手
-  - class: 冰雷魔导师
   - class: 魂骑士
   - class: 英雄
   - class: 冲锋队长
@@ -43,4 +44,7 @@ roles:
   - class: 隐士
   - class: 豹弩游侠
   - class: 狂龙战士
-    script: script_180.yaml    
+    script: script_180.yaml
+  # 6
+  - class: 艾利尔
+    script: script_150.yaml
