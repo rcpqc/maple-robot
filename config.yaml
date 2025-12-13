@@ -47,4 +47,4 @@ roles:
     script: script_180.yaml
   # 6
   - class: 艾利尔
-    script: script_150.yaml
+    script: script_180.yaml
