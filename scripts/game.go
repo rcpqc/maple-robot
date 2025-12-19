@@ -37,7 +37,9 @@ func init() {
 // tkdmy 天空岛贸易
 func tkdmy(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-贸易", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-贸易")
 	LabelWaitClick(ctx, "天空岛贸易-前往获取战利品", 5*time.Second)
 	LabelWaitClick(ctx, "天空岛贸易-入场", 5*time.Second)
 	log.Info(ctx, "任务入场")
@@ -232,7 +234,9 @@ func zdzdsj(ctx context.Context) {
 // ghqd 公会签到
 func ghqd(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-公会", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-公会")
 	LabelWait(ctx, "公会-领地树", 5*time.Second)
 
 	if flag := config.GetTaskOptions(ctx, "领地树祝福"); flag != "NO" {
@@ -262,7 +266,9 @@ func lqgrjl(ctx context.Context) {
 // srq 送人气
 func srq(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-社交", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-社交")
 	LabelWaitClick(ctx, "社交-微信好友", 5*time.Second)
 	LabelWait(ctx, "社交-微信好友-背景", 5*time.Second)
 	LabelClick(ctx, "社交-微信好友-战斗力")
@@ -301,7 +307,9 @@ func ghlt(ctx context.Context) {
 // lqghjl 领取公会奖励
 func lqghjl(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-公会", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-公会")
 	LabelClick(ctx, "公会-公会任务")
 	LabelClick(ctx, "公会-公会任务-每日任务")
 	LabelClick(ctx, "公会-公会任务-全部领取")
@@ -316,7 +324,9 @@ func lqghjl(ctx context.Context) {
 // 委托佣兵
 func wtyb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-委托", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-委托")
 	LabelWait(ctx, "委托-切换", 5*time.Second)
 	maxChange, _ := strconv.ParseInt(config.GetTaskOptions(ctx, "最大切换"), 10, 64)
 	maxChange = min(max(maxChange, 0), 5)
@@ -372,7 +382,9 @@ func gmwts(ctx context.Context) {
 		return
 	}
 	goods := strings.Split(list, ",")
-	LabelWaitClick(ctx, "世界-商店", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-商店")
 
 	for _, good := range goods {
 		LabelWaitClick(ctx, "商店-收藏-"+good, 5*time.Second)

@@ -25,14 +25,14 @@ var labels = map[string]*Label{
 	// 世界自定义标签
 	"世界-邮箱": {ix.Position{X: 786, Y: 27}, ix.ColorWhite, 3 * time.Second},
 	"世界-日常": {ix.Position{X: 742, Y: 27}, ix.ColorWhite, 3 * time.Second},
-	"世界-角色": {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
-	"世界-商店": {ix.Position{X: 654, Y: 22}, ix.ColorWhite, 3 * time.Second},
-	"世界-公会": {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 6 * time.Second},
-	"世界-社交": {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
-	"世界-贸易": {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
-	"世界-委托": {ix.Position{X: 470, Y: 15}, ix.ColorWhite, 3 * time.Second},
+	// "世界-角色": {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
+	// "世界-商店": {ix.Position{X: 654, Y: 22}, ix.ColorWhite, 3 * time.Second},
+	// "世界-公会": {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 6 * time.Second},
+	// "世界-社交": {ix.Position{X: 561, Y: 29}, ix.ColorWhite, 3 * time.Second},
+	// "世界-贸易": {ix.Position{X: 516, Y: 36}, ix.ColorWhite, 3 * time.Second},
+	// "世界-委托": {ix.Position{X: 470, Y: 15}, ix.ColorWhite, 3 * time.Second},
+	"世界-领取日常": {ix.Position{X: 610, Y: 300}, ix.ColorButtonBlue, 2 * time.Second},
 
-	"世界-领取日常":   {ix.Position{X: 610, Y: 300}, ix.ColorButtonBlue, 2 * time.Second},
 	"聊天栏-公会":    {ix.Position{X: 24, Y: 120}, ix.Color{R: 11, G: 13, B: 17}, time.Second},
 	"聊天栏-表情":    {ix.Position{X: 284, Y: 506}, ix.ColorWhite, time.Second},
 	"聊天栏-表情-害羞": {ix.Position{X: 745, Y: 95}, ix.Color{R: 255, G: 219, B: 85}, time.Second},
@@ -48,16 +48,17 @@ var labels = map[string]*Label{
 	"副本-退出":  {ix.Position{X: 930, Y: 214}, ix.ColorButtonExitDungeon, time.Second},
 
 	// 导航
-	"导航-枫小喵":   {ix.Position{X: 707, Y: 501}, ix.Color{R: 253, G: 235, B: 218}, time.Second},
-	"导航-公会":    {ix.Position{X: 645, Y: 230}, ix.Color{}, 3 * time.Second},
-	"导航-成长":    {ix.Position{X: 820, Y: 90}, ix.Color{}, 3 * time.Second},
-	"导航-日常":    {ix.Position{X: 860, Y: 230}, ix.Color{}, 3 * time.Second},
-	"导航-社交":    {ix.Position{X: 645, Y: 360}, ix.Color{}, 3 * time.Second},
-	"导航-邮箱":    {ix.Position{X: 794, Y: 25}, ix.Color{}, 3 * time.Second},
-	"导航-关闭":    {ix.Position{X: 925, Y: 21}, ix.Color{}, 3 * time.Second},
-	"导航-更改角色":  {ix.Position{X: 881, Y: 497}, ix.Color{}, 3 * time.Second},
-	"导航-角色训练场": {ix.Position{X: 815, Y: 424}, ix.Color{}, 3 * time.Second},
-	"导航-天空岛贸易": {ix.Position{X: 900, Y: 424}, ix.Color{}, 3 * time.Second},
+	"导航-枫小喵":  {ix.Position{X: 707, Y: 501}, ix.Color{R: 253, G: 234, B: 216}, time.Second},
+	"导航-公会":   {ix.Position{X: 645, Y: 230}, ix.Color{}, 3 * time.Second},
+	"导航-成长":   {ix.Position{X: 820, Y: 90}, ix.Color{}, 3 * time.Second},
+	"导航-日常":   {ix.Position{X: 860, Y: 230}, ix.Color{}, 3 * time.Second},
+	"导航-社交":   {ix.Position{X: 816, Y: 467}, ix.Color{}, 3 * time.Second},
+	"导航-邮箱":   {ix.Position{X: 794, Y: 16}, ix.Color{}, 3 * time.Second},
+	"导航-关闭":   {ix.Position{X: 925, Y: 22}, ix.ColorWhite, 3 * time.Second},
+	"导航-更改角色": {ix.Position{X: 881, Y: 494}, ix.ColorWhite, 3 * time.Second},
+	// "导航-角色训练场": {ix.Position{X: 815, Y: 424}, ix.Color{}, 3 * time.Second},
+	"导航-贸易": {ix.Position{X: 900, Y: 424}, ix.Color{}, 3 * time.Second},
+	"导航-委托": {ix.Position{X: 815, Y: 353}, ix.Color{}, 3 * time.Second},
 
 	// 成长
 
@@ -87,6 +88,7 @@ var labels = map[string]*Label{
 	"日常-进度-怪物乐园跳关-入场确认":    {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
 	"日常-进度-怪物乐园跳关-结算确认":    {ix.Position{X: 430, Y: 430}, ix.ColorButtonBlue, time.Second},
 
+	// 材料，精英，周常，金字塔，武陵，金钩，怪物
 	"日常-简化模式1号":  {ix.Position{X: 93, Y: 235}, ix.Color{}, time.Second},
 	"日常-简化模式2号":  {ix.Position{X: 93, Y: 438}, ix.Color{}, time.Second},
 	"日常-简化模式3号":  {ix.Position{X: 260, Y: 235}, ix.Color{}, time.Second},
