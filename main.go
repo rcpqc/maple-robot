@@ -107,6 +107,6 @@ func main() {
 
 	f.Close()
 
-	exec.Command("./analyze.exe").Run()
+	exec.Command("./analyze").Run()
 
 }

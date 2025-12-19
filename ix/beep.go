@@ -1,11 +1,16 @@
 package ix
 
-import "syscall"
-
-var (
-	fnMessageBeep = syscall.MustLoadDLL("user32.dll").MustFindProc("MessageBeep")
+import (
+	"fmt"
+	"os/exec"
 )
 
+func PlaySystemSound(soundName string) error {
+	soundPath := fmt.Sprintf("/System/Library/Sounds/%s.aiff", soundName)
+	cmd := exec.Command("afplay", soundPath)
+	return cmd.Run()
+}
+
 func Beep() {
-	fnMessageBeep.Call(0xffffffff)
+	PlaySystemSound("Glass")
 }
