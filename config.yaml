@@ -36,6 +36,7 @@ roles:
   - class: 冲锋队长
   - class: 圣骑士
   - class: 尖兵
+
   # 5
   - class: 施亚
   - class: 船长
@@ -44,7 +45,7 @@ roles:
   - class: 隐士
   - class: 豹弩游侠
   - class: 狂龙战士
-    script: script_180.yaml
+
   # 6
   - class: 艾利尔
     script: script_180.yaml

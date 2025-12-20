@@ -360,7 +360,7 @@ func wtyb(ctx context.Context) {
 			LabelClick(ctx, mission)
 			if LabelCheck(ctx, "委托-接受佣兵团") {
 				LabelClick(ctx, "委托-接受佣兵团")
-				LabelWaitClick(ctx, "委托-领取奖励", 5*time.Second)
+				// LabelWaitClick(ctx, "委托-领取奖励", 5*time.Second)
 				LabelClick(ctx, "委托-接受1号位")
 			}
 		}

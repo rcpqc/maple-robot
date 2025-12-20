@@ -67,7 +67,9 @@ func Back(ctx context.Context) {
 
 func NextRole(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-角色", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-更改角色")
 	LabelWait(ctx, "更改角色-选择角色", 5*time.Second)
 	if LabelCheck(ctx, "更改角色-上左") {
 		LabelClick(ctx, "更改角色-上右")
