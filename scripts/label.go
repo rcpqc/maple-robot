@@ -54,6 +54,7 @@ var labels = map[string]*Label{
 	"导航-日常":   {ix.Position{X: 860, Y: 230}, ix.Color{}, 3 * time.Second},
 	"导航-社交":   {ix.Position{X: 816, Y: 467}, ix.Color{}, 3 * time.Second},
 	"导航-邮箱":   {ix.Position{X: 794, Y: 16}, ix.Color{}, 3 * time.Second},
+	"导航-商店":   {ix.Position{X: 814, Y: 277}, ix.Color{}, 3 * time.Second},
 	"导航-关闭":   {ix.Position{X: 925, Y: 22}, ix.ColorWhite, 3 * time.Second},
 	"导航-更改角色": {ix.Position{X: 881, Y: 494}, ix.ColorWhite, 3 * time.Second},
 	// "导航-角色训练场": {ix.Position{X: 815, Y: 424}, ix.Color{}, 3 * time.Second},
@@ -295,6 +296,7 @@ func LabelWait(ctx context.Context, name string, timeout time.Duration) {
 	lbl, ok := labels[name]
 	if !ok {
 		log.Error(ctx, "标签等待", "label", name, "err", "missing")
+		return
 	}
 	st := time.Now()
 	ddl := st.Add(timeout)
