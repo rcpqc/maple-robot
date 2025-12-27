@@ -63,7 +63,7 @@ func wldc(ctx context.Context) {
 	LabelWaitClick(ctx, "武陵道场-进入", 5*time.Second)
 	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "副本-退出", 15*time.Second)
-	time.Sleep(6 * time.Second)
+	time.Sleep(7 * time.Second)
 	LabelWaitClick(ctx, "武陵道场-退出", 5*time.Second)
 	LabelWaitClick(ctx, "武陵道场-离开", 10*time.Second)
 	BackWorld(ctx)
