@@ -179,7 +179,7 @@ func gwly(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
-	excludeList := []string{"黑骑士", "箭神", "幻影", "战神", "冰雷魔导师", "艾利尔", "古迹猎人"}
+	excludeList := []string{"黑骑士", "箭神", "幻影", "战神", "冰雷魔导师", "艾利尔", "炎术士"}
 	pos := config.GetTaskOptions(ctx, "标签位置")
 	stage := config.GetTaskOptions(ctx, "关卡")
 	if !slices.Contains(excludeList, role.Class) {
@@ -272,7 +272,7 @@ func srq(ctx context.Context) {
 	LabelWaitClick(ctx, "社交-微信好友", 5*time.Second)
 	LabelWait(ctx, "社交-微信好友-背景", 5*time.Second)
 	LabelClick(ctx, "社交-微信好友-战斗力")
-	LabelWaitClick(ctx, "社交-微信好友-送人气给3号", 5*time.Second)
+	LabelWaitClick(ctx, "社交-微信好友-送人气给4号", 5*time.Second)
 	LabelClick(ctx, "社交-送人气")
 	LabelClick(ctx, "社交-送人气确定")
 	LabelClick(ctx, "社交-送人气不提醒")

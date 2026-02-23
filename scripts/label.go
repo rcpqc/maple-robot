@@ -165,12 +165,12 @@ var labels = map[string]*Label{
 	"周常副本-模式特殊": {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, 2 * time.Second},
 	"周常副本-星期五":  {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
 
-	"周常副本-简单": {ix.Position{X: 100, Y: 231}, ix.Color{}, time.Second},
-	"周常副本-普通": {ix.Position{X: 100, Y: 285}, ix.Color{}, time.Second},
-	"周常副本-困难": {ix.Position{X: 100, Y: 337}, ix.Color{}, time.Second},
-	"周常副本-超难": {ix.Position{X: 100, Y: 389}, ix.Color{}, time.Second},
-	"周常副本-极难": {ix.Position{X: 100, Y: 441}, ix.Color{}, time.Second},
-	"周常副本-绝望": {ix.Position{X: 100, Y: 493}, ix.Color{}, time.Second},
+	"周常副本-普通": {ix.Position{X: 100, Y: 231}, ix.Color{}, time.Second},
+	"周常副本-困难": {ix.Position{X: 100, Y: 285}, ix.Color{}, time.Second},
+	"周常副本-超难": {ix.Position{X: 100, Y: 337}, ix.Color{}, time.Second},
+	"周常副本-极难": {ix.Position{X: 100, Y: 389}, ix.Color{}, time.Second},
+	"周常副本-绝望": {ix.Position{X: 100, Y: 441}, ix.Color{}, time.Second},
+	"周常副本-噩梦": {ix.Position{X: 100, Y: 493}, ix.Color{}, time.Second},
 
 	"周常副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"周常副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},

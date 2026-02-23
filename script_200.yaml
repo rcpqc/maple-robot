@@ -9,10 +9,12 @@ tasks:
       关卡: 隐匿痕迹
   - name: 天空岛贸易
   - name: 周常副本
+    options:
+      难度: 绝望
   - name: 特殊周常副本
     options:
       模式: 特殊
-      难度: 简单
+      难度: 普通
   - name: 武陵道场
     condition: '1234'
   - name: 精英副本

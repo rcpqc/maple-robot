@@ -4,13 +4,10 @@ tasks:
   - name: 特殊周常副本
     options:
       模式: 特殊
-      难度: 普通
   - name: 精英副本
   - name: 金钩海兵王
   - name: 奈特的金字塔
   - name: 材料副本
-    options:
-      副本名: 武陵桃源
   - name: 怪物乐园
     options:
       经验增益: OK
