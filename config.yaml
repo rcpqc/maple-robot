@@ -22,6 +22,7 @@ roles:
 
   # 3
   - class: 冰雷魔导师
+    script: script_200.yaml
   - class: 墨玄
   - class: 双弩精灵
   - class: 风灵使者
@@ -50,4 +51,4 @@ roles:
   # 6
   - class: 狂龙战士
   - class: 艾利尔
-    script: script_180.yaml
+
