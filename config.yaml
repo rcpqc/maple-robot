@@ -3,6 +3,7 @@ roles:
   - class: 黑骑士
     script: script_nuo.yaml
   - class: 冰雷魔导师
+    script: script_bin.yaml
   - class: 爆莉萌灵使
     script: script_200.yaml
   - class: 古迹猎人
