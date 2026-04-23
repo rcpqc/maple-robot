@@ -32,6 +32,7 @@ func init() {
 	config.ProvideTask("领取公会奖励", lqghjl)
 	config.ProvideTask("委托佣兵", wtyb)
 	config.ProvideTask("购买委托书", gmwts)
+	config.ProvideTask("神秘河日常", smhrc)
 }
 
 // tkdmy 天空岛贸易
@@ -179,7 +180,7 @@ func gwly(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
-	excludeList := []string{"黑骑士", "箭神", "幻影", "战神", "冰雷魔导师", "艾利尔", "炎术士"}
+	excludeList := []string{"黑骑士"}
 	pos := config.GetTaskOptions(ctx, "标签位置")
 	stage := config.GetTaskOptions(ctx, "关卡")
 	if !slices.Contains(excludeList, role.Class) {
@@ -192,7 +193,7 @@ func gwly(ctx context.Context) {
 		if stage != "" {
 			LabelClick(ctx, "日常-进度-怪物乐园跳关-"+stage)
 		}
-		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-使用战斗跳关券", 5*time.Second)
+		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-跳过战斗", 5*time.Second)
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 		log.Info(ctx, "任务入场")
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
@@ -397,5 +398,18 @@ func gmwts(ctx context.Context) {
 		}
 	}
 
+	BackWorld(ctx)
+}
+
+func smhrc(ctx context.Context) {
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-任务")
+	LabelWait(ctx, "任务-设定", 5*time.Second)
+	LabelClick(ctx, "任务-每日任务")
+	LabelWaitClick(ctx, "任务-进行", 5*time.Second)
+	LabelWaitClick(ctx, "任务-进行-立即完成", 5*time.Second)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }

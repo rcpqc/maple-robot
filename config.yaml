@@ -3,11 +3,10 @@ roles:
   - class: 黑骑士
     script: script_nuo.yaml
   - class: 冰雷魔导师
-    script: script_bin.yaml
   - class: 爆莉萌灵使
-    script: script_200.yaml
+    script: script_200x.yaml
   - class: 古迹猎人
-    script: script_200.yaml
+    script: script_200x.yaml
   - class: 暗隐双刀
   - class: 火毒魔导师
   - class: 战神
@@ -20,7 +19,6 @@ roles:
   - class: 恶魔猎手
   - class: 唤灵斗师
   - class: 箭神
-
 
   # 3
   - class: 机械师
@@ -48,9 +46,11 @@ roles:
   - class: 火炮手
   - class: 神射手
   - class: 豹弩游侠
+    script: script_189.yaml
 
   # 6
   - class: 艾利尔
   - class: 狂龙战士
+    script: script_189.yaml
 
 

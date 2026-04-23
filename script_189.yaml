@@ -15,8 +15,8 @@ tasks:
     condition: '1234'
   # - name: 精英副本
   #   condition: '1234'
-  # - name: 奈特的金字塔
-  #   condition: '12'
+  - name: 奈特的金字塔
+    # condition: '12'
   - name: 购买委托书
     condition: '1'
     options: 
