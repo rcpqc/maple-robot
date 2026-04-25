@@ -33,6 +33,7 @@ func init() {
 	config.ProvideTask("委托佣兵", wtyb)
 	config.ProvideTask("购买委托书", gmwts)
 	config.ProvideTask("神秘河日常", smhrc)
+	config.ProvideTask("神秘河副本", smhfb)
 }
 
 // tkdmy 天空岛贸易
@@ -401,6 +402,7 @@ func gmwts(ctx context.Context) {
 	BackWorld(ctx)
 }
 
+// smhrc 神秘河日常
 func smhrc(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
@@ -411,5 +413,19 @@ func smhrc(ctx context.Context) {
 	LabelWaitClick(ctx, "任务-进行", 5*time.Second)
 	LabelWaitClick(ctx, "任务-进行-立即完成", 5*time.Second)
 	log.Info(ctx, "任务入场")
+	BackWorld(ctx)
+}
+
+// 神秘河副本
+func smhfb(ctx context.Context) {
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWait(ctx, "日常-进度", 5*time.Second)
+	LabelClick(ctx, "日常-简化模式8号")
+	LabelWaitClick(ctx, "神秘河副本-快速组队", 5*time.Second)
+	LabelWaitClick(ctx, "神秘河副本-快速组队-入场确认", 5*time.Second)
+	LabelWait(ctx, "副本-退出", 120*time.Second)
+	log.Info(ctx, "任务入场")
+	LabelWaitClick(ctx, "神秘河副本-副本结算-退出", 300*time.Second)
 	BackWorld(ctx)
 }

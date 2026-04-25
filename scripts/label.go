@@ -90,7 +90,7 @@ var labels = map[string]*Label{
 	"日常-进度-怪物乐园跳关-入场确认":    {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
 	"日常-进度-怪物乐园跳关-结算确认":    {ix.Position{X: 430, Y: 430}, ix.ColorButtonBlue, time.Second},
 
-	// 材料，精英，周常，金字塔，武陵，金钩，怪物
+	// 材料，精英，周常，金字塔，武陵，金钩，怪物，神秘河周常
 	"日常-简化模式1号":  {ix.Position{X: 93, Y: 235}, ix.Color{}, time.Second},
 	"日常-简化模式2号":  {ix.Position{X: 93, Y: 438}, ix.Color{}, time.Second},
 	"日常-简化模式3号":  {ix.Position{X: 260, Y: 235}, ix.Color{}, time.Second},
@@ -227,6 +227,11 @@ var labels = map[string]*Label{
 	"怪物乐园-副本结算-追加奖励":    {ix.Position{X: 606, Y: 388}, ix.Color{R: 232, G: 188, B: 0}, time.Second},
 	"怪物乐园-副本结算-追加奖励-确定": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"怪物乐园-副本结算-退出":      {ix.Position{X: 250, Y: 488}, ix.ColorButtonBlue, 3 * time.Second},
+
+	// 神秘河副本
+	"神秘河副本-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"神秘河副本-快速组队-入场确认": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"神秘河副本-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 更改角色
 	"更改角色-选择角色": {ix.Position{X: 220, Y: 480}, ix.ColorButtonBlue, time.Second},
