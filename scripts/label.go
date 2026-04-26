@@ -284,8 +284,8 @@ var labels = map[string]*Label{
 	"委托-福利":    {ix.Position{X: 881, Y: 85}, ix.Color{R: 56, G: 221, B: 219}, 2 * time.Second},
 	"委托-福利-购买": {ix.Position{X: 536, Y: 424}, ix.ColorButtonOrange, 2 * time.Second},
 	// 商店
-	"商店-收藏-1号商品":   {ix.Position{X: 155, Y: 200}, ix.ColorButtonYellow, 2 * time.Second},
-	"商店-收藏-2号商品":   {ix.Position{X: 288, Y: 200}, ix.ColorButtonYellow, 2 * time.Second},
+	"商店-收藏-1号商品":   {ix.Position{X: 155, Y: 250}, ix.ColorButtonYellow, 2 * time.Second},
+	"商店-收藏-2号商品":   {ix.Position{X: 288, Y: 250}, ix.ColorButtonYellow, 2 * time.Second},
 	"商店-商品详情-收藏图标": {ix.Position{X: 509, Y: 486}, ix.Color{R: 234, G: 160, B: 0}, 2 * time.Second},
 	"商店-商品详情-购买":   {ix.Position{X: 815, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
 	"商店-商品详情-关闭":   {ix.Position{X: 918, Y: 34}, ix.ColorWhite, 2 * time.Second},
