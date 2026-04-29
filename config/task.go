@@ -3,9 +3,8 @@ package config
 import (
 	"context"
 	"maple-robot/log"
-	"strconv"
-	"strings"
-	"time"
+
+	"github.com/rcpqc/expr"
 )
 
 type taskkey struct{}
@@ -21,11 +20,15 @@ type Task struct {
 
 type Condition string
 
-func (o Condition) Match() bool {
+func (o Condition) Match(vars expr.Vars) bool {
 	if len(o) == 0 {
 		return true
 	}
-	return strings.Contains(string(o), strconv.FormatInt(int64(time.Now().Weekday()), 10))
+	e, err := expr.Comp(string(o))
+	if err != nil {
+		panic(err)
+	}
+	return expr.EvalOr(e, vars, false).(bool)
 }
 
 func ProvideTask(name string, handler func(ctx context.Context)) {

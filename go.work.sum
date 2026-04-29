@@ -1,0 +1,4 @@
+github.com/otiai10/gosseract/v2 v2.4.1 h1:G8AyBpXEeSlcq8TI85LH/pM5SXk8Djy2GEXisgyblRw=
+github.com/otiai10/gosseract/v2 v2.4.1/go.mod h1:1gNWP4Hgr2o7yqWfs6r5bZxAatjOIdqWxJLWsTsembk=
+github.com/rcpqc/expr v1.4.2 h1:M10zo2Q7jH98MeFTdjd/NX8jLCeQghjTl4OIi29WHIY=
+github.com/rcpqc/expr v1.4.2/go.mod h1:hIRJXjw/cfzCLxtQqE/cTrWjnBBblQMU+5IJjtzPrqw=
