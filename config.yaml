@@ -45,11 +45,10 @@ roles:
   - class: 夜光法师
   - class: 火炮手
   - class: 神射手
-  - class: 豹弩游侠
-    script: script_189.yaml
+  - class: 艾利尔
 
   # 6
-  - class: 艾利尔
+  - class: 豹弩游侠
   - class: 狂龙战士
     script: script_189.yaml
   - class: 超能力者

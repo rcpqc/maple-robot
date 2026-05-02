@@ -86,7 +86,6 @@ func main() {
 		for _, task := range script.Tasks {
 			vars := expr.Vars{"index": index, "weekday": int64(time.Now().Weekday())}
 			if !task.Condition.Match(vars) {
-				log.Info(ctx, "任务条件不满足 ", "condition: ", task.Condition)
 				continue
 			}
 			// 任务今日已入场
