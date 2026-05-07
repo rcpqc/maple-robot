@@ -15,7 +15,7 @@ tasks:
     options:
       难度: 超难
   - name: 武陵道场
-    condition: weekday>=1 && weekday<=4
+    condition: weekday>=1 && weekday<=5
   - name: 精英副本
   - name: 奈特的金字塔
   - name: 购买委托书
@@ -30,5 +30,10 @@ tasks:
   - name: 材料副本
     options:
       副本名: 玩具城
+  - name: 领主
+    condition: weekday==1 || weekday==3 || weekday==6 || weekday==0
+    options:
+      副本名: 扎昆
+      副本难度: 困难
   - name: 领取日常奖励
   - name: 领取公会奖励

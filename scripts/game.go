@@ -34,6 +34,7 @@ func init() {
 	config.ProvideTask("购买委托书", gmwts)
 	config.ProvideTask("神秘河日常", smhrc)
 	config.ProvideTask("神秘河副本", smhfb)
+	config.ProvideTask("领主", lz)
 }
 
 // tkdmy 天空岛贸易
@@ -427,5 +428,34 @@ func smhfb(ctx context.Context) {
 	LabelWait(ctx, "副本-退出", 120*time.Second)
 	log.Info(ctx, "任务入场")
 	LabelWaitClick(ctx, "神秘河副本-副本结算-退出", 300*time.Second)
+	BackWorld(ctx)
+}
+
+// 领主
+func lz(ctx context.Context) {
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWait(ctx, "日常-进度", 5*time.Second)
+	LabelClick(ctx, "日常-简化模式9号")
+	LabelWait(ctx, "领主-每日领主跳过", 5*time.Second)
+
+	fName := config.GetTaskOptions(ctx, "副本名")
+	fLevel := config.GetTaskOptions(ctx, "副本难度")
+
+	LabelClick(ctx, "领主-"+fName)
+	time.Sleep(time.Second)
+	LabelClick(ctx, "领主-"+fLevel)
+
+	LabelWaitClick(ctx, "领主-快速组队", 5*time.Second)
+	LabelWait(ctx, "副本-退出", 60*time.Second)
+	LabelWait(ctx, "副本-统计", 30*time.Second)
+	log.Info(ctx, "任务入场")
+	time.Sleep(5 * time.Second)
+	st := time.Now()
+	for !LabelCheck(ctx, "领主-返回主页") && time.Since(st) < 60*time.Second {
+		LabelClick(ctx, "世界-技能8")
+		time.Sleep(500 * time.Millisecond)
+	}
+	LabelClick(ctx, "领主-返回主页")
 	BackWorld(ctx)
 }

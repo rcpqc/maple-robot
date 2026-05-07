@@ -45,6 +45,7 @@ var labels = map[string]*Label{
 
 	// 副本
 	"副本-麦克风": {ix.Position{X: 874, Y: 204}, ix.ColorWhite, time.Second},
+	"副本-统计":  {ix.Position{X: 821, Y: 216}, ix.ColorWhite, time.Second},
 	"副本-退出":  {ix.Position{X: 930, Y: 214}, ix.ColorButtonExitDungeon, time.Second},
 
 	// 导航
@@ -290,6 +291,21 @@ var labels = map[string]*Label{
 	"商店-商品详情-购买":   {ix.Position{X: 815, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
 	"商店-商品详情-关闭":   {ix.Position{X: 918, Y: 34}, ix.ColorWhite, 2 * time.Second},
 	"商店-购买道具-购买":   {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
+
+	// 领主
+	"领主-每日领主跳过": {ix.Position{X: 385, Y: 30}, ix.ColorButtonWine, time.Second},
+
+	"领主-扎昆":   {ix.Position{X: 170, Y: 170}, ix.Color{}, time.Second},
+	"领主-暗黑龙王": {ix.Position{X: 115, Y: 345}, ix.Color{}, time.Second},
+	"领主-品克缤":  {ix.Position{X: 115, Y: 410}, ix.Color{}, time.Second},
+	"领主-希纳斯":  {ix.Position{X: 115, Y: 475}, ix.Color{}, time.Second},
+
+	"领主-普通": {ix.Position{X: 85, Y: 220}, ix.Color{}, time.Second},
+	"领主-困难": {ix.Position{X: 85, Y: 255}, ix.Color{}, time.Second},
+	"领主-混沌": {ix.Position{X: 85, Y: 290}, ix.Color{}, time.Second},
+
+	"领主-快速组队": {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"领主-返回主页": {ix.Position{X: 520, Y: 520}, ix.ColorButtonBlue, 3 * time.Second},
 }
 
 func LabelCheck(ctx context.Context, names ...string) bool {

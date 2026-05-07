@@ -52,4 +52,4 @@ roles:
   - class: 狂龙战士
     script: script_189.yaml
   - class: 超能力者
-    script: script_150.yaml
+    script: script_189.yaml

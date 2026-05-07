@@ -34,5 +34,10 @@ tasks:
   - name: 材料副本
     options:
       副本名: 武陵桃源
+  - name: 领主
+    condition: weekday==1 || weekday==3 || weekday==6 || weekday==0
+    options:
+      副本名: 扎昆
+      副本难度: 困难
   - name: 领取日常奖励
   - name: 领取公会奖励
