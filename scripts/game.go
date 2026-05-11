@@ -3,7 +3,6 @@ package scripts
 import (
 	"context"
 	"fmt"
-	"slices"
 	"strings"
 
 	"maple-robot/config"
@@ -23,6 +22,7 @@ func init() {
 	config.ProvideTask("武陵道场", wldc)
 	config.ProvideTask("金钩海兵王", jghbw)
 	config.ProvideTask("怪物乐园", gwly)
+	config.ProvideTask("怪物乐园跳关", gwlytg)
 	config.ProvideTask("自动战斗时间", zdzdsj)
 	config.ProvideTask("公会签到", ghqd)
 	config.ProvideTask("领取个人奖励", lqgrjl)
@@ -178,50 +178,66 @@ func jghbw(ctx context.Context) {
 
 // gwly 怪物乐园
 func gwly(ctx context.Context) {
-	role := GetRole(ctx)
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+
+	LabelWait(ctx, "日常-进度", 5*time.Second)
+	LabelClick(ctx, "日常-简化模式7号")
+	buff := config.GetTaskOptions(ctx, "经验增益")
+	LabelWaitClick(ctx, "怪物乐园-入场", 5*time.Second)
+	LabelWaitClick(ctx, "怪物乐园-入场-票券确认", 5*time.Second)
+	if buff != "" && LabelCheck(ctx, "怪物乐园-入场-经验增益") {
+		LabelClick(ctx, "怪物乐园-入场-经验增益")
+	}
+	LabelWaitClick(ctx, "怪物乐园-入场-入场", 5*time.Second)
+	LabelWait(ctx, "副本-退出", 10*time.Second)
+	log.Info(ctx, "任务入场")
+
+	extraBonus := config.GetTaskOptions(ctx, "追加奖励")
+	if extraBonus != "" {
+		LabelWaitClick(ctx, "怪物乐园-副本结算-追加奖励", 360*time.Second)
+		LabelWaitClick(ctx, "怪物乐园-副本结算-追加奖励-确定", 5*time.Second)
+		time.Sleep(2 * time.Second)
+		LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 5*time.Second)
+	} else {
+		LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 600*time.Second)
+	}
+
+	BackWorld(ctx)
+}
+
+// gwlytg 怪物乐园跳关
+func gwlytg(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
 	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
-	excludeList := []string{"黑骑士"}
+
 	pos := config.GetTaskOptions(ctx, "标签位置")
 	stage := config.GetTaskOptions(ctx, "关卡")
-	if !slices.Contains(excludeList, role.Class) {
-		LabelWaitClick(ctx, "日常-进度", 5*time.Second)
-		LabelWait(ctx, "日常-进度-关闭", 5*time.Second)
-		ix.Swipe(ix.Position{X: 579, Y: 481}, ix.Position{X: 579, Y: 50}, 1500)
-		time.Sleep(time.Second)
-		LabelWaitClick(ctx, "日常-进度-"+pos, 5*time.Second)
-		LabelWait(ctx, "日常-进度-怪物乐园跳关-标题", 5*time.Second)
-		if stage != "" {
-			LabelClick(ctx, "日常-进度-怪物乐园跳关-"+stage)
-		}
-		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-跳过战斗", 5*time.Second)
+
+	LabelWaitClick(ctx, "日常-进度", 5*time.Second)
+	LabelWait(ctx, "日常-进度-关闭", 5*time.Second)
+	ix.Swipe(ix.Position{X: 579, Y: 481}, ix.Position{X: 579, Y: 50}, 1500)
+	time.Sleep(time.Second)
+	LabelWaitClick(ctx, "日常-进度-"+pos, 5*time.Second)
+	LabelWait(ctx, "日常-进度-怪物乐园跳关-标题", 5*time.Second)
+
+	if stage != "" {
+		LabelClick(ctx, "日常-进度-怪物乐园跳关-"+stage)
+	}
+
+	if LabelCheck(ctx, "日常-进度-怪物乐园跳关-跳过战斗(券)") {
+		LabelClick(ctx, "日常-进度-怪物乐园跳关-跳过战斗(券)")
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 		log.Info(ctx, "任务入场")
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
-	} else {
-		LabelWait(ctx, "日常-进度", 5*time.Second)
-		LabelClick(ctx, "日常-简化模式7号")
-		buff := config.GetTaskOptions(ctx, "经验增益")
-		LabelWaitClick(ctx, "怪物乐园-入场", 5*time.Second)
-		LabelWaitClick(ctx, "怪物乐园-入场-票券确认", 5*time.Second)
-		if buff != "" && LabelCheck(ctx, "怪物乐园-入场-经验增益") {
-			LabelClick(ctx, "怪物乐园-入场-经验增益")
-		}
-		LabelWaitClick(ctx, "怪物乐园-入场-入场", 5*time.Second)
-		LabelWait(ctx, "副本-退出", 10*time.Second)
+	} else if LabelCheck(ctx, "日常-进度-怪物乐园跳关-跳过战斗") {
+		LabelClick(ctx, "日常-进度-怪物乐园跳关-跳过战斗")
+		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 		log.Info(ctx, "任务入场")
-
-		extraBonus := config.GetTaskOptions(ctx, "追加奖励")
-		if extraBonus != "" {
-			LabelWaitClick(ctx, "怪物乐园-副本结算-追加奖励", 360*time.Second)
-			LabelWaitClick(ctx, "怪物乐园-副本结算-追加奖励-确定", 5*time.Second)
-			time.Sleep(2 * time.Second)
-			LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 5*time.Second)
-		} else {
-			LabelWaitClick(ctx, "怪物乐园-副本结算-退出", 600*time.Second)
-		}
+		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
 	}
+
 	BackWorld(ctx)
 }
 

@@ -6,7 +6,7 @@ tasks:
   - name: 神秘河日常
   - name: 神秘河副本
     condition: weekday==(index/100)
-  - name: 怪物乐园
+  - name: 怪物乐园跳关
     options:
       标签位置: 倒数3号
       关卡: 隐匿痕迹

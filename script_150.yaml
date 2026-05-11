@@ -3,7 +3,7 @@ tasks:
   - name: 送人气
   - name: 公会签到
   - name: 领取个人奖励
-  - name: 怪物乐园
+  - name: 怪物乐园跳关
     options:
       标签位置: 倒数1号
       关卡: 隐匿痕迹
