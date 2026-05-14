@@ -12,6 +12,7 @@ import (
 	"net/http"
 	"strings"
 	"sync"
+	"time"
 
 	"maple-robot/config"
 	"maple-robot/ix"
@@ -107,32 +108,41 @@ func Start(addr string, logHub *LogHub, runner *Runner, auth *config.AuthConfig)
 	return http.ListenAndServe(addr, handler)
 }
 
+// authFailMu 串行化失败延迟, 防止并发绕过.
+var authFailMu sync.Mutex
+
 // basicAuth wraps an http.Handler with HTTP Basic Authentication.
 func basicAuth(next http.Handler, username, password string) http.Handler {
 	realm := "Maple Robot"
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		auth := r.Header.Get("Authorization")
 		if auth == "" || !strings.HasPrefix(auth, "Basic ") {
-			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			failAuth(w, realm)
 			return
 		}
 		payload, err := base64.StdEncoding.DecodeString(auth[6:])
 		if err != nil {
-			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			failAuth(w, realm)
 			return
 		}
 		pair := strings.SplitN(string(payload), ":", 2)
 		if len(pair) != 2 ||
 			subtle.ConstantTimeCompare([]byte(pair[0]), []byte(username)) != 1 ||
 			subtle.ConstantTimeCompare([]byte(pair[1]), []byte(password)) != 1 {
-			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
-			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			failAuth(w, realm)
 			return
 		}
 		next.ServeHTTP(w, r)
 	})
+}
+
+// failAuth 串行化延迟 500ms 后返回 401, 全局限速 ~2次/秒.
+func failAuth(w http.ResponseWriter, realm string) {
+	authFailMu.Lock()
+	time.Sleep(500 * time.Millisecond)
+	authFailMu.Unlock()
+	w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
+	http.Error(w, "Unauthorized", http.StatusUnauthorized)
 }
 
 // ---- screenshot ----
