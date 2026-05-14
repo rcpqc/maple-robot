@@ -1,15 +1,19 @@
 package web
 
 import (
+	"crypto/subtle"
 	"embed"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
 	"io/fs"
 	"log"
 	"net/http"
+	"strings"
 	"sync"
 
+	"maple-robot/config"
 	"maple-robot/ix"
 )
 
@@ -68,7 +72,7 @@ func (h *LogHub) RecentLogs(n int) []string {
 }
 
 // Start launches the web dashboard server (blocking).
-func Start(addr string, logHub *LogHub, runner *Runner) error {
+func Start(addr string, logHub *LogHub, runner *Runner, auth *config.AuthConfig) error {
 	mux := http.NewServeMux()
 
 	staticFS, err := fs.Sub(staticFiles, "static")
@@ -95,7 +99,40 @@ func Start(addr string, logHub *LogHub, runner *Runner) error {
 	})
 
 	log.Printf("[web] dashboard listening on %s", addr)
-	return http.ListenAndServe(addr, mux)
+	var handler http.Handler = mux
+	if auth != nil {
+		handler = basicAuth(mux, auth.Username, auth.Password)
+		log.Printf("[web] basic auth enabled (user: %s)", auth.Username)
+	}
+	return http.ListenAndServe(addr, handler)
+}
+
+// basicAuth wraps an http.Handler with HTTP Basic Authentication.
+func basicAuth(next http.Handler, username, password string) http.Handler {
+	realm := "Maple Robot"
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		auth := r.Header.Get("Authorization")
+		if auth == "" || !strings.HasPrefix(auth, "Basic ") {
+			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+		payload, err := base64.StdEncoding.DecodeString(auth[6:])
+		if err != nil {
+			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+		pair := strings.SplitN(string(payload), ":", 2)
+		if len(pair) != 2 ||
+			subtle.ConstantTimeCompare([]byte(pair[0]), []byte(username)) != 1 ||
+			subtle.ConstantTimeCompare([]byte(pair[1]), []byte(password)) != 1 {
+			w.Header().Set("WWW-Authenticate", `Basic realm="`+realm+`"`)
+			http.Error(w, "Unauthorized", http.StatusUnauthorized)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }
 
 // ---- screenshot ----

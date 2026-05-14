@@ -7,13 +7,18 @@ import (
 )
 
 type Config struct {
-	Roles []*Role     `yaml:"roles"`
 	Web   WebConfig   `yaml:"web"`
 	Adele *AdeleConfig `yaml:"adele"` // nil = 禁用隧道
+	Auth  *AuthConfig `yaml:"auth"`   // nil = 不开启认证
 }
 
 type WebConfig struct {
 	Addr string `yaml:"addr"`
+}
+
+type AuthConfig struct {
+	Username string `yaml:"username"`
+	Password string `yaml:"password"`
 }
 
 type AdeleConfig struct {

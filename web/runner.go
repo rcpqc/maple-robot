@@ -30,16 +30,16 @@ type Runner struct {
 
 	logFilePath string
 	baseLogger  *slog.Logger
-	cfg         *config.Config
+	roles       []*config.Role
 }
 
-// NewRunner creates a Runner that will execute roles from cfg.
-func NewRunner(cfg *config.Config, baseLogger *slog.Logger, logFilePath string) *Runner {
+// NewRunner creates a Runner that will execute the given roles.
+func NewRunner(roles []*config.Role, baseLogger *slog.Logger, logFilePath string) *Runner {
 	return &Runner{
-		cfg:         cfg,
+		roles:       roles,
 		baseLogger:  baseLogger,
 		logFilePath: logFilePath,
-		totalRoles:  len(cfg.Roles),
+		totalRoles:  len(roles),
 	}
 }
 
@@ -122,7 +122,7 @@ func (r *Runner) run(ctx context.Context) {
 
 	entered := false
 
-	for i, role := range r.cfg.Roles {
+	for i, role := range r.roles {
 		select {
 		case <-ctx.Done():
 			r.finish()
@@ -150,7 +150,7 @@ func (r *Runner) run(ctx context.Context) {
 
 		// load script
 		if role.Script == "" {
-			role.Script = "script_200.yaml"
+			role.Script = "200"
 		}
 		script, err := config.LoadScript(role.Script)
 		if err != nil {

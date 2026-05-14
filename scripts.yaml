@@ -1,0 +1,259 @@
+roles:
+  # 1
+  - class: 黑骑士
+    script: nuo
+  - class: 冰雷魔导师
+    script: 200x
+  - class: 爆莉萌灵使
+    script: 200x
+  - class: 古迹猎人
+    script: 200x
+  - class: 暗隐双刀
+  - class: 火毒魔导师
+  - class: 战神
+
+  # 2
+  - class: 龙神
+  - class: 恶魔复仇者
+  - class: 幻影
+  - class: 侠影
+  - class: 恶魔猎手
+  - class: 唤灵斗师
+  - class: 箭神
+
+  # 3
+  - class: 机械师
+  - class: 墨玄
+  - class: 双弩精灵
+  - class: 炎术士
+  - class: 风灵使者
+  - class: 夜行者
+  - class: 光之魔导师
+
+  # 4
+  - class: 奇袭着
+  - class: 魂骑士
+  - class: 冲锋队长
+  - class: 圣骑士
+  - class: 隐士
+  - class: 施亚
+  - class: 船长
+
+  # 5
+  - class: 英雄
+  - class: 尖兵
+  - class: 隐月
+  - class: 夜光法师
+  - class: 火炮手
+  - class: 神射手
+  - class: 艾利尔
+
+  # 6
+  - class: 豹弩游侠
+  - class: 狂龙战士
+  - class: 超能力者
+    script: 189
+
+scripts:
+  # ====== 150 组 ======
+  150:
+    tasks:
+      - name: 送人气
+      - name: 公会签到
+      - name: 领取个人奖励
+      - name: 怪物乐园跳关
+        options:
+          标签位置: 倒数1号
+          关卡: 隐匿痕迹
+      - name: 天空岛贸易
+      - name: 周常副本
+        options:
+          难度: 超难
+      - name: 武陵道场
+        condition: weekday>=1 && weekday<=4
+      - name: 精英副本
+      - name: 奈特的金字塔
+      - name: 购买委托书
+        condition: weekday==1
+        options:
+          商品列表: 1号商品,2号商品
+      - name: 委托佣兵
+        condition: weekday==1 && weekday<=6
+        options:
+          最大切换: 2
+          最大接受: 3
+      - name: 金钩海兵王
+      - name: 材料副本
+        options:
+          副本名: 龙之峡谷
+      - name: 领取日常奖励
+      - name: 领取公会奖励
+
+  # ====== 180 组 ======
+  180:
+    tasks:
+      - name: 送人气
+      - name: 公会签到
+      - name: 领取个人奖励
+      - name: 怪物乐园跳关
+        options:
+          标签位置: 倒数2号
+          关卡: 停止施工的工地
+      - name: 天空岛贸易
+      - name: 周常副本
+        options:
+          难度: 超难
+      - name: 武陵道场
+        condition: weekday>=1 && weekday<=4
+      - name: 购买委托书
+        condition: weekday==1
+        options:
+          商品列表: 1号商品,2号商品
+      - name: 委托佣兵
+        condition: weekday>=1 && weekday<=6
+        options:
+          最大切换: 2
+          最大接受: 3
+      - name: 材料副本
+        options:
+          副本名: 玩具城
+      - name: 领取日常奖励
+      - name: 领取公会奖励
+
+  # ====== 189 组 ======
+  189:
+    tasks:
+      - name: 送人气
+      - name: 公会签到
+      - name: 领取个人奖励
+      - name: 怪物乐园跳关
+        options:
+          标签位置: 倒数2号
+          关卡: 隐匿痕迹
+      - name: 天空岛贸易
+      - name: 周常副本
+        options:
+          难度: 超难
+      - name: 武陵道场
+        condition: weekday>=1 && weekday<=4
+      - name: 奈特的金字塔
+      - name: 购买委托书
+        condition: weekday==1
+        options:
+          商品列表: 1号商品,2号商品
+      - name: 委托佣兵
+        condition: weekday>=1 && weekday<=6
+        options:
+          最大切换: 2
+          最大接受: 3
+      - name: 材料副本
+        options:
+          副本名: 玩具城
+      - name: 领取日常奖励
+      - name: 领取公会奖励
+
+  # ====== 200 组 (默认) ======
+  200:
+    tasks:
+      - name: 送人气
+      - name: 公会签到
+      - name: 领取个人奖励
+      - name: 神秘河日常
+      - name: 神秘河副本
+        condition: weekday==(index/100)
+      - name: 怪物乐园跳关
+        options:
+          标签位置: 倒数3号
+          关卡: 隐匿痕迹
+      - name: 天空岛贸易
+      - name: 周常副本
+        options:
+          难度: 超难
+      - name: 武陵道场
+        condition: weekday>=1 && weekday<=5
+      - name: 精英副本
+        options:
+          副本名: 驮狼雪人
+      - name: 奈特的金字塔
+      - name: 购买委托书
+        condition: weekday==1
+        options:
+          商品列表: 1号商品,2号商品
+      - name: 委托佣兵
+        condition: weekday>=1 && weekday<=6
+        options:
+          最大切换: 2
+          最大接受: 3
+      - name: 材料副本
+        options:
+          副本名: 玩具城
+      - name: 领主
+        condition: weekday==1 || weekday==3 || weekday==6 || weekday==0
+        options:
+          副本名: 扎昆
+          副本难度: 困难
+      - name: 领取日常奖励
+      - name: 领取公会奖励
+
+  # ====== 200x 组 ======
+  200x:
+    tasks:
+      - name: 送人气
+      - name: 公会签到
+      - name: 领取个人奖励
+      - name: 神秘河日常
+      - name: 神秘河副本
+        condition: weekday==(index/100)
+      - name: 怪物乐园跳关
+        options:
+          标签位置: 倒数3号
+          关卡: 隐匿痕迹
+      - name: 天空岛贸易
+      - name: 周常副本
+        options:
+          难度: 绝望
+      - name: 特殊周常副本
+        options:
+          模式: 特殊
+          难度: 普通
+      - name: 武陵道场
+        condition: weekday>=1 && weekday<=4
+      - name: 精英副本
+        options:
+          副本名: 驮狼雪人
+      - name: 奈特的金字塔
+      - name: 购买委托书
+        condition: weekday==1
+        options:
+          商品列表: 1号商品,2号商品
+      - name: 委托佣兵
+        condition: weekday>=1 && weekday<=6
+        options:
+          最大切换: 2
+          最大接受: 3
+      - name: 材料副本
+        options:
+          副本名: 武陵桃源
+      - name: 领主
+        condition: weekday==1 || weekday==3 || weekday==6 || weekday==0
+        options:
+          副本名: 扎昆
+          副本难度: 困难
+      - name: 领取日常奖励
+      - name: 领取公会奖励
+
+  # ====== nuo 组 ======
+  nuo:
+    tasks:
+      - name: 周常副本
+      - name: 特殊周常副本
+        options:
+          模式: 特殊
+      - name: 精英副本
+      - name: 金钩海兵王
+      - name: 奈特的金字塔
+      - name: 材料副本
+      - name: 怪物乐园
+        options:
+          经验增益: OK
+          追加奖励: OK

@@ -37,14 +37,20 @@ func main() {
 	logHub := web.NewLogHub()
 	baseLogger := log.New(io.MultiWriter(os.Stdout, f, logHub))
 
-	// 读取配置
+	// 读取服务配置
 	cfg, err := config.Load("config.yaml")
 	if err != nil {
 		panic(err)
 	}
 
+	// 读取角色 & 脚本
+	roles, err := config.LoadRoles()
+	if err != nil {
+		panic(err)
+	}
+
 	// 创建 Runner (后续通过 Web 面板启动/停止)
-	runner := web.NewRunner(cfg, baseLogger, logFile)
+	runner := web.NewRunner(roles, baseLogger, logFile)
 
 	// 服务地址
 	addr := cfg.Web.Addr
@@ -56,7 +62,7 @@ func main() {
 	fmt.Printf("=== Maple Robot 服务已启动 ===\n")
 	fmt.Printf("    Web 面板: http://localhost%s\n", addr)
 	fmt.Printf("    日志文件: %s\n", logFile)
-	fmt.Printf("    角色数量: %d\n", len(cfg.Roles))
+	fmt.Printf("    角色数量: %d\n", len(roles))
 
 	// 启动 Adele 隧道 (非阻塞)
 	if cfg.Adele != nil && cfg.Adele.Server != "" {
@@ -66,7 +72,7 @@ func main() {
 	fmt.Println()
 
 	// 启动 Web 服务 (阻塞)
-	if err := web.Start(addr, logHub, runner); err != nil {
+	if err := web.Start(addr, logHub, runner, cfg.Auth); err != nil {
 		log.Warn(ctx, "web server stopped", "err", err)
 	}
 }
