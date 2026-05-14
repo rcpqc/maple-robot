@@ -113,6 +113,11 @@ func jyfb(ctx context.Context) {
 		log.Info(ctx, "任务入场")
 		LabelWaitClick(ctx, "精英副本-副本结算-单人离开", 90*time.Second)
 	} else {
+		if fbName := config.GetTaskOptions(ctx, "副本名"); fbName != "" {
+			ix.Swipe(ix.Position{X: 100, Y: 520}, ix.Position{X: 100, Y: 120}, 1500)
+			time.Sleep(time.Second)
+			LabelClick(ctx, "精英副本-"+fbName)
+		}
 		LabelWaitClick(ctx, "精英副本-快速组队", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
 		LabelWait(ctx, "副本-退出", 60*time.Second)
@@ -222,16 +227,15 @@ func gwlytg(ctx context.Context) {
 	LabelWaitClick(ctx, "日常-进度-"+pos, 5*time.Second)
 	LabelWait(ctx, "日常-进度-怪物乐园跳关-标题", 5*time.Second)
 
-	if stage != "" {
-		LabelClick(ctx, "日常-进度-怪物乐园跳关-"+stage)
-	}
-
 	if LabelCheck(ctx, "日常-进度-怪物乐园跳关-跳过战斗(券)") {
 		LabelClick(ctx, "日常-进度-怪物乐园跳关-跳过战斗(券)")
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 		log.Info(ctx, "任务入场")
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-结算确认", 5*time.Second)
 	} else if LabelCheck(ctx, "日常-进度-怪物乐园跳关-跳过战斗") {
+		if stage != "" {
+			LabelClick(ctx, "日常-进度-怪物乐园跳关-"+stage)
+		}
 		LabelClick(ctx, "日常-进度-怪物乐园跳关-跳过战斗")
 		LabelWaitClick(ctx, "日常-进度-怪物乐园跳关-入场确认", 5*time.Second)
 		log.Info(ctx, "任务入场")

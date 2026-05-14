@@ -21,6 +21,8 @@ tasks:
   - name: 武陵道场
     condition: weekday>=1 && weekday<=4
   - name: 精英副本
+    options:
+      副本名: 驮狼雪人
   - name: 奈特的金字塔
   - name: 购买委托书
     condition: weekday==1

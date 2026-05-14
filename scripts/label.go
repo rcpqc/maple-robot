@@ -166,6 +166,9 @@ var labels = map[string]*Label{
 	// 精英副本
 	"精英副本-普通":        {ix.Position{X: 80, Y: 90}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
 	"精英副本-鬼怪蘑菇王":     {ix.Position{X: 94, Y: 147}, ix.Color{}, time.Second},
+	"精英副本-艾菲尼娅":      {ix.Position{X: 30, Y: 354}, ix.Color{}, time.Second},
+	"精英副本-驮狼雪人":      {ix.Position{X: 30, Y: 430}, ix.Color{}, time.Second},
+	"精英副本-阿勒玛":       {ix.Position{X: 30, Y: 504}, ix.Color{}, time.Second},
 	"精英副本-创建队伍":      {ix.Position{X: 777, Y: 490}, ix.ColorButtonOrange, time.Second},
 	"精英副本-快速组队":      {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
 	"精英副本-入场-确定":     {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},

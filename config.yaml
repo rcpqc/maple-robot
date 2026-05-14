@@ -51,6 +51,5 @@ roles:
   # 6
   - class: 豹弩游侠
   - class: 狂龙战士
-    script: script_189.yaml
   - class: 超能力者
     script: script_189.yaml
