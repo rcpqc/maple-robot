@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maple Robot 监控</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #1a1a2e;
+    color: #e0e0e0;
+    font-family: 'Menlo', 'Consolas', 'Courier New', monospace;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  header {
+    background: #16213e;
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #0f3460;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+  }
+  header h1 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #e94560;
+    margin-right: auto;
+  }
+  .status-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    flex-wrap: wrap;
+  }
+  .status-bar .sep { color: #333; }
+
+  .btn {
+    padding: 4px 14px;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .btn-start  { background: #4ecca3; color: #1a1a2e; }
+  .btn-start:hover { background: #3dbf94; }
+  .btn-stop   { background: #e94560; color: #fff; }
+  .btn-stop:hover  { background: #d63850; }
+  .btn-refresh { background: #0f3460; color: #e0e0e0; border: 1px solid #1a5276; }
+  .btn-refresh:hover { background: #1a5276; }
+  .btn-refresh.loading { background: #1a5276; color: #888; pointer-events: none; }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .sel-interval {
+    background: #0f3460;
+    color: #e0e0e0;
+    border: 1px solid #1a5276;
+    border-radius: 4px;
+    padding: 3px 6px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .status-dot.online { background: #4ecca3; }
+  .status-dot.offline { background: #e94560; }
+
+  #statusInfo { font-size: 12px; color: #a8a8b3; }
+
+  .main {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .screen-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0f3460;
+    position: relative;
+    min-width: 0;
+    cursor: crosshair;
+    overflow: hidden;
+  }
+  .screen-area img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+  .screen-area .coord-overlay {
+    position: absolute;
+    bottom: 8px; left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.7);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .log-panel {
+    width: 320px;
+    background: #12121a;
+    border-left: 1px solid #0f3460;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+  }
+  .log-panel .log-header {
+    padding: 6px 10px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #1e1e2f;
+    border-bottom: 1px solid #0f3460;
+    flex-shrink: 0;
+  }
+  .log-panel .log-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 4px 8px;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  .log-panel .log-body::-webkit-scrollbar { width: 4px; }
+  .log-panel .log-body::-webkit-scrollbar-thumb { background: #0f3460; border-radius: 2px; }
+  .log-line {
+    white-space: pre-wrap;
+    word-break: break-all;
+    padding: 1px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: #a8a8b3;
+  }
+  .log-line.INFO  { color: #4ecca3; }
+  .log-line.WARN  { color: #f0a500; }
+  .log-line.ERROR { color: #e94560; }
+  .log-line.DEBUG { color: #8888aa; }
+
+  .log-panel .drag-hint {
+    padding: 4px 8px;
+    font-size: 11px;
+    color: #666;
+    border-top: 1px solid #0f3460;
+    flex-shrink: 0;
+    text-align: center;
+  }
+
+  /* ---- modal ---- */
+  .modal-mask {
+    display: none;
+    position: fixed; z-index: 999;
+    left: 0; top: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.6);
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-mask.show { display: flex; }
+  .modal-box {
+    background: #1e1e2f;
+    border: 1px solid #e94560;
+    border-radius: 8px;
+    padding: 24px 32px;
+    max-width: 420px;
+    text-align: center;
+  }
+  .modal-box p { margin: 8px 0 16px; font-size: 14px; }
+  .modal-box .btn {
+    background: #e94560;
+    color: #fff;
+    padding: 6px 24px;
+    border: none;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .modal-box .btn:hover { background: #d63850; }
+
+  @media (max-width: 768px) {
+    .main { flex-direction: column; }
+    .log-panel { width: 100%; height: 200px; }
+    header { gap: 6px; }
+    .status-bar { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Maple Robot</h1>
+  <div class="status-bar">
+    <button class="btn btn-start" id="btnStart" onclick="doStart()">开始</button>
+    <button class="btn btn-stop"  id="btnStop"  onclick="doStop()" disabled>停止</button>
+    <span class="sep">|</span>
+    <span id="statusInfo">就绪</span>
+    <span class="sep">|</span>
+    <button class="btn btn-refresh" id="btnRefresh" onclick="fetchScreenshot(true)">截图</button>
+    <select class="sel-interval" id="selInterval" onchange="onIntervalChange()">
+      <option value="0">手动</option>
+      <option value="3000">3秒</option>
+      <option value="5000">5秒</option>
+      <option value="10000">10秒</option>
+      <option value="30000">30秒</option>
+    </select>
+    <span class="sep">|</span>
+    <span>游戏: <span id="resolution">-</span></span>
+    <span class="sep">|</span>
+    <span class="status-dot online" id="statusDot"></span>
+    <span id="statusText">连接中</span>
+  </div>
+</header>
+<div class="main">
+  <div class="screen-area" id="screenArea">
+    <img id="screenImg" src="" alt="游戏画面">
+    <div class="coord-overlay" id="coordOverlay">坐标: (0, 0)</div>
+  </div>
+  <div class="log-panel">
+    <div class="log-header">实时日志</div>
+    <div class="log-body" id="logBody"></div>
+    <div class="drag-hint" id="dragHint">单击 = Tap | 拖动 = Swipe</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  // ---- state ----
+  let gameW = 0, gameH = 0;
+  let isDragging = false;
+  let dragStartX = 0, dragStartY = 0;
+  let running = false;
+  let autoTimer = null;       // auto-refresh timer id
+  let currentAbort = null;    // AbortController for in-flight screenshot
+  let currentObjectUrl = null; // current screenshot blob URL
+
+  function objectUrlTimeout(intervalMs) {
+    // 手动模式: 60s; 自动模式: interval * 2, 最少 10s
+    if (intervalMs === 0) return 60000;
+    return Math.max(intervalMs * 2, 10000);
+  }
+
+  const btnStart   = document.getElementById('btnStart');
+  const btnStop    = document.getElementById('btnStop');
+  const btnRefresh = document.getElementById('btnRefresh');
+  const selInt     = document.getElementById('selInterval');
+  const statusInfo = document.getElementById('statusInfo');
+
+  const screenImg  = document.getElementById('screenImg');
+  const screenArea = document.getElementById('screenArea');
+  const coordOverlay = document.getElementById('coordOverlay');
+  const logBody    = document.getElementById('logBody');
+  const resolutionEl = document.getElementById('resolution');
+  const statusDot  = document.getElementById('statusDot');
+  const statusText = document.getElementById('statusText');
+  const dragHint   = document.getElementById('dragHint');
+
+  // ---- fetch display info ----
+  async function fetchInfo() {
+    try {
+      const resp = await fetch('/api/info');
+      const info = await resp.json();
+      gameW = info.width;
+      gameH = info.height;
+      resolutionEl.textContent = gameW + 'x' + gameH;
+    } catch(e) { /* ignore */ }
+  }
+  fetchInfo();
+
+  // ---- modal ----
+  window.closeModal = function() {
+    document.getElementById('modalMask').classList.remove('show');
+  };
+  function showModal(msg) {
+    document.getElementById('modalMsg').textContent = msg;
+    document.getElementById('modalMask').classList.add('show');
+  }
+
+  // ---- fetch screenshot with timeout ----
+  var isManualShot = false; // 标记是否手动点击触发
+  window.fetchScreenshot = function(manual) {
+    // 取消前一次正在进行的请求
+    if (currentAbort) {
+      currentAbort.abort();
+      currentAbort = null;
+    }
+
+    var ms = parseInt(selInt.value, 10);
+    var timeout = objectUrlTimeout(ms);
+    var controller = new AbortController();
+    currentAbort = controller;
+
+    // loading (仅手动模式)
+    if (manual) {
+      isManualShot = true;
+      btnRefresh.disabled = true;
+      btnRefresh.textContent = '加载中...';
+      btnRefresh.classList.add('loading');
+    }
+
+    var tid = setTimeout(function() { controller.abort(); }, timeout);
+
+    fetch('/screenshot?_=' + Date.now(), { signal: controller.signal })
+      .then(function(resp) {
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        return resp.blob();
+      })
+      .then(function(blob) {
+        clearTimeout(tid);
+        if (currentAbort !== controller) return;
+        if (currentObjectUrl) URL.revokeObjectURL(currentObjectUrl);
+        currentObjectUrl = URL.createObjectURL(blob);
+        screenImg.src = currentObjectUrl;
+        restoreBtn();
+      })
+      .catch(function(err) {
+        clearTimeout(tid);
+        if (currentAbort !== controller) return;
+        restoreBtn();
+        if (err.name === 'AbortError') {
+          coordOverlay.textContent = '截图超时 (' + timeout / 1000 + 's)';
+          if (manual) showModal('截图请求超时 (' + timeout / 1000 + '秒)\n请检查网络或服务状态');
+        } else {
+          coordOverlay.textContent = '截图失败: ' + err.message;
+          if (manual) showModal('截图失败: ' + err.message);
+        }
+      });
+  };
+
+  function restoreBtn() {
+    if (!isManualShot) return;
+    isManualShot = false;
+    btnRefresh.disabled = false;
+    btnRefresh.textContent = '截图';
+    btnRefresh.classList.remove('loading');
+  }
+  // 首次加载自动拉一张
+  fetchScreenshot();
+
+  // ---- auto-refresh interval ----
+  window.onIntervalChange = function() {
+    if (autoTimer) {
+      clearInterval(autoTimer);
+      autoTimer = null;
+    }
+    var ms = parseInt(selInt.value, 10);
+    if (ms > 0) {
+      fetchScreenshot(); // 立即拉一张
+      autoTimer = setInterval(fetchScreenshot, ms);
+    }
+  };
+
+  // ---- status polling (also used as health check) ----
+  async function pollStatus() {
+    try {
+      const resp = await fetch('/api/status');
+      // API 通 = 连接正常
+      statusDot.className = 'status-dot online';
+      statusText.textContent = '已连接';
+
+      const s = await resp.json();
+      const wasRunning = running;
+      running = s.running;
+
+      if (running !== wasRunning) {
+        btnStart.disabled = running;
+        btnStop.disabled  = !running;
+        btnStart.textContent = running ? '运行中' : '开始';
+      }
+
+      if (running) {
+        var parts = [];
+        if (s.current_role)  parts.push('角色: ' + s.current_role);
+        if (s.current_task)  parts.push('任务: ' + s.current_task);
+        if (s.role_idx && s.total_roles) parts.push(s.role_idx + '/' + s.total_roles);
+        if (s.start_time)    parts.push('开始: ' + s.start_time);
+        statusInfo.textContent = parts.join(' | ') || '运行中';
+      } else {
+        statusInfo.textContent = '就绪';
+      }
+    } catch(e) {
+      statusDot.className = 'status-dot offline';
+      statusText.textContent = '离线';
+    }
+  }
+  setInterval(pollStatus, 10000);
+  pollStatus();
+
+  // ---- coordinate calc ----
+  function gameCoord(clientX, clientY) {
+    var rect = screenImg.getBoundingClientRect();
+    var scaleX = gameW / rect.width;
+    var scaleY = gameH / rect.height;
+    var gx = Math.round((clientX - rect.left) * scaleX);
+    var gy = Math.round((clientY - rect.top) * scaleY);
+    return { x: Math.max(0, Math.min(gx, gameW-1)), y: Math.max(0, Math.min(gy, gameH-1)) };
+  }
+
+  // ---- tap on click ----
+  screenArea.addEventListener('click', function(e) {
+    if (e.target !== screenImg) return;
+    var p = gameCoord(e.clientX, e.clientY);
+    coordOverlay.textContent = '点击: (' + p.x + ', ' + p.y + ')';
+    fetch('/api/tap', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ x: p.x, y: p.y })
+    }).catch(console.warn);
+  });
+
+  // ---- swipe on drag ----
+  screenArea.addEventListener('mousedown', function(e) {
+    if (e.target !== screenImg) return;
+    isDragging = true;
+    var p = gameCoord(e.clientX, e.clientY);
+    dragStartX = p.x; dragStartY = p.y;
+    dragHint.textContent = '拖动开始: (' + p.x + ', ' + p.y + ')';
+  });
+
+  window.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    var p = gameCoord(e.clientX, e.clientY);
+    coordOverlay.textContent = '拖动: (' + dragStartX + ', ' + dragStartY + ') → (' + p.x + ', ' + p.y + ')';
+  });
+
+  window.addEventListener('mouseup', function(e) {
+    if (!isDragging) return;
+    isDragging = false;
+    var p = gameCoord(e.clientX, e.clientY);
+    if (dragStartX === p.x && dragStartY === p.y) {
+      dragHint.textContent = '单击 = Tap | 拖动 = Swipe';
+      return;
+    }
+    var dx = p.x - dragStartX;
+    var dy = p.y - dragStartY;
+    var duration = Math.min(Math.max(Math.round(Math.sqrt(dx*dx + dy*dy)), 100), 800);
+    coordOverlay.textContent = '滑动: (' + dragStartX + ', ' + dragStartY + ') → (' + p.x + ', ' + p.y + ') 耗时: ' + duration + 'ms';
+    dragHint.textContent = '滑动: (' + dragStartX + ', ' + dragStartY + ') → (' + p.x + ', ' + p.y + ')';
+    fetch('/api/swipe', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ x1: dragStartX, y1: dragStartY, x2: p.x, y2: p.y, duration: duration })
+    }).catch(console.warn);
+  });
+
+  // ---- start / stop ----
+  window.doStart = async function() {
+    btnStart.disabled = true;
+    btnStart.textContent = '启动中...';
+    try {
+      var resp = await fetch('/api/start', { method: 'POST' });
+      if (!resp.ok) {
+        var txt = await resp.text();
+        statusInfo.textContent = '启动失败: ' + txt;
+        btnStart.disabled = false;
+        btnStart.textContent = '开始';
+      }
+    } catch(e) {
+      statusInfo.textContent = '启动失败: ' + e.message;
+      btnStart.disabled = false;
+      btnStart.textContent = '开始';
+    }
+  };
+
+  window.doStop = async function() {
+    btnStop.disabled = true;
+    try {
+      await fetch('/api/stop', { method: 'POST' });
+    } catch(e) { /* ignore */ }
+  };
+
+  // ---- log polling (短连接, 避免 SSE 阻塞隧道) ----
+  var lastLogCount = 0;
+  function pollLogs() {
+    fetch('/api/logs')
+      .then(function(r) { return r.json(); })
+      .then(function(logs) {
+        for (var i = lastLogCount; i < logs.length; i++) {
+          var line = document.createElement('div');
+          line.className = 'log-line';
+          var text = logs[i];
+          var m = text.match(/\b(INFO|WARN|ERROR|DEBUG)\b/);
+          if (m) line.classList.add(m[1]);
+          line.textContent = text;
+          logBody.appendChild(line);
+        }
+        lastLogCount = logs.length;
+
+        var threshold = 30;
+        var atBottom = (logBody.scrollHeight - logBody.scrollTop - logBody.clientHeight) < threshold;
+        if (atBottom) logBody.scrollTop = logBody.scrollHeight;
+
+        while (logBody.children.length > 1000) logBody.removeChild(logBody.firstChild);
+      })
+      .catch(function() { /* ignore */ });
+  }
+  pollLogs();
+  setInterval(pollLogs, 2000);
+})();
+</script>
+
+<!-- Modal -->
+<div class="modal-mask" id="modalMask">
+  <div class="modal-box">
+    <div style="font-size:32px; color:#e94560;">⚠</div>
+    <p id="modalMsg">截图超时</p>
+    <button class="btn" onclick="closeModal()">确定</button>
+  </div>
+</div>
+</body>
+</html>

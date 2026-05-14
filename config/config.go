@@ -7,7 +7,18 @@ import (
 )
 
 type Config struct {
-	Roles []*Role `yaml:"roles"`
+	Roles []*Role     `yaml:"roles"`
+	Web   WebConfig   `yaml:"web"`
+	Adele *AdeleConfig `yaml:"adele"` // nil = 禁用隧道
+}
+
+type WebConfig struct {
+	Addr string `yaml:"addr"`
+}
+
+type AdeleConfig struct {
+	Server   string `yaml:"server"`   // 服务器地址 ip:port
+	ClientID string `yaml:"client_id"` // 客户端标识
 }
 
 type Role struct {

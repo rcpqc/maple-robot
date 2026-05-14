@@ -1,0 +1,12 @@
+roles:
+  # 按实际角色配置, 格式: class + 可选 script
+  # - class: 职业名
+  #   script: script_xxx.yaml
+
+web:
+  addr: ":8080"
+
+# Adele 反向代理隧道 (可选)
+# adele:
+#   server: "your-cvm-ip:50051"
+#   client_id: "maple-robot"

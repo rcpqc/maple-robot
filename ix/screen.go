@@ -5,8 +5,10 @@ import (
 	"encoding/binary"
 	"fmt"
 	"image"
+	"image/jpeg"
 	"log"
 	"os/exec"
+	"sync"
 	"time"
 )
 
@@ -21,7 +23,11 @@ func Check() error {
 }
 
 type Screen struct {
+	mu          sync.RWMutex
 	frameBuffer *image.RGBA
+	jpegCache   []byte // 预编码的 JPEG 缓存 (缩小版)
+	jpegW       int    // 缓存图片宽度
+	jpegH       int    // 缓存图片高度
 }
 
 func (o *Screen) take() error {
@@ -40,11 +46,24 @@ func (o *Screen) take() error {
 	binary.Read(buf, binary.LittleEndian, &format)
 	binary.Read(buf, binary.LittleEndian, &reverse)
 
-	o.frameBuffer = &image.RGBA{
+	fb := &image.RGBA{
 		Pix:    buf.Bytes()[:width*4*height],
 		Stride: 4 * int(width),
 		Rect:   image.Rect(0, 0, int(width), int(height)),
 	}
+
+	// 编码 JPEG (质量 60)
+	enc := new(bytes.Buffer)
+	if err := jpeg.Encode(enc, fb, &jpeg.Options{Quality: 60}); err != nil {
+		return fmt.Errorf("jpeg cache -> %w", err)
+	}
+
+	o.mu.Lock()
+	o.frameBuffer = fb
+	o.jpegCache = enc.Bytes()
+	o.jpegW = int(width)
+	o.jpegH = int(height)
+	o.mu.Unlock()
 
 	return nil
 }
@@ -60,7 +79,21 @@ func (o *Screen) update(interval time.Duration) {
 	}()
 }
 
+func (o *Screen) Size() (int, int) {
+	o.mu.RLock()
+	defer o.mu.RUnlock()
+	if o.frameBuffer == nil {
+		return 0, 0
+	}
+	return o.frameBuffer.Rect.Dx(), o.frameBuffer.Rect.Dy()
+}
+
 func GetPixel(pos Position) Color {
+	Display.mu.RLock()
+	defer Display.mu.RUnlock()
+	if Display.frameBuffer == nil {
+		return Color{}
+	}
 	c := Display.frameBuffer.RGBAAt(int(pos.X), int(pos.Y))
 	return Color{R: c.R, G: c.G, B: c.B}
 }
@@ -75,5 +108,24 @@ func WaitPixel(pos Position, c Color) {
 }
 
 func SubImage(rc Rect) image.Image {
+	Display.mu.RLock()
+	defer Display.mu.RUnlock()
+	if Display.frameBuffer == nil {
+		return nil
+	}
 	return Display.frameBuffer.SubImage(image.Rect(int(rc.X), int(rc.Y), int(rc.W), int(rc.H)))
+}
+
+// CaptureJPEG 返回预编码的 JPEG 缓存, 不会触发新的编码.
+func CaptureJPEG() ([]byte, int, int, error) {
+	Display.mu.RLock()
+	cache := Display.jpegCache
+	w, h := Display.jpegW, Display.jpegH
+	Display.mu.RUnlock()
+	if cache == nil {
+		return nil, 0, 0, fmt.Errorf("jpeg cache not ready")
+	}
+	data := make([]byte, len(cache))
+	copy(data, cache)
+	return data, w, h, nil
 }

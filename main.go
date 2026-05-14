@@ -5,16 +5,14 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
-	"strconv"
 	"time"
 
 	"maple-robot/config"
 	"maple-robot/ix"
 	"maple-robot/log"
-	"maple-robot/scripts"
+	"maple-robot/web"
 
-	"github.com/rcpqc/expr"
+	"github.com/rcpqc/adele/client"
 )
 
 func init() {
@@ -24,92 +22,73 @@ func init() {
 }
 
 func main() {
-	// 加载日志记录
+	// 日志文件 (按天)
 	logFile := "logs/" + time.Now().Format(time.DateOnly) + ".log"
 	records, _ := config.LoadTaskRecords(logFile)
 	ctx := config.WithRecords(context.Background(), records)
 
-	// 设置日志输出
+	// 设置日志输出: stdout + 文件 + Web 广播
 	f, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_RDWR, os.ModePerm)
 	if err != nil {
 		panic(err)
 	}
+	defer f.Close()
 
-	baseLogger := log.New(io.MultiWriter(os.Stdout, f))
+	logHub := web.NewLogHub()
+	baseLogger := log.New(io.MultiWriter(os.Stdout, f, logHub))
 
-	// 读取角色脚本
+	// 读取配置
 	cfg, err := config.Load("config.yaml")
 	if err != nil {
 		panic(err)
 	}
 
-	entered := false
+	// 创建 Runner (后续通过 Web 面板启动/停止)
+	runner := web.NewRunner(cfg, baseLogger, logFile)
 
-	for i, role := range cfg.Roles {
-		index := (i/7+1)*100 + (i%7 + 1)
-		roleid := strconv.FormatInt(int64(index), 10)
-		ctx = scripts.WithRole(ctx, index, role.Class)
-		ctx = log.WithLogger(ctx, baseLogger.With("role", index, "class", role.Class))
-		// 角色已完成, 则跳过
-		if _, ok := config.GetRecord(ctx, roleid, "", "角色日常结束"); ok {
-			log.Info(ctx, "角色日常跳过")
-			continue
-		}
-
-		// 脚本加载
-		if role.Script == "" {
-			role.Script = "script_200.yaml"
-		}
-		script, err := config.LoadScript(role.Script)
-		if err != nil {
-			log.Error(ctx, "脚本加载", "script", role.Script, "err", err)
-		}
-
-		// 角色登录
-		log.Info(ctx, "角色日常开始")
-		if !entered {
-			scripts.Enter(ctx, index)
-			scripts.WaitEnter(ctx)
-			entered = true
-		} else {
-			scripts.NextRole(ctx)
-			scripts.WaitEnter(ctx)
-		}
-
-		// 角色属性获取
-		log.Info(ctx, "角色属性",
-			"bpu", fmt.Sprintf("%.0f%%", scripts.BackpackUtilizationRatio()*100),
-			"exp", fmt.Sprintf("%.2f%%", scripts.ExpRatio()*100),
-		)
-
-		// 任务执行
-		for _, task := range script.Tasks {
-			vars := expr.Vars{"index": index, "weekday": int64(time.Now().Weekday())}
-			if !task.Condition.Match(vars) {
-				continue
-			}
-			// 任务今日已入场
-			if _, ok := config.GetRecord(ctx, roleid, task.Name, "任务完成"); ok {
-				continue
-			}
-			if _, ok := config.GetRecord(ctx, roleid, task.Name, "任务入场"); ok {
-				continue
-			}
-			task.Execute(ctx)
-		}
-
-		// 角色属性获取
-		log.Info(ctx, "角色属性",
-			"bpu", fmt.Sprintf("%.0f%%", scripts.BackpackUtilizationRatio()*100),
-			"exp", fmt.Sprintf("%.2f%%", scripts.ExpRatio()*100),
-		)
-
-		log.Info(ctx, "角色日常结束")
+	// 服务地址
+	addr := cfg.Web.Addr
+	if addr == "" {
+		addr = ":8080"
 	}
-	scripts.Exit(ctx)
+	localAddr := "127.0.0.1" + addr
 
-	f.Close()
+	fmt.Printf("=== Maple Robot 服务已启动 ===\n")
+	fmt.Printf("    Web 面板: http://localhost%s\n", addr)
+	fmt.Printf("    日志文件: %s\n", logFile)
+	fmt.Printf("    角色数量: %d\n", len(cfg.Roles))
 
-	exec.Command("./bin/analyze").Run()
+	// 启动 Adele 隧道 (非阻塞)
+	if cfg.Adele != nil && cfg.Adele.Server != "" {
+		go startAdele(cfg.Adele, localAddr)
+	}
 
+	fmt.Println()
+
+	// 启动 Web 服务 (阻塞)
+	if err := web.Start(addr, logHub, runner); err != nil {
+		log.Warn(ctx, "web server stopped", "err", err)
+	}
+}
+
+func startAdele(cfg *config.AdeleConfig, localAddr string) {
+	clientID := cfg.ClientID
+	if clientID == "" {
+		clientID = "maple-robot"
+	}
+
+	c := client.New(clientID, localAddr, client.WithServerAddress(cfg.Server))
+
+	fmt.Printf("    Adele 隧道: 连接中 %s ...\n", cfg.Server)
+
+	if err := c.Connect(); err != nil {
+		fmt.Printf("    Adele 隧道: 连接失败 %v\n", err)
+		return
+	}
+
+	proxyAddr := c.ProxyAddr()
+	fmt.Printf("    Adele 隧道: http://localhost%s → http://%s\n", localAddr, proxyAddr)
+
+	// 保持连接, 直到程序退出
+	<-make(chan struct{})
 }

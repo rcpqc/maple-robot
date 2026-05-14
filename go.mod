@@ -1,10 +1,18 @@
 module maple-robot
 
-go 1.23
-
-require gopkg.in/yaml.v3 v3.0.1
+go 1.24.0
 
 require (
-	github.com/otiai10/gosseract/v2 v2.4.1 // indirect
-	github.com/rcpqc/expr v1.4.2 // indirect
+	github.com/rcpqc/adele v0.0.0-20260417154351-b30f383656a2
+	github.com/rcpqc/expr v1.4.2
+	gopkg.in/yaml.v3 v3.0.1
+)
+
+require (
+	golang.org/x/net v0.49.0 // indirect
+	golang.org/x/sys v0.40.0 // indirect
+	golang.org/x/text v0.33.0 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20260120221211-b8f7ae30c516 // indirect
+	google.golang.org/grpc v1.80.0 // indirect
+	google.golang.org/protobuf v1.36.11 // indirect
 )
