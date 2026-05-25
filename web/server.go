@@ -95,6 +95,7 @@ func Start(addr string, logHub *LogHub, runner *Runner, auth *config.AuthConfig)
 	mux.HandleFunc("/api/status", func(w http.ResponseWriter, r *http.Request) {
 		handleStatus(w, r, runner)
 	})
+	mux.HandleFunc("/api/bypass", handleBypass)
 	mux.HandleFunc("/api/logs", func(w http.ResponseWriter, r *http.Request) {
 		handleLogs(w, r, logHub)
 	})
@@ -222,6 +223,14 @@ func handleInfo(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(resp)
 }
 
+// ---- bypass ----
+
+func handleBypass(w http.ResponseWriter, r *http.Request) {
+	ix.Bypass()
+	w.WriteHeader(http.StatusOK)
+	io.WriteString(w, "ok")
+}
+
 // ---- runner control ----
 
 func handleStart(w http.ResponseWriter, r *http.Request, runner *Runner) {
@@ -241,7 +250,10 @@ func handleStop(w http.ResponseWriter, r *http.Request, runner *Runner) {
 		http.Error(w, "POST required", http.StatusMethodNotAllowed)
 		return
 	}
-	runner.Stop()
+	if err := runner.StopWaitTimeout(30 * time.Second); err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
 	json.NewEncoder(w).Encode(map[string]string{"status": "stopped"})
 }
 

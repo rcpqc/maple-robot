@@ -18,8 +18,13 @@ func Enter(ctx context.Context, index int) {
 	// 等待场景
 	LabelWait(ctx, "角色选择-服务器", 30*time.Second)
 
-	// 切换角色页
+	// 切换角色页 (加超时防止卡死)
+	ddl := time.Now().Add(30 * time.Second)
 	for !LabelCheck(ctx, fmt.Sprintf("角色选择-选中角色页%d", page)) {
+		if ctx.Err() != nil || time.Now().After(ddl) {
+			log.Warn(ctx, "角色选择翻页超时")
+			return
+		}
 		LabelClick(ctx, "角色选择-下一页")
 	}
 
@@ -38,7 +43,12 @@ func WaitEnter(ctx context.Context) {
 }
 
 func Exit(ctx context.Context) {
+	ddl := time.Now().Add(30 * time.Second)
 	for !LabelCheck(ctx, "通用-游戏结束-否", "通用-游戏结束-返回角色界面", "通用-游戏结束-是") {
+		if ctx.Err() != nil || time.Now().After(ddl) {
+			log.Warn(ctx, "退出游戏超时")
+			return
+		}
 		Back(ctx)
 	}
 	LabelClick(ctx, "通用-游戏结束-返回角色界面")

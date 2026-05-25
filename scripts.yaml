@@ -52,7 +52,6 @@ roles:
   - class: 豹弩游侠
   - class: 狂龙战士
   - class: 超能力者
-    script: 189
 
 scripts:
   # ====== 150 组 ======

@@ -60,7 +60,7 @@ func main() {
 	localAddr := "127.0.0.1" + addr
 
 	fmt.Printf("=== Maple Robot 服务已启动 ===\n")
-	fmt.Printf("    Web 面板: http://localhost%s\n", addr)
+	fmt.Printf("    Web 面板: http://%s\n", localAddr)
 	fmt.Printf("    日志文件: %s\n", logFile)
 	fmt.Printf("    角色数量: %d\n", len(roles))
 
@@ -93,7 +93,7 @@ func startAdele(cfg *config.AdeleConfig, localAddr string) {
 	}
 
 	proxyAddr := c.ProxyAddr()
-	fmt.Printf("    Adele 隧道: http://localhost%s → http://%s\n", localAddr, proxyAddr)
+	fmt.Printf("    Adele 隧道: %s → http://%s\n", localAddr, proxyAddr)
 
 	// 保持连接, 直到程序退出
 	<-make(chan struct{})

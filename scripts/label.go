@@ -337,6 +337,12 @@ func LabelWait(ctx context.Context, name string, timeout time.Duration) {
 	st := time.Now()
 	ddl := st.Add(timeout)
 	for {
+		select {
+		case <-ctx.Done():
+			log.Debug(ctx, "标签等待中止(停止)", "label", name)
+			return
+		default:
+		}
 		cur := ix.GetPixel(lbl.Position)
 		if cur.Equals(lbl.Color) {
 			log.Debug(ctx, "标签等待完成", "label", name, "timeout", timeout, "cost", time.Since(st))
@@ -346,8 +352,8 @@ func LabelWait(ctx context.Context, name string, timeout time.Duration) {
 			log.Info(ctx, "标签等待", "label", name, "timeout", timeout, "position", lbl.Position, "color", cur, "target", lbl.Color)
 			ix.Beep()
 		}
-		if ix.WaitOrPass(time.Second) {
-			log.Debug(ctx, "标签等待中止", "label", name, "timeout", timeout, "cost", time.Since(st), time.Since(st))
+		if ix.WaitOrPass(ctx, time.Second) {
+			log.Debug(ctx, "标签等待中止", "label", name, "timeout", timeout, "cost", time.Since(st))
 			return
 		}
 	}

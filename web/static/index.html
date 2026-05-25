@@ -220,6 +220,8 @@
     <button class="btn btn-start" id="btnStart" onclick="doStart()">开始</button>
     <button class="btn btn-stop"  id="btnStop"  onclick="doStop()" disabled>停止</button>
     <span class="sep">|</span>
+    <button class="btn" style="background:#f0a500;color:#1a1a2e;" id="btnBypass" onclick="doBypass()">跳过等待</button>
+    <span class="sep">|</span>
     <span id="statusInfo">就绪</span>
     <span class="sep">|</span>
     <button class="btn btn-refresh" id="btnRefresh" onclick="fetchScreenshot(true)">截图</button>
@@ -553,8 +555,23 @@
 
   window.doStop = async function() {
     btnStop.disabled = true;
+    btnStop.textContent = '停止中...';
     try {
-      await fetch('/api/stop', { method: 'POST' });
+      var resp = await fetch('/api/stop', { method: 'POST' });
+      if (!resp.ok) {
+        var txt = await resp.text();
+        showModal('停止超时: ' + txt);
+      }
+    } catch(e) {
+      showModal('停止失败: ' + e.message);
+    }
+    btnStop.textContent = '停止';
+    btnStop.disabled = false;
+  };
+
+  window.doBypass = async function() {
+    try {
+      await fetch('/api/bypass', { method: 'POST' });
     } catch(e) { /* ignore */ }
   };
 

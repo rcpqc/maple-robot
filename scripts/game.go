@@ -307,7 +307,11 @@ func srq(ctx context.Context) {
 // lqrcjl 领取日常奖励
 func lqrcjl(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
+	ddl := time.Now().Add(30 * time.Second)
 	for LabelCheck(ctx, "世界-领取日常") {
+		if ctx.Err() != nil || time.Now().After(ddl) {
+			break
+		}
 		LabelClick(ctx, "世界-领取日常")
 		BackWorld(ctx)
 	}
@@ -358,7 +362,11 @@ func wtyb(ctx context.Context) {
 
 	// 接受委托
 	change, pos := 0, 1
+	wddl := time.Now().Add(60 * time.Second)
 	for LabelColor(ctx, fmt.Sprintf("委托-接受%d号位", maxAccept)) == ix.ColorMissionEmpty {
+		if ctx.Err() != nil || time.Now().After(wddl) {
+			break
+		}
 		if LabelColor(ctx, fmt.Sprintf("委托-发布%d号位", pos)) == ix.ColorMissionHard {
 			LabelClick(ctx, fmt.Sprintf("委托-发布%d号位", pos))
 			LabelWaitClick(ctx, "委托-发布接受", 5*time.Second)
@@ -473,6 +481,9 @@ func lz(ctx context.Context) {
 	time.Sleep(5 * time.Second)
 	st := time.Now()
 	for !LabelCheck(ctx, "领主-返回主页") && time.Since(st) < 60*time.Second {
+		if ctx.Err() != nil {
+			break
+		}
 		LabelClick(ctx, "世界-技能8")
 		time.Sleep(500 * time.Millisecond)
 	}

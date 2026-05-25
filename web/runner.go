@@ -102,15 +102,27 @@ func (r *Runner) Stop() {
 	}
 }
 
-// StopWait cancels and waits for execution to finish.
-func (r *Runner) StopWait() {
+const stopTimeout = 30 * time.Second
+
+// StopWait cancels and waits for execution to finish within the default timeout.
+// Returns an error if the runner does not stop within the timeout.
+func (r *Runner) StopWait() error {
+	return r.StopWaitTimeout(stopTimeout)
+}
+
+// StopWaitTimeout cancels execution and waits up to timeout for it to finish.
+func (r *Runner) StopWaitTimeout(timeout time.Duration) error {
 	r.Stop()
+	ddl := time.Now().Add(timeout)
 	for {
 		r.mu.Lock()
 		run := r.running
 		r.mu.Unlock()
 		if !run {
-			return
+			return nil
+		}
+		if time.Now().After(ddl) {
+			return fmt.Errorf("stop timeout after %v", timeout)
 		}
 		time.Sleep(100 * time.Millisecond)
 	}
