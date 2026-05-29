@@ -222,6 +222,11 @@
     <span class="sep">|</span>
     <button class="btn" style="background:#f0a500;color:#1a1a2e;" id="btnBypass" onclick="doBypass()">跳过等待</button>
     <span class="sep">|</span>
+    <label style="font-size:12px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" id="chkBeep" checked onchange="toggleBeep(this.checked)" style="accent-color:#f0a500;">
+      蜂鸣
+    </label>
+    <span class="sep">|</span>
     <span id="statusInfo">就绪</span>
     <span class="sep">|</span>
     <button class="btn btn-refresh" id="btnRefresh" onclick="fetchScreenshot(true)">截图</button>
@@ -574,6 +579,19 @@
       await fetch('/api/bypass', { method: 'POST' });
     } catch(e) { /* ignore */ }
   };
+
+  // ---- beep toggle ----
+  window.toggleBeep = async function(enabled) {
+    await fetch('/api/beep', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ enabled: enabled })
+    }).catch(console.warn);
+  };
+  // 从服务端拉取当前蜂鸣状态
+  fetch('/api/beep').then(function(r) { return r.json(); }).then(function(d) {
+    document.getElementById('chkBeep').checked = d.enabled;
+  }).catch(function() {});
 
   // ---- log polling (短连接, 避免 SSE 阻塞隧道) ----
   var lastLogText = '';

@@ -96,6 +96,7 @@ func Start(addr string, logHub *LogHub, runner *Runner, auth *config.AuthConfig)
 		handleStatus(w, r, runner)
 	})
 	mux.HandleFunc("/api/bypass", handleBypass)
+	mux.HandleFunc("/api/beep", handleBeep)
 	mux.HandleFunc("/api/logs", func(w http.ResponseWriter, r *http.Request) {
 		handleLogs(w, r, logHub)
 	})
@@ -229,6 +230,29 @@ func handleBypass(w http.ResponseWriter, r *http.Request) {
 	ix.Bypass()
 	w.WriteHeader(http.StatusOK)
 	io.WriteString(w, "ok")
+}
+
+// ---- beep toggle ----
+
+func handleBeep(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]bool{"enabled": ix.BeepEnabled()})
+	case http.MethodPost:
+		var body struct {
+			Enabled bool `json:"enabled"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		ix.SetBeepEnabled(body.Enabled)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]bool{"enabled": ix.BeepEnabled()})
+	default:
+		http.Error(w, "GET or POST required", http.StatusMethodNotAllowed)
+	}
 }
 
 // ---- runner control ----
