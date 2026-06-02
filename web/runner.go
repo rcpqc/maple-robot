@@ -210,6 +210,9 @@ func (r *Runner) run(ctx context.Context) {
 			if _, ok := config.GetRecord(ctx, roleid, task.Name, "任务入场"); ok {
 				continue
 			}
+			if config.IsTaskDisabled(role.Script, task.Name) {
+				continue
+			}
 			task.Execute(ctx)
 		}
 

@@ -97,6 +97,7 @@ func Start(addr string, logHub *LogHub, runner *Runner, auth *config.AuthConfig)
 	})
 	mux.HandleFunc("/api/bypass", handleBypass)
 	mux.HandleFunc("/api/beep", handleBeep)
+	mux.HandleFunc("/api/tasks", handleTasks)
 	mux.HandleFunc("/api/logs", func(w http.ResponseWriter, r *http.Request) {
 		handleLogs(w, r, logHub)
 	})
@@ -250,6 +251,54 @@ func handleBeep(w http.ResponseWriter, r *http.Request) {
 		ix.SetBeepEnabled(body.Enabled)
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]bool{"enabled": ix.BeepEnabled()})
+	default:
+		http.Error(w, "GET or POST required", http.StatusMethodNotAllowed)
+	}
+}
+
+// ---- task toggle ----
+
+func handleTasks(w http.ResponseWriter, r *http.Request) {
+	switch r.Method {
+	case http.MethodGet:
+		script := r.URL.Query().Get("script")
+		if script == "" {
+			script = "200"
+		}
+		tasks, err := config.GetScriptTasks(script)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		disabled := config.AllDisabledTasks(script)
+		type taskItem struct {
+			Name     string `json:"name"`
+			Disabled bool   `json:"disabled"`
+		}
+		items := make([]taskItem, len(tasks))
+		for i, t := range tasks {
+			items[i] = taskItem{Name: t.Name, Disabled: disabled[t.Name]}
+		}
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]any{"script": script, "tasks": items})
+
+	case http.MethodPost:
+		var req struct {
+			Script   string `json:"script"`
+			TaskName string `json:"task_name"`
+			Disabled bool   `json:"disabled"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
+		if req.Script == "" {
+			req.Script = "200"
+		}
+		config.SetTaskDisabled(req.Script, req.TaskName, req.Disabled)
+		w.Header().Set("Content-Type", "application/json")
+		json.NewEncoder(w).Encode(map[string]any{"ok": true})
+
 	default:
 		http.Error(w, "GET or POST required", http.StatusMethodNotAllowed)
 	}

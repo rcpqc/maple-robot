@@ -3,6 +3,7 @@ package config
 import (
 	"context"
 	"maple-robot/log"
+	"sync"
 
 	"github.com/rcpqc/expr"
 )
@@ -45,6 +46,50 @@ func GetTaskOptions(ctx context.Context, key string) string {
 		return ""
 	}
 	return options[key]
+}
+
+// ---- disabled tasks (web toggle) ----
+
+var (
+	taskDisabledMu sync.RWMutex
+	taskDisabled   = map[string]map[string]bool{} // scriptKey -> taskName -> disabled
+)
+
+func SetTaskDisabled(scriptKey, taskName string, disabled bool) {
+	taskDisabledMu.Lock()
+	if taskDisabled[scriptKey] == nil {
+		taskDisabled[scriptKey] = map[string]bool{}
+	}
+	taskDisabled[scriptKey][taskName] = disabled
+	taskDisabledMu.Unlock()
+}
+
+func IsTaskDisabled(scriptKey, taskName string) bool {
+	taskDisabledMu.RLock()
+	defer taskDisabledMu.RUnlock()
+	if m := taskDisabled[scriptKey]; m != nil {
+		return m[taskName]
+	}
+	return false
+}
+
+func AllDisabledTasks(scriptKey string) map[string]bool {
+	taskDisabledMu.RLock()
+	defer taskDisabledMu.RUnlock()
+	out := map[string]bool{}
+	for k, v := range taskDisabled[scriptKey] {
+		out[k] = v
+	}
+	return out
+}
+
+// GetScriptTasks returns the task list for a script key.
+func GetScriptTasks(key string) ([]*Task, error) {
+	s, err := LoadScript(key)
+	if err != nil {
+		return nil, err
+	}
+	return s.Tasks, nil
 }
 
 func (o *Task) Execute(ctx context.Context) {

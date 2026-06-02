@@ -227,6 +227,8 @@
       蜂鸣
     </label>
     <span class="sep">|</span>
+    <button class="btn" style="background:#3b82f6;color:#fff;" onclick="showTaskPanel()">任务</button>
+    <span class="sep">|</span>
     <span id="statusInfo">就绪</span>
     <span class="sep">|</span>
     <button class="btn btn-refresh" id="btnRefresh" onclick="fetchScreenshot(true)">截图</button>
@@ -593,6 +595,56 @@
     document.getElementById('chkBeep').checked = d.enabled;
   }).catch(function() {});
 
+  // ---- task panel ----
+  window.showTaskPanel = function() {
+    document.getElementById('taskMask').classList.add('show');
+    fetchTaskList();
+  };
+  window.closeTaskPanel = function() {
+    document.getElementById('taskMask').classList.remove('show');
+  };
+
+  async function fetchTaskList() {
+    var el = document.getElementById('taskList');
+    el.innerHTML = '<div style="color:#888;text-align:center;padding:20px;">加载中...</div>';
+    try {
+      var resp = await fetch('/api/tasks?script=200');
+      var data = await resp.json();
+      var html = '';
+      for (var i = 0; i < data.tasks.length; i++) {
+        var t = data.tasks[i];
+        // checked = 执行（不跳过）, unchecked = 跳过
+        var checked = t.disabled ? '' : 'checked';
+        var skipped = t.disabled;
+        html += '<label style="display:flex;align-items:center;gap:6px;padding:2px 6px;cursor:pointer;border-radius:3px;';
+        html += skipped ? 'background:rgba(233,69,96,0.08);' : '';
+        html += '" onmouseenter="this.style.background=\'rgba(255,255,255,0.05)\'" ';
+        html += 'onmouseleave="this.style.background=\'' + (skipped ? 'rgba(233,69,96,0.08)' : 'transparent') + '\'">';
+        html += '<input type="checkbox" ' + checked + ' style="accent-color:#4ecca3;cursor:pointer;"';
+        html += ' onchange="toggleTask(\'' + t.name.replace(/'/g, "\\'") + '\', !this.checked)">';
+        if (skipped) {
+          html += '<span style="color:#e94560;font-size:10px;font-weight:700;background:#e94560;color:#fff;border-radius:3px;padding:0 5px;line-height:16px;">跳过</span>';
+          html += '<span style="color:#777;text-decoration:line-through;">' + t.name + '</span>';
+        } else {
+          html += '<span style="color:#e0e0e0;">' + t.name + '</span>';
+        }
+        html += '</label>';
+      }
+      el.innerHTML = html;
+    } catch(e) {
+      el.innerHTML = '<div style="color:#e94560;text-align:center;padding:20px;">加载失败: ' + e.message + '</div>';
+    }
+  }
+
+  window.toggleTask = async function(name, disabled) {
+    await fetch('/api/tasks', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ script: '200', task_name: name, disabled: disabled })
+    }).catch(console.warn);
+    fetchTaskList(); // 重新渲染
+  };
+
   // ---- log polling (短连接, 避免 SSE 阻塞隧道) ----
   var lastLogText = '';
   function pollLogs() {
@@ -635,7 +687,24 @@
 })();
 </script>
 
-<!-- Modal -->
+<!-- Task panel (modal) -->
+<div class="modal-mask" id="taskMask">
+  <div style="background:#16213e;border:1px solid #0f3460;border-radius:8px;padding:16px 20px;max-width:500px;width:90%;max-height:80vh;display:flex;flex-direction:column;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+      <h2 style="font-size:15px;color:#e94560;">任务列表（脚本 200）</h2>
+      <button onclick="closeTaskPanel()" style="background:none;border:none;color:#a8a8b3;font-size:20px;cursor:pointer;">✕</button>
+    </div>
+    <div style="text-align:center;margin-bottom:8px;font-size:11px;">
+      <span style="color:#4ecca3;">✔ 执行</span>
+      <span style="color:#555;margin:0 6px;">|</span>
+      <span style="color:#e94560;">✖ 跳过</span>
+    </div>
+    <div id="taskList" style="overflow-y:auto;flex:1;font-size:13px;line-height:1.8;"></div>
+    <div style="margin-top:8px;text-align:center;font-size:11px;color:#666;">取消勾选 = 跳过该任务，下次运行生效</div>
+  </div>
+</div>
+
+<!-- Alert Modal -->
 <div class="modal-mask" id="modalMask">
   <div class="modal-box">
     <div style="font-size:32px; color:#e94560;">⚠</div>
