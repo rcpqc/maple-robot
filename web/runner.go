@@ -196,24 +196,24 @@ func (r *Runner) run(ctx context.Context) {
 			default:
 			}
 
-			r.mu.Lock()
-			r.currentTask = task.Name
-			r.mu.Unlock()
+		r.mu.Lock()
+		r.currentTask = task.Key()
+		r.mu.Unlock()
 
-			vars := expr.Vars{"index": index, "weekday": int64(time.Now().Weekday())}
-			if !task.Condition.Match(vars) {
-				continue
-			}
-			if _, ok := config.GetRecord(ctx, roleid, task.Name, "任务完成"); ok {
-				continue
-			}
-			if _, ok := config.GetRecord(ctx, roleid, task.Name, "任务入场"); ok {
-				continue
-			}
-			if config.IsTaskDisabled(role.Script, task.Name) {
-				continue
-			}
-			task.Execute(ctx)
+		vars := expr.Vars{"index": index, "weekday": int64(time.Now().Weekday())}
+		if !task.Condition.Match(vars) {
+			continue
+		}
+		if _, ok := config.GetRecord(ctx, roleid, task.Key(), "任务完成"); ok {
+			continue
+		}
+		if _, ok := config.GetRecord(ctx, roleid, task.Key(), "任务入场"); ok {
+			continue
+		}
+		if config.IsTaskDisabled(role.Script, task.Key()) {
+			continue
+		}
+		task.Execute(ctx)
 		}
 
 		r.mu.Lock()

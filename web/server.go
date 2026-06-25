@@ -277,7 +277,8 @@ func handleTasks(w http.ResponseWriter, r *http.Request) {
 		}
 		items := make([]taskItem, len(tasks))
 		for i, t := range tasks {
-			items[i] = taskItem{Name: t.Name, Disabled: disabled[t.Name]}
+			key := t.Key()
+			items[i] = taskItem{Name: key, Disabled: disabled[key]}
 		}
 		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(map[string]any{"script": script, "tasks": items})

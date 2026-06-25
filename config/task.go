@@ -14,9 +14,19 @@ var tasks = map[string]func(ctx context.Context){}
 
 type Task struct {
 	Name      string            `yaml:"name"`
+	Alias     string            `yaml:"alias,omitempty"`
 	Condition Condition         `yaml:"condition"`
 	Options   map[string]string `yaml:"options,omitempty"`
 	Subs      []*Task           `yaml:"subs,omitempty"`
+}
+
+// Key 返回任务实例的唯一标识，用于日志、进度记录、Web 任务开关。
+// 设置了 Alias 时使用 Alias，否则回退到 Name。
+func (o *Task) Key() string {
+	if o.Alias != "" {
+		return o.Alias
+	}
+	return o.Name
 }
 
 type Condition string
@@ -93,7 +103,7 @@ func GetScriptTasks(key string) ([]*Task, error) {
 }
 
 func (o *Task) Execute(ctx context.Context) {
-	ctx = log.WithLogger(ctx, log.GetLogger(ctx).With("task", o.Name))
+	ctx = log.WithLogger(ctx, log.GetLogger(ctx).With("task", o.Key()))
 	if handler := tasks[o.Name]; handler != nil {
 		log.Info(ctx, "任务开始")
 		handler(WithTaskOptions(ctx, o.Options))
