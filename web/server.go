@@ -85,6 +85,7 @@ func Start(addr string, logHub *LogHub, runner *Runner, auth *config.AuthConfig)
 	mux.HandleFunc("/screenshot", handleScreenshot)
 	mux.HandleFunc("/api/tap", handleTap)
 	mux.HandleFunc("/api/swipe", handleSwipe)
+	mux.HandleFunc("/api/key", handleKey)
 	mux.HandleFunc("/api/info", handleInfo)
 	mux.HandleFunc("/api/start", func(w http.ResponseWriter, r *http.Request) {
 		handleStart(w, r, runner)
@@ -207,6 +208,27 @@ func handleSwipe(w http.ResponseWriter, r *http.Request) {
 		req.Duration = 200
 	}
 	ix.Swipe(ix.Position{X: req.X1, Y: req.Y1}, ix.Position{X: req.X2, Y: req.Y2}, req.Duration)
+	w.WriteHeader(http.StatusOK)
+	io.WriteString(w, "ok")
+}
+
+// ---- key event ----
+
+type keyReq struct {
+	Code int64 `json:"code"`
+}
+
+func handleKey(w http.ResponseWriter, r *http.Request) {
+	if r.Method != http.MethodPost {
+		http.Error(w, "POST required", http.StatusMethodNotAllowed)
+		return
+	}
+	var req keyReq
+	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	ix.Key(ix.KeyCode(req.Code))
 	w.WriteHeader(http.StatusOK)
 	io.WriteString(w, "ok")
 }

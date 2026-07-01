@@ -221,6 +221,7 @@
     <button class="btn btn-stop"  id="btnStop"  onclick="doStop()" disabled>停止</button>
     <span class="sep">|</span>
     <button class="btn" style="background:#f0a500;color:#1a1a2e;" id="btnBypass" onclick="doBypass()">跳过等待</button>
+    <button class="btn" style="background:#6b7280;color:#fff;" id="btnEsc" onclick="sendKey(111)">ESC</button>
     <span class="sep">|</span>
     <label style="font-size:12px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:4px;">
       <input type="checkbox" id="chkBeep" checked onchange="toggleBeep(this.checked)" style="accent-color:#f0a500;">
@@ -579,6 +580,17 @@
   window.doBypass = async function() {
     try {
       await fetch('/api/bypass', { method: 'POST' });
+    } catch(e) { /* ignore */ }
+  };
+
+  // ---- send key event ----
+  window.sendKey = async function(code) {
+    try {
+      await fetch('/api/key', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ code: code })
+      });
     } catch(e) { /* ignore */ }
   };
 
