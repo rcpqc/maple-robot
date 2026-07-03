@@ -3,7 +3,7 @@ module maple-robot
 go 1.24.0
 
 require (
-	github.com/rcpqc/adele v0.0.0-20260417154351-b30f383656a2
+	github.com/rcpqc/adele v0.0.0-20260514175109-abbe8c2c439c
 	github.com/rcpqc/expr v1.4.2
 	gopkg.in/yaml.v3 v3.0.1
 )

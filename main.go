@@ -2,9 +2,13 @@ package main
 
 import (
 	"context"
+	"crypto/tls"
 	"fmt"
 	"io"
+	"net"
+	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"maple-robot/config"
@@ -83,18 +87,47 @@ func startAdele(cfg *config.AdeleConfig, localAddr string) {
 		clientID = "maple-robot"
 	}
 
-	c := client.New(clientID, localAddr, client.WithServerAddress(cfg.Server))
+	serverHost, _, _ := net.SplitHostPort(cfg.Server)
 
-	fmt.Printf("    Adele 隧道: 连接中 %s ...\n", cfg.Server)
+	for {
+		c := client.New(clientID, localAddr, client.WithServerAddress(cfg.Server))
 
-	if err := c.Connect(); err != nil {
-		fmt.Printf("    Adele 隧道: 连接失败 %v\n", err)
-		return
+		fmt.Printf("[Adele] 连接中 %s ...\n", cfg.Server)
+		if err := c.Connect(); err != nil {
+			fmt.Printf("[Adele] 连接失败: %v, 5秒后重试\n", err)
+			time.Sleep(5 * time.Second)
+			continue
+		}
+
+		proxyAddr := c.ProxyAddr()
+		proxyPort := strings.TrimPrefix(proxyAddr, ":")
+		healthURL := fmt.Sprintf("https://%s:%s/api/info", serverHost, proxyPort)
+
+		fmt.Printf("[Adele] 隧道已建立: %s → https://%s:%s\n", localAddr, serverHost, proxyPort)
+
+		// 健康检查: 每15秒通过隧道发请求, 连续2次失败则重连
+		tr := &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
+		hc := &http.Client{Timeout: 10 * time.Second, Transport: tr}
+
+		failures := 0
+		ticker := time.NewTicker(15 * time.Second)
+		for range ticker.C {
+			resp, err := hc.Get(healthURL)
+			if err != nil {
+				failures++
+				fmt.Printf("[Adele] 健康检查失败 (%d/2): %v\n", failures, err)
+			} else {
+				resp.Body.Close()
+				failures = 0
+			}
+			if failures >= 2 {
+				break
+			}
+		}
+		ticker.Stop()
+
+		fmt.Printf("[Adele] 隧道断开, 3秒后重连...\n")
+		c.Disconnect()
+		time.Sleep(3 * time.Second)
 	}
-
-	proxyAddr := c.ProxyAddr()
-	fmt.Printf("    Adele 隧道: %s → http://%s\n", localAddr, proxyAddr)
-
-	// 保持连接, 直到程序退出
-	<-make(chan struct{})
 }
