@@ -189,13 +189,13 @@ scripts:
           副本名: 玩具城
       - name: 领主
         alias: 领主-扎昆-困难
-        condition: weekday==1 || weekday==3 || weekday==6 || weekday==0
+        condition: weekday==1 || weekday==3
         options:
           副本名: 扎昆
           副本难度: 困难
       - name: 领主
         alias: 领主-扎昆-混沌
-        condition: weekday==1 || weekday==3 || weekday==6 || weekday==0
+        condition: weekday==1 || weekday==3
         options:
           副本名: 扎昆
           副本难度: 混沌

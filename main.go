@@ -2,13 +2,9 @@ package main
 
 import (
 	"context"
-	"crypto/tls"
 	"fmt"
 	"io"
-	"net"
-	"net/http"
 	"os"
-	"strings"
 	"time"
 
 	"maple-robot/config"
@@ -87,8 +83,6 @@ func startAdele(cfg *config.AdeleConfig, localAddr string) {
 		clientID = "maple-robot"
 	}
 
-	serverHost, _, _ := net.SplitHostPort(cfg.Server)
-
 	for {
 		c := client.New(clientID, localAddr, client.WithServerAddress(cfg.Server))
 
@@ -99,32 +93,10 @@ func startAdele(cfg *config.AdeleConfig, localAddr string) {
 			continue
 		}
 
-		proxyAddr := c.ProxyAddr()
-		proxyPort := strings.TrimPrefix(proxyAddr, ":")
-		healthURL := fmt.Sprintf("https://%s:%s/api/info", serverHost, proxyPort)
+		fmt.Printf("[Adele] 隧道已建立: %s → %s\n", localAddr, c.ProxyAddr())
 
-		fmt.Printf("[Adele] 隧道已建立: %s → https://%s:%s\n", localAddr, serverHost, proxyPort)
-
-		// 健康检查: 每15秒通过隧道发请求, 连续2次失败则重连
-		tr := &http.Transport{TLSClientConfig: &tls.Config{InsecureSkipVerify: true}}
-		hc := &http.Client{Timeout: 10 * time.Second, Transport: tr}
-
-		failures := 0
-		ticker := time.NewTicker(15 * time.Second)
-		for range ticker.C {
-			resp, err := hc.Get(healthURL)
-			if err != nil {
-				failures++
-				fmt.Printf("[Adele] 健康检查失败 (%d/2): %v\n", failures, err)
-			} else {
-				resp.Body.Close()
-				failures = 0
-			}
-			if failures >= 2 {
-				break
-			}
-		}
-		ticker.Stop()
+		// 等待 gRPC stream 断开 (recvLoop 退出即触发重连)
+		c.Wait()
 
 		fmt.Printf("[Adele] 隧道断开, 3秒后重连...\n")
 		c.Disconnect()
