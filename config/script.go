@@ -3,13 +3,12 @@ package config
 import (
 	"fmt"
 	"os"
-	"sync"
 
 	"gopkg.in/yaml.v3"
 )
 
 type ScriptsFile struct {
-	Roles   []*Role           `yaml:"roles"`
+	Roles   []*Role            `yaml:"roles"`
 	Scripts map[string]*Script `yaml:"scripts"`
 }
 
@@ -17,26 +16,16 @@ type Script struct {
 	Tasks []*Task `yaml:"tasks"`
 }
 
-var (
-	sfOnce sync.Once
-	sf     *ScriptsFile
-	sfErr  error
-)
-
 func loadScriptsFile() (*ScriptsFile, error) {
-	sfOnce.Do(func() {
-		bytes, err := os.ReadFile("scripts.yaml")
-		if err != nil {
-			sfErr = fmt.Errorf("read scripts.yaml: %w", err)
-			return
-		}
-		sf = &ScriptsFile{}
-		if err := yaml.Unmarshal(bytes, sf); err != nil {
-			sfErr = fmt.Errorf("parse scripts.yaml: %w", err)
-			return
-		}
-	})
-	return sf, sfErr
+	bytes, err := os.ReadFile("scripts.yaml")
+	if err != nil {
+		return nil, fmt.Errorf("read scripts.yaml: %w", err)
+	}
+	sf := &ScriptsFile{}
+	if err := yaml.Unmarshal(bytes, sf); err != nil {
+		return nil, fmt.Errorf("parse scripts.yaml: %w", err)
+	}
+	return sf, nil
 }
 
 // LoadRoles 返回 scripts.yaml 中的角色列表.

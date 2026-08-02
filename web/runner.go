@@ -3,7 +3,8 @@ package web
 import (
 	"context"
 	"fmt"
-	"log/slog"
+	"io"
+	"os"
 	"os/exec"
 	"strconv"
 	"sync"
@@ -28,18 +29,15 @@ type Runner struct {
 	running     bool
 	startTime   time.Time
 
-	logFilePath string
-	baseLogger  *slog.Logger
-	roles       []*config.Role
+	logHub *LogHub
 }
 
-// NewRunner creates a Runner that will execute the given roles.
-func NewRunner(roles []*config.Role, baseLogger *slog.Logger, logFilePath string) *Runner {
+// NewRunner creates a Runner. Roles, log file and records are loaded on each
+// Start() so that cross-day launches pick up the current day's log file and
+// the latest scripts.yaml.
+func NewRunner(logHub *LogHub) *Runner {
 	return &Runner{
-		roles:       roles,
-		baseLogger:  baseLogger,
-		logFilePath: logFilePath,
-		totalRoles:  len(roles),
+		logHub: logHub,
 	}
 }
 
@@ -86,6 +84,7 @@ func (r *Runner) Start() error {
 	r.currentRole = ""
 	r.currentTask = ""
 	r.roleIdx = 0
+	r.totalRoles = 0
 	r.mu.Unlock()
 
 	go r.run(ctx)
@@ -129,12 +128,37 @@ func (r *Runner) StopWaitTimeout(timeout time.Duration) error {
 }
 
 func (r *Runner) run(ctx context.Context) {
-	records, _ := config.LoadTaskRecords(r.logFilePath)
+	// 按点击当天生成日志文件 (支持跨天启动)
+	logFile := "logs/" + time.Now().Format(time.DateOnly) + ".log"
+	f, err := os.OpenFile(logFile, os.O_CREATE|os.O_APPEND|os.O_RDWR, os.ModePerm)
+	if err != nil {
+		fmt.Printf("[runner] 打开日志文件失败: %v\n", err)
+		r.finish()
+		return
+	}
+	defer f.Close()
+
+	baseLogger := log.New(io.MultiWriter(os.Stdout, f, r.logHub))
+
+	// 每次启动重新加载角色 (支持跨天/热更新 scripts.yaml)
+	roles, err := config.LoadRoles()
+	if err != nil {
+		baseLogger.Error("加载角色失败", "err", err)
+		r.finish()
+		return
+	}
+
+	r.mu.Lock()
+	r.totalRoles = len(roles)
+	r.mu.Unlock()
+
+	// 加载当日任务记录 (按当天日志文件)
+	records, _ := config.LoadTaskRecords(logFile)
 	ctx = config.WithRecords(ctx, records)
 
 	entered := false
 
-	for i, role := range r.roles {
+	for i, role := range roles {
 		select {
 		case <-ctx.Done():
 			r.finish()
@@ -152,7 +176,7 @@ func (r *Runner) run(ctx context.Context) {
 		r.mu.Unlock()
 
 		ctx = scripts.WithRole(ctx, index, role.Class)
-		ctx = log.WithLogger(ctx, r.baseLogger.With("role", index, "class", role.Class))
+		ctx = log.WithLogger(ctx, baseLogger.With("role", index, "class", role.Class))
 
 		// skip if already done today
 		if _, ok := config.GetRecord(ctx, roleid, "", "角色日常结束"); ok {
@@ -196,24 +220,24 @@ func (r *Runner) run(ctx context.Context) {
 			default:
 			}
 
-		r.mu.Lock()
-		r.currentTask = task.Key()
-		r.mu.Unlock()
+			r.mu.Lock()
+			r.currentTask = task.Key()
+			r.mu.Unlock()
 
-		vars := expr.Vars{"index": index, "weekday": int64(time.Now().Weekday())}
-		if !task.Condition.Match(vars) {
-			continue
-		}
-		if _, ok := config.GetRecord(ctx, roleid, task.Key(), "任务完成"); ok {
-			continue
-		}
-		if _, ok := config.GetRecord(ctx, roleid, task.Key(), "任务入场"); ok {
-			continue
-		}
-		if config.IsTaskDisabled(role.Script, task.Key()) {
-			continue
-		}
-		task.Execute(ctx)
+			vars := expr.Vars{"index": index, "weekday": int64(time.Now().Weekday())}
+			if !task.Condition.Match(vars) {
+				continue
+			}
+			if _, ok := config.GetRecord(ctx, roleid, task.Key(), "任务完成"); ok {
+				continue
+			}
+			if _, ok := config.GetRecord(ctx, roleid, task.Key(), "任务入场"); ok {
+				continue
+			}
+			if config.IsTaskDisabled(role.Script, task.Key()) {
+				continue
+			}
+			task.Execute(ctx)
 		}
 
 		r.mu.Lock()
