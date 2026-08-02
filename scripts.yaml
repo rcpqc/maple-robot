@@ -3,7 +3,7 @@ roles:
   - class: 黑骑士
     script: nuo
   - class: 冰雷魔导师
-    script: 200x
+    script: bin
   - class: 爆莉萌灵使
     script: 200x
   - class: 古迹猎人
@@ -253,6 +253,49 @@ scripts:
         options:
           副本名: 扎昆
           副本难度: 混沌
+      - name: 领取日常奖励
+      - name: 领取公会奖励
+
+  # ====== bin 组 ======
+  bin:
+    tasks:
+      - name: 送人气
+      - name: 公会签到
+      - name: 领取个人奖励
+      - name: 神秘河日常
+      - name: 神秘河副本
+        condition: weekday==(index/100)
+      - name: 怪物乐园跳关
+        options:
+          标签位置: 倒数3号
+          关卡: 隐匿痕迹
+      - name: 天空岛贸易
+      - name: 周常副本
+        options:
+          难度: 绝望
+      - name: 特殊周常副本
+        options:
+          模式: 特殊
+          难度: 普通
+      - name: 武陵道场
+        condition: weekday>=1 && weekday<=4
+      - name: 精英副本
+        options:
+          副本名: 驮狼雪人
+      - name: 奈特的金字塔
+      - name: 购买委托书
+        condition: weekday==1
+        options:
+          商品列表: 1号商品,2号商品
+      - name: 委托佣兵
+        condition: weekday>=1 && weekday<=6
+        options:
+          最大切换: 2
+          最大接受: 3
+      - name: 金钩海兵王
+      - name: 材料副本
+        options:
+          副本名: 武陵桃源
       - name: 领取日常奖励
       - name: 领取公会奖励
 
