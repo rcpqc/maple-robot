@@ -35,6 +35,7 @@ func init() {
 	config.ProvideTask("神秘河日常", smhrc)
 	config.ProvideTask("神秘河副本", smhfb)
 	config.ProvideTask("领主", lz)
+	config.ProvideTask("分解装备", fjzb)
 }
 
 // tkdmy 天空岛贸易
@@ -503,5 +504,22 @@ func lz(ctx context.Context) {
 		time.Sleep(500 * time.Millisecond)
 	}
 	LabelClick(ctx, "领主-返回主页")
+	BackWorld(ctx)
+}
+
+// fjzb 分解装备
+func fjzb(ctx context.Context) {
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	// 打开包裹
+	LabelWaitClick(ctx, "世界-包裹", 5*time.Second)
+	// 进入分解装备界面
+	LabelWaitClick(ctx, "包裹-分解", 5*time.Second)
+	// 点击分解装备
+	LabelWaitClick(ctx, "包裹-分解装备", 5*time.Second)
+	// 确认分解
+	LabelWaitClick(ctx, "包裹-分解确认-确定", 5*time.Second)
+	// 分解完成
+	LabelWaitClick(ctx, "包裹-分解完成-确定", 5*time.Second)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }

@@ -25,6 +25,7 @@ var labels = map[string]*Label{
 	// 世界自定义标签
 	"世界-邮箱": {ix.Position{X: 786, Y: 27}, ix.ColorWhite, 3 * time.Second},
 	"世界-日常": {ix.Position{X: 742, Y: 27}, ix.ColorWhite, 3 * time.Second},
+	"世界-包裹": {ix.Position{X: 876, Y: 22}, ix.ColorWhite, 3 * time.Second},
 	// "世界-角色": {ix.Position{X: 695, Y: 24}, ix.ColorWhite, 3 * time.Second},
 	// "世界-商店": {ix.Position{X: 654, Y: 22}, ix.ColorWhite, 3 * time.Second},
 	// "世界-公会": {ix.Position{X: 607, Y: 30}, ix.ColorWhite, 6 * time.Second},
@@ -149,6 +150,12 @@ var labels = map[string]*Label{
 	// 自动战斗
 	"自动战斗-使用": {ix.Position{X: 675, Y: 460}, ix.Color{}, time.Second},
 	"自动战斗-关闭": {ix.Position{X: 738, Y: 49}, ix.Color{}, time.Second},
+
+	// 包裹分解
+	"包裹-分解":         {ix.Position{X: 855, Y: 519}, ix.Color{}, 2 * time.Second},
+	"包裹-分解装备":      {ix.Position{X: 855, Y: 519}, ix.Color{}, 2 * time.Second},
+	"包裹-分解确认-确定":   {ix.Position{X: 540, Y: 488}, ix.ColorButtonOrange, 2 * time.Second},
+	"包裹-分解完成-确定":   {ix.Position{X: 540, Y: 488}, ix.ColorButtonOrange, 2 * time.Second},
 
 	// 材料副本
 	"材料副本-阿里安特":      {ix.Position{X: 72, Y: 195}, ix.Color{}, time.Second},
