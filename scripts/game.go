@@ -36,6 +36,7 @@ func init() {
 	config.ProvideTask("神秘河副本", smhfb)
 	config.ProvideTask("领主", lz)
 	config.ProvideTask("分解装备", fjzb)
+	config.ProvideTask("梦之操纵者", mzczy)
 }
 
 // tkdmy 天空岛贸易
@@ -521,5 +522,21 @@ func fjzb(ctx context.Context) {
 	// 分解完成
 	LabelWaitClick(ctx, "包裹-分解完成-确定", 5*time.Second)
 	log.Info(ctx, "任务入场")
+	BackWorld(ctx)
+}
+
+// mzczy 梦之操纵者
+func mzczy(ctx context.Context) {
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWait(ctx, "日常-进度", 5*time.Second)
+	// 第10号位置
+	LabelClick(ctx, "日常-简化模式10号")
+	// 入场
+	LabelWaitClick(ctx, "梦之操纵者-入场", 5*time.Second)
+	log.Info(ctx, "任务入场")
+	// 入场后立即退出
+	LabelWaitClick(ctx, "副本-退出", 10*time.Second)
+	LabelWaitClick(ctx, "梦之操纵者-退出", 5*time.Second)
 	BackWorld(ctx)
 }

@@ -252,6 +252,10 @@ var labels = map[string]*Label{
 	"神秘河副本-快速组队-入场确认": {ix.Position{X: 550, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"神秘河副本-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 5 * time.Second},
 
+	// 梦之操纵者
+	"梦之操纵者-入场":  {ix.Position{X: 830, Y: 499}, ix.ColorButtonOrange, time.Second},
+	"梦之操纵者-退出":  {ix.Position{X: 600, Y: 400}, ix.ColorButtonOrange, time.Second},
+
 	// 更改角色
 	"更改角色-选择角色": {ix.Position{X: 220, Y: 480}, ix.ColorButtonBlue, time.Second},
 	"更改角色-上左":   {ix.Position{X: 360, Y: 180}, ix.ColorButtonYellow, time.Second},
