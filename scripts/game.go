@@ -103,21 +103,36 @@ func jyfb(ctx context.Context) {
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式2号")
 	LabelWait(ctx, "精英副本-普通", 5*time.Second)
-	if mode := config.GetTaskOptions(ctx, "模式"); mode == "单人" {
+
+	mode := config.GetTaskOptions(ctx, "模式")
+	if mode == "试炼" {
+		LabelClick(ctx, "精英副本-试炼")
+	}
+
+	// 精英副本列表进入后会保留上次滚动位置，根据副本名决定 swipe 到顶还是到底
+	fbName := config.GetTaskOptions(ctx, "副本名")
+	switch fbName {
+	case "巨型蜈蚣", "古代黑暗石巨人", "艾菲尼娅", "驮狼雪人", "阿勒玛":
+		// 下方 5 个副本在列表底部，swipe 到底
+		ix.Swipe(ix.Position{X: 100, Y: 520}, ix.Position{X: 100, Y: 120}, 1500)
+	default:
+		// 其余副本在列表顶部，swipe 到顶
 		ix.Swipe(ix.Position{X: 100, Y: 120}, ix.Position{X: 100, Y: 520}, 1500)
-		time.Sleep(time.Second)
-		LabelClick(ctx, "精英副本-鬼怪蘑菇王")
-		LabelWaitClick(ctx, "精英副本-创建队伍", 5*time.Second)
-		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
-		LabelWaitClick(ctx, "精英副本-集结地-开始", 5*time.Second)
+	}
+	time.Sleep(time.Second)
+
+	if fbName != "" {
+		LabelClick(ctx, "精英副本-"+fbName)
+	}
+
+	if mode == "试炼" {
+		// 试炼模式：直接入场（无确认弹窗），只能单人
+		LabelWaitClick(ctx, "精英副本-试炼-入场", 5*time.Second)
 		log.Info(ctx, "任务入场")
-		LabelWaitClick(ctx, "精英副本-副本结算-单人离开", 90*time.Second)
+		// 等待结算页出现后点"离开"
+		LabelWaitClick(ctx, "精英副本-试炼-结算-离开", 6*time.Minute)
 	} else {
-		if fbName := config.GetTaskOptions(ctx, "副本名"); fbName != "" {
-			ix.Swipe(ix.Position{X: 100, Y: 520}, ix.Position{X: 100, Y: 120}, 1500)
-			time.Sleep(time.Second)
-			LabelClick(ctx, "精英副本-"+fbName)
-		}
+		// 普通模式：快速组队 + 入场确认
 		LabelWaitClick(ctx, "精英副本-快速组队", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
 		LabelWait(ctx, "副本-退出", 60*time.Second)
