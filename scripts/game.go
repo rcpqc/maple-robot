@@ -37,6 +37,7 @@ func init() {
 	config.ProvideTask("领主", lz)
 	config.ProvideTask("分解装备", fjzb)
 	config.ProvideTask("梦之操纵者", mzczy)
+	config.ProvideTask("分享图片", fxtp)
 }
 
 // tkdmy 天空岛贸易
@@ -514,13 +515,17 @@ func fjzb(ctx context.Context) {
 	// 打开包裹
 	LabelWaitClick(ctx, "世界-包裹", 5*time.Second)
 	// 进入分解装备界面
-	LabelWaitClick(ctx, "包裹-分解", 5*time.Second)
+	time.Sleep(2 * time.Second)
+	LabelClick(ctx, "包裹-分解")
 	// 点击分解装备
-	LabelWaitClick(ctx, "包裹-分解装备", 5*time.Second)
+	time.Sleep(2 * time.Second)
+	LabelClick(ctx, "包裹-分解装备")
 	// 确认分解
-	LabelWaitClick(ctx, "包裹-分解确认-确定", 5*time.Second)
+	time.Sleep(2 * time.Second)
+	LabelClick(ctx, "包裹-分解确认-确定")
 	// 分解完成
-	LabelWaitClick(ctx, "包裹-分解完成-确定", 5*time.Second)
+	time.Sleep(2 * time.Second)
+	LabelClick(ctx, "包裹-分解完成-确定")
 	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
@@ -537,6 +542,24 @@ func mzczy(ctx context.Context) {
 	log.Info(ctx, "任务入场")
 	// 入场后立即退出
 	LabelWaitClick(ctx, "副本-退出", 10*time.Second)
-	LabelWaitClick(ctx, "梦之操纵者-退出", 5*time.Second)
+	LabelWaitClick(ctx, "梦之操纵者-离开", 5*time.Second)
+	BackWorld(ctx)
+}
+
+// fxtp 分享图片
+func fxtp(ctx context.Context) {
+	LabelWait(ctx, "世界-电量", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-成长")
+	LabelWaitClick(ctx, "成长-分享图片奖励", 5*time.Second)
+	// 点最上面"拜访明珠港"的分享
+	LabelWaitClick(ctx, "分享图片-分享", 5*time.Second)
+	// 点微信图标
+	LabelWaitClick(ctx, "分享图片-微信", 5*time.Second)
+	log.Info(ctx, "任务入场")
+	// 唤起微信后 ESC 退出并返回世界
+	Back(ctx)
+	Back(ctx)
 	BackWorld(ctx)
 }

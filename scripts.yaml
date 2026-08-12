@@ -85,6 +85,12 @@ scripts:
       - name: 材料副本
         options:
           副本名: 龙之峡谷
+      - name: 分解装备
+        condition: weekday==0
+      - name: 分享图片
+        condition: weekday==0
+      - name: 梦之操纵者
+        condition: weekday==0
       - name: 领取日常奖励
       - name: 领取公会奖励
 
@@ -116,6 +122,12 @@ scripts:
       - name: 材料副本
         options:
           副本名: 玩具城
+      - name: 分解装备
+        condition: weekday==0
+      - name: 分享图片
+        condition: weekday==0
+      - name: 梦之操纵者
+        condition: weekday==0
       - name: 领取日常奖励
       - name: 领取公会奖励
 
@@ -148,6 +160,12 @@ scripts:
       - name: 材料副本
         options:
           副本名: 玩具城
+      - name: 分解装备
+        condition: weekday==0
+      - name: 分享图片
+        condition: weekday==0
+      - name: 梦之操纵者
+        condition: weekday==0
       - name: 领取日常奖励
       - name: 领取公会奖励
 
@@ -199,6 +217,42 @@ scripts:
         options:
           副本名: 扎昆
           副本难度: 混沌
+      - name: 分解装备
+        condition: weekday==0
+      - name: 分享图片
+        condition: weekday==0
+      - name: 梦之操纵者
+        condition: weekday==0
+      - name: 精英副本
+        alias: 精英副本-试炼-黑甲凶灵
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 黑甲凶灵
+      - name: 精英副本
+        alias: 精英副本-试炼-喷火龙
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 喷火龙
+      - name: 精英副本
+        alias: 精英副本-试炼-战甲吹泡泡鱼王
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 战甲吹泡泡鱼王
+      - name: 精英副本
+        alias: 精英副本-试炼-巨型蜈蚣
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 巨型蜈蚣
+      - name: 精英副本
+        alias: 精英副本-试炼-古代黑暗石巨人
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 古代黑暗石巨人
       - name: 领取日常奖励
       - name: 领取公会奖励
 
@@ -253,6 +307,42 @@ scripts:
         options:
           副本名: 扎昆
           副本难度: 混沌
+      - name: 分解装备
+        condition: weekday==0
+      - name: 分享图片
+        condition: weekday==0
+      - name: 梦之操纵者
+        condition: weekday==0
+      - name: 精英副本
+        alias: 精英副本-试炼-黑甲凶灵
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 黑甲凶灵
+      - name: 精英副本
+        alias: 精英副本-试炼-喷火龙
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 喷火龙
+      - name: 精英副本
+        alias: 精英副本-试炼-战甲吹泡泡鱼王
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 战甲吹泡泡鱼王
+      - name: 精英副本
+        alias: 精英副本-试炼-巨型蜈蚣
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 巨型蜈蚣
+      - name: 精英副本
+        alias: 精英副本-试炼-古代黑暗石巨人
+        condition: weekday==0
+        options:
+          模式: 试炼
+          副本名: 古代黑暗石巨人
       - name: 领取日常奖励
       - name: 领取公会奖励
 
