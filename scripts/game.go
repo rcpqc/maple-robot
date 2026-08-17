@@ -60,7 +60,9 @@ func tkdmy(ctx context.Context) {
 // wldc 武陵道场
 func wldc(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式5号")
 	time.Sleep(3 * time.Second)
@@ -78,7 +80,9 @@ func wldc(ctx context.Context) {
 // zcfb 周常副本
 func zcfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式3号")
 	LabelWait(ctx, "周常副本-模式普通", 5*time.Second)
@@ -102,10 +106,12 @@ func zcfb(ctx context.Context) {
 // jyfb 精英副本
 func jyfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式2号")
-	LabelWait(ctx, "精英副本-普通", 5*time.Second)
+	LabelWait(ctx, "精英副本-快速入场", 5*time.Second)
 
 	mode := config.GetTaskOptions(ctx, "模式")
 	if mode == "试炼" {
@@ -136,7 +142,7 @@ func jyfb(ctx context.Context) {
 		LabelWaitClick(ctx, "精英副本-试炼-结算-离开", 6*time.Minute)
 	} else {
 		// 普通模式：快速组队 + 入场确认
-		LabelWaitClick(ctx, "精英副本-快速组队", 5*time.Second)
+		LabelWaitClick(ctx, "精英副本-快速入场", 5*time.Second)
 		LabelWaitClick(ctx, "精英副本-入场-确定", 5*time.Second)
 		LabelWait(ctx, "副本-退出", 60*time.Second)
 		LabelWait(ctx, "副本-麦克风", 15*time.Second)
@@ -149,7 +155,9 @@ func jyfb(ctx context.Context) {
 // clfb 材料副本
 func clfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式1号")
 	LabelWait(ctx, "材料副本-入场", 5*time.Second)
@@ -173,7 +181,9 @@ func clfb(ctx context.Context) {
 // ntdjzt 奈特的金字塔
 func ntdjzt(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式4号")
 	LabelWaitClick(ctx, "奈特的金字塔-快速组队", 5*time.Second)
@@ -181,28 +191,32 @@ func ntdjzt(ctx context.Context) {
 	LabelWait(ctx, "副本-退出", 60*time.Second)
 	LabelWait(ctx, "副本-麦克风", 30*time.Second)
 	log.Info(ctx, "任务入场")
-	LabelWaitClick(ctx, "奈特的金字塔-副本结算-退出", 180*time.Second)
+	LabelWaitClick(ctx, "奈特的金字塔-副本结算-离开", 180*time.Second)
 	BackWorld(ctx)
 }
 
 // jghbw 金钩海兵王
 func jghbw(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式6号")
 	LabelWaitClick(ctx, "金钩海兵王-快速组队", 5*time.Second)
 	LabelWaitClick(ctx, "金钩海兵王-快速组队-入场确认", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 60*time.Second)
 	log.Info(ctx, "任务入场")
-	LabelWaitClick(ctx, "金钩海兵王-副本结算-退出", 120*time.Second)
+	LabelWaitClick(ctx, "金钩海兵王-副本结算-离开", 120*time.Second)
 	BackWorld(ctx)
 }
 
 // gwly 怪物乐园
 func gwly(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式7号")
@@ -232,7 +246,9 @@ func gwly(ctx context.Context) {
 // gwlytg 怪物乐园跳关
 func gwlytg(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	// excludeList := strings.Split(config.GetTaskOptions(ctx, "跳关排除列表"), ",")
 
 	pos := config.GetTaskOptions(ctx, "标签位置")
@@ -466,7 +482,9 @@ func smhrc(ctx context.Context) {
 // 神秘河副本
 func smhfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式8号")
 	LabelWaitClick(ctx, "神秘河副本-快速组队", 5*time.Second)
@@ -480,7 +498,9 @@ func smhfb(ctx context.Context) {
 // 领主
 func lz(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式9号")
 	LabelWait(ctx, "领主-每日领主跳过", 5*time.Second)
@@ -533,7 +553,9 @@ func fjzb(ctx context.Context) {
 // mzczy 梦之操纵者
 func mzczy(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
-	LabelWaitClick(ctx, "世界-日常", 5*time.Second)
+	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
+	LabelWait(ctx, "导航-关闭", 5*time.Second)
+	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	// 第10号位置
 	LabelClick(ctx, "日常-简化模式10号")

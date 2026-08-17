@@ -156,7 +156,9 @@ func (r *Runner) run(ctx context.Context) {
 	records, _ := config.LoadTaskRecords(logFile)
 	ctx = config.WithRecords(ctx, records)
 
-	entered := false
+	// 启动时假设游戏已停留在某个已登录角色的世界界面:
+	// 第一个需要执行的角色直接使用当前登录角色, 后续角色通过"导航→更改角色"切换。
+	first := true
 
 	for i, role := range roles {
 		select {
@@ -188,6 +190,10 @@ func (r *Runner) run(ctx context.Context) {
 		if role.Script == "" {
 			role.Script = "200"
 		}
+		if role.Script == "skip" {
+			log.Info(ctx, "角色跳过", "script", "skip")
+			continue
+		}
 		script, err := config.LoadScript(role.Script)
 		if err != nil {
 			log.Error(ctx, "脚本加载", "script", role.Script, "err", err)
@@ -196,10 +202,10 @@ func (r *Runner) run(ctx context.Context) {
 
 		// login / switch role
 		log.Info(ctx, "角色日常开始")
-		if !entered {
-			scripts.Enter(ctx, index)
+		if first {
+			// 当前登录角色即为首个待执行角色, 直接进入世界
 			scripts.WaitEnter(ctx)
-			entered = true
+			first = false
 		} else {
 			scripts.NextRole(ctx)
 			scripts.WaitEnter(ctx)
