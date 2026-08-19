@@ -7,6 +7,7 @@ import (
 	"image"
 	"image/jpeg"
 	"log"
+	"math"
 	"os/exec"
 	"sync"
 	"time"
@@ -96,6 +97,32 @@ func GetPixel(pos Position) Color {
 	}
 	c := Display.frameBuffer.RGBAAt(int(pos.X), int(pos.Y))
 	return Color{R: c.R, G: c.G, B: c.B}
+}
+
+// FindPixelInColumn 在 x=col 这一列中，从上到下查找第一个与目标颜色 target
+// 欧氏距离小于 threshold 的像素，返回其 Position 与 true；未找到返回零值与 false。
+func FindPixelInColumn(col int64, target Color, threshold float64) (Position, bool) {
+	Display.mu.RLock()
+	defer Display.mu.RUnlock()
+	if Display.frameBuffer == nil {
+		return Position{}, false
+	}
+	w := Display.frameBuffer.Rect.Dx()
+	h := Display.frameBuffer.Rect.Dy()
+	if int(col) < 0 || int(col) >= w {
+		return Position{}, false
+	}
+	for y := 0; y < h; y++ {
+		c := Display.frameBuffer.RGBAAt(int(col), y)
+		dr := float64(c.R) - float64(target.R)
+		dg := float64(c.G) - float64(target.G)
+		db := float64(c.B) - float64(target.B)
+		dist := math.Sqrt(dr*dr + dg*dg + db*db)
+		if dist < threshold {
+			return Position{X: col, Y: int64(y)}, true
+		}
+	}
+	return Position{}, false
 }
 
 func WaitPixel(pos Position, c Color) {

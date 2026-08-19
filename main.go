@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"os"
 	"time"
 
 	"maple-robot/config"
@@ -41,6 +42,27 @@ func main() {
 
 	fmt.Printf("=== Maple Robot 服务已启动 ===\n")
 	fmt.Printf("    Web 面板: http://%s\n", localAddr)
+	fmt.Printf("    按回车键开始挂机\n")
+	fmt.Println()
+
+	// 监听回车键启动挂机
+	go func() {
+		buf := make([]byte, 1)
+		for {
+			n, err := os.Stdin.Read(buf)
+			if err != nil {
+				return
+			}
+			if n > 0 && (buf[0] == '\n' || buf[0] == '\r') {
+				if err := runner.Start(); err != nil {
+					fmt.Printf("[enter] 启动失败: %v\n", err)
+				} else {
+					fmt.Printf("[enter] 挂机已启动\n")
+				}
+				return
+			}
+		}
+	}()
 
 	// 启动 Adele 隧道 (非阻塞)
 	if cfg.Adele != nil && cfg.Adele.Server != "" {

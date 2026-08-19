@@ -76,8 +76,8 @@ var labels = map[string]*Label{
 	"成长-分享图片奖励":    {ix.Position{X: 80, Y: 513}, ix.Color{R: 43, G: 54, B: 70}, time.Second},
 
 	// 分享图片
-	"分享图片-分享":  {ix.Position{X: 865, Y: 165}, ix.ColorButtonOrange, time.Second},
-	"分享图片-微信":  {ix.Position{X: 780, Y: 514}, ix.Color{R: 5, G: 198, B: 98}, time.Second},
+	"分享图片-分享": {ix.Position{X: 865, Y: 165}, ix.ColorButtonOrange, time.Second},
+	"分享图片-微信": {ix.Position{X: 780, Y: 514}, ix.Color{R: 5, G: 198, B: 98}, time.Second},
 
 	// 日常
 	"日常-进度":                {ix.Position{X: 706, Y: 93}, ix.ColorButtonGray, time.Second},
@@ -157,10 +157,10 @@ var labels = map[string]*Label{
 	"自动战斗-关闭": {ix.Position{X: 738, Y: 49}, ix.Color{}, time.Second},
 
 	// 包裹分解
-	"包裹-分解":         {ix.Position{X: 855, Y: 519}, ix.ColorButtonBlue, 2 * time.Second},
-	"包裹-分解装备":      {ix.Position{X: 855, Y: 519}, ix.ColorButtonOrange, 2 * time.Second},
-	"包裹-分解确认-确定":   {ix.Position{X: 540, Y: 488}, ix.ColorButtonOrange, 2 * time.Second},
-	"包裹-分解完成-确定":   {ix.Position{X: 540, Y: 488}, ix.ColorButtonOrange, 2 * time.Second},
+	"包裹-分解":      {ix.Position{X: 855, Y: 519}, ix.ColorButtonBlue, 2 * time.Second},
+	"包裹-分解装备":    {ix.Position{X: 855, Y: 519}, ix.ColorButtonOrange, 2 * time.Second},
+	"包裹-分解确认-确定": {ix.Position{X: 540, Y: 488}, ix.ColorButtonOrange, 2 * time.Second},
+	"包裹-分解完成-确定": {ix.Position{X: 540, Y: 488}, ix.ColorButtonOrange, 2 * time.Second},
 
 	// 材料副本
 	"材料副本-阿里安特":      {ix.Position{X: 72, Y: 195}, ix.Color{}, time.Second},
@@ -176,24 +176,24 @@ var labels = map[string]*Label{
 	"材料副本-副本结算-退出":   {ix.Position{X: 228, Y: 423}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 精英副本
-	"精英副本-普通":           {ix.Position{X: 80, Y: 90}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
-	"精英副本-试炼":           {ix.Position{X: 175, Y: 90}, ix.Color{}, time.Second},
-	"精英副本-试炼-入场":       {ix.Position{X: 830, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"精英副本-试炼-结算-离开":   {ix.Position{X: 259, Y: 421}, ix.ColorButtonBlue, 5 * time.Second},
-	"精英副本-鬼怪蘑菇王":       {ix.Position{X: 100, Y: 130}, ix.Color{}, time.Second},
-	"精英副本-古瓦洛的残痕":      {ix.Position{X: 100, Y: 200}, ix.Color{}, time.Second},
-	"精英副本-法兰肯":          {ix.Position{X: 100, Y: 270}, ix.Color{}, time.Second},
-	"精英副本-黑甲凶灵":         {ix.Position{X: 100, Y: 340}, ix.Color{}, time.Second},
-	"精英副本-喷火龙":          {ix.Position{X: 100, Y: 410}, ix.Color{}, time.Second},
-	"精英副本-战甲吹泡泡鱼王":     {ix.Position{X: 100, Y: 480}, ix.Color{}, time.Second},
-	"精英副本-巨型蜈蚣":         {ix.Position{X: 100, Y: 200}, ix.Color{}, time.Second},
-	"精英副本-古代黑暗石巨人":     {ix.Position{X: 100, Y: 270}, ix.Color{}, time.Second},
-	"精英副本-艾菲尼娅":         {ix.Position{X: 100, Y: 340}, ix.Color{}, time.Second},
-	"精英副本-驮狼雪人":         {ix.Position{X: 100, Y: 410}, ix.Color{}, time.Second},
-	"精英副本-阿勒玛":          {ix.Position{X: 100, Y: 480}, ix.Color{}, time.Second},
-	"精英副本-快速入场":         {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"精英副本-入场-确定":        {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"精英副本-副本结算-离开":     {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 5 * time.Second},
+	"精英副本-普通":       {ix.Position{X: 80, Y: 90}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
+	"精英副本-试炼":       {ix.Position{X: 175, Y: 90}, ix.Color{}, time.Second},
+	"精英副本-试炼-入场":    {ix.Position{X: 830, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"精英副本-试炼-结算-离开": {ix.Position{X: 259, Y: 421}, ix.ColorButtonBlue, 5 * time.Second},
+	"精英副本-鬼怪蘑菇王":    {ix.Position{X: 100, Y: 130}, ix.Color{}, time.Second},
+	"精英副本-古瓦洛的残痕":   {ix.Position{X: 100, Y: 200}, ix.Color{}, time.Second},
+	"精英副本-法兰肯":      {ix.Position{X: 100, Y: 270}, ix.Color{}, time.Second},
+	"精英副本-黑甲凶灵":     {ix.Position{X: 100, Y: 340}, ix.Color{}, time.Second},
+	"精英副本-喷火龙":      {ix.Position{X: 100, Y: 410}, ix.Color{}, time.Second},
+	"精英副本-战甲吹泡泡鱼王":  {ix.Position{X: 100, Y: 480}, ix.Color{}, time.Second},
+	"精英副本-巨型蜈蚣":     {ix.Position{X: 100, Y: 200}, ix.Color{}, time.Second},
+	"精英副本-古代黑暗石巨人":  {ix.Position{X: 100, Y: 270}, ix.Color{}, time.Second},
+	"精英副本-艾菲尼娅":     {ix.Position{X: 100, Y: 340}, ix.Color{}, time.Second},
+	"精英副本-驮狼雪人":     {ix.Position{X: 100, Y: 410}, ix.Color{}, time.Second},
+	"精英副本-阿勒玛":      {ix.Position{X: 100, Y: 480}, ix.Color{}, time.Second},
+	"精英副本-快速入场":     {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"精英副本-入场-确定":    {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"精英副本-副本结算-离开":  {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 周常副本
 	"周常副本-模式普通": {ix.Position{X: 65, Y: 189}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
@@ -258,8 +258,8 @@ var labels = map[string]*Label{
 	"神秘河副本-副本结算-退出":   {ix.Position{X: 250, Y: 500}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 梦之操纵者
-	"梦之操纵者-入场":  {ix.Position{X: 830, Y: 499}, ix.ColorButtonOrange, time.Second},
-	"梦之操纵者-离开":  {ix.Position{X: 600, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"梦之操纵者-入场": {ix.Position{X: 830, Y: 499}, ix.ColorButtonOrange, time.Second},
+	"梦之操纵者-离开": {ix.Position{X: 600, Y: 400}, ix.ColorButtonOrange, time.Second},
 
 	// 更改角色
 	"更改角色-选择角色": {ix.Position{X: 220, Y: 480}, ix.ColorButtonBlue, time.Second},
@@ -309,30 +309,31 @@ var labels = map[string]*Label{
 	"委托-接受佣兵团": {ix.Position{X: 800, Y: 465}, ix.Color{R: 248, G: 197, B: 35}, 4 * time.Second},
 	"委托-领取奖励":  {ix.Position{X: 428, Y: 482}, ix.ColorButtonOrange, 3 * time.Second},
 	"委托-切换":    {ix.Position{X: 315, Y: 499}, ix.Color{R: 248, G: 197, B: 35}, 2 * time.Second},
-	"委托-福利":    {ix.Position{X: 881, Y: 85}, ix.Color{R: 56, G: 221, B: 219}, 2 * time.Second},
+	"委托-福利":    {ix.Position{X: 881, Y: 85}, ix.Color{R: 56, G: 220, B: 219}, 2 * time.Second},
 	"委托-福利-购买": {ix.Position{X: 536, Y: 424}, ix.ColorButtonOrange, 2 * time.Second},
 	// 商店
 	"商店-收藏-1号商品":   {ix.Position{X: 155, Y: 250}, ix.ColorButtonYellow, 2 * time.Second},
 	"商店-收藏-2号商品":   {ix.Position{X: 288, Y: 250}, ix.ColorButtonYellow, 2 * time.Second},
-	"商店-商品详情-收藏图标": {ix.Position{X: 509, Y: 486}, ix.Color{R: 234, G: 160, B: 0}, 2 * time.Second},
+	"商店-商品详情-收藏图标": {ix.Position{X: 509, Y: 486}, ix.ColorFavorite, 2 * time.Second},
 	"商店-商品详情-购买":   {ix.Position{X: 815, Y: 500}, ix.ColorButtonOrange, 2 * time.Second},
 	"商店-商品详情-关闭":   {ix.Position{X: 918, Y: 34}, ix.ColorWhite, 2 * time.Second},
 	"商店-购买道具-购买":   {ix.Position{X: 540, Y: 400}, ix.ColorButtonOrange, 2 * time.Second},
 
-	// 领主
-	"领主-每日领主跳过": {ix.Position{X: 385, Y: 30}, ix.ColorButtonWine, time.Second},
-
-	"领主-扎昆":   {ix.Position{X: 170, Y: 170}, ix.Color{}, time.Second},
-	"领主-暗黑龙王": {ix.Position{X: 115, Y: 345}, ix.Color{}, time.Second},
-	"领主-品克缤":  {ix.Position{X: 115, Y: 410}, ix.Color{}, time.Second},
-	"领主-希纳斯":  {ix.Position{X: 115, Y: 475}, ix.Color{}, time.Second},
-
-	"领主-普通": {ix.Position{X: 85, Y: 220}, ix.Color{}, time.Second},
-	"领主-困难": {ix.Position{X: 85, Y: 255}, ix.Color{}, time.Second},
-	"领主-混沌": {ix.Position{X: 85, Y: 290}, ix.Color{}, time.Second},
-
-	"领主-快速组队": {ix.Position{X: 800, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"领主-返回主页": {ix.Position{X: 520, Y: 520}, ix.ColorButtonBlue, 3 * time.Second},
+	// 每日领主
+	"每日领主-教程":          {ix.Position{X: 694, Y: 97}, ix.ColorFavorite, time.Second},
+	"每日领主-入场":          {ix.Position{X: 818, Y: 488}, ix.ColorButtonOrange, time.Second},
+	"每日领主-副本-退出":       {ix.Position{X: 243, Y: 389}, ix.ColorButtonBlue, 5 * time.Second},
+	"每日领主-副本-返回菜单":     {ix.Position{X: 413, Y: 389}, ix.ColorButtonBlue, 5 * time.Second},
+	"每日领主-批量快速通关":      {ix.Position{X: 136, Y: 511}, ix.ColorButtonWine, time.Second},
+	"每日领主-批量快速通关-快速通关": {ix.Position{X: 531, Y: 486}, ix.ColorButtonOrange, time.Second},
+	"每日领主-扎昆":          {ix.Position{X: 82, Y: 138}, ix.Color{}, time.Second},
+	"每日领主-暗黑龙王":        {ix.Position{X: 82, Y: 203}, ix.Color{}, time.Second},
+	"每日领主-品克缤":         {ix.Position{X: 82, Y: 268}, ix.Color{}, time.Second},
+	"每日领主-希纳斯":         {ix.Position{X: 82, Y: 333}, ix.Color{}, time.Second},
+	"每日领主-蝙蝠怪":         {ix.Position{X: 82, Y: 397}, ix.Color{}, time.Second},
+	"每日领主-班雷昂":         {ix.Position{X: 82, Y: 461}, ix.Color{}, time.Second},
+	"每日领主-跳过确定":         {ix.Position{X: 405, Y: 129}, ix.ColorTitleGray, time.Second},
+	"每日领主-跳过确定-确定":      {ix.Position{X: 535, Y: 400}, ix.ColorButtonOrange, time.Second},
 }
 
 func LabelCheck(ctx context.Context, names ...string) bool {

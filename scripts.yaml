@@ -1,7 +1,7 @@
 roles:
   # 1
   - class: 黑骑士
-    script: skip
+    script: nuo
   - class: 冰雷魔导师
     script: bin
   - class: 爆莉萌灵使
@@ -89,6 +89,9 @@ scripts:
       - name: 材料副本
         options:
           副本名: 玩具城
+      - name: 每日领主
+        options:
+          副本名: 暗黑龙王
       - name: 分解装备
         condition: weekday==0
       # - name: 分享图片
@@ -136,6 +139,9 @@ scripts:
       - name: 材料副本
         options:
           副本名: 武陵桃源
+      - name: 每日领主
+        options:
+          副本名: 暗黑龙王
       - name: 分解装备
         condition: weekday==0
       # - name: 分享图片
@@ -184,6 +190,9 @@ scripts:
       - name: 材料副本
         options:
           副本名: 武陵桃源
+      - name: 每日领主
+        options:
+          副本名: 暗黑龙王
       - name: 领取日常奖励
       - name: 领取公会奖励
 

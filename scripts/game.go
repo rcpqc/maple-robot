@@ -34,7 +34,7 @@ func init() {
 	config.ProvideTask("购买委托书", gmwts)
 	config.ProvideTask("神秘河日常", smhrc)
 	config.ProvideTask("神秘河副本", smhfb)
-	config.ProvideTask("领主", lz)
+	config.ProvideTask("每日领主", mrlz)
 	config.ProvideTask("分解装备", fjzb)
 	config.ProvideTask("梦之操纵者", mzczy)
 	config.ProvideTask("分享图片", fxtp)
@@ -347,6 +347,7 @@ func lqrcjl(ctx context.Context) {
 			break
 		}
 		LabelClick(ctx, "世界-领取日常")
+		log.Info(ctx, "领取日常奖励")
 		BackWorld(ctx)
 	}
 	log.Info(ctx, "任务入场")
@@ -431,8 +432,7 @@ func wtyb(ctx context.Context) {
 		}
 	}
 
-	clr := ix.Color{R: 56, G: 221, B: 219}
-	if LabelColor(ctx, "委托-福利") == clr {
+	if LabelCheck(ctx, "委托-福利") {
 		LabelClick(ctx, "委托-福利")
 		LabelWaitClick(ctx, "委托-福利-购买", 5*time.Second)
 	}
@@ -495,37 +495,37 @@ func smhfb(ctx context.Context) {
 	BackWorld(ctx)
 }
 
-// 领主
-func lz(ctx context.Context) {
+// 每日领主
+func mrlz(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
 	LabelWait(ctx, "导航-关闭", 5*time.Second)
 	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式9号")
-	LabelWait(ctx, "领主-每日领主跳过", 5*time.Second)
-
-	fName := config.GetTaskOptions(ctx, "副本名")
-	fLevel := config.GetTaskOptions(ctx, "副本难度")
-
-	LabelClick(ctx, "领主-"+fName)
-	time.Sleep(time.Second)
-	LabelClick(ctx, "领主-"+fLevel)
-
-	LabelWaitClick(ctx, "领主-快速组队", 5*time.Second)
-	LabelWait(ctx, "副本-退出", 60*time.Second)
-	LabelWait(ctx, "副本-统计", 30*time.Second)
-	log.Info(ctx, "任务入场")
-	time.Sleep(5 * time.Second)
-	st := time.Now()
-	for !LabelCheck(ctx, "领主-返回主页") && time.Since(st) < 60*time.Second {
-		if ctx.Err() != nil {
-			break
-		}
-		LabelClick(ctx, "世界-技能8")
-		time.Sleep(500 * time.Millisecond)
+	LabelWait(ctx, "每日领主-教程", 5*time.Second)
+	if fbName := config.GetTaskOptions(ctx, "副本名"); fbName != "" {
+		LabelClick(ctx, "每日领主-"+fbName)
+		time.Sleep(time.Second)
 	}
-	LabelClick(ctx, "领主-返回主页")
+	ix.Swipe(ix.Position{X: 205, Y: 109}, ix.Position{X: 205, Y: 419}, 1500)
+	pos, ok := ix.FindPixelInColumn(205, ix.Color{R: 82, G: 32, B: 18}, 5)
+	if ok {
+		log.Info(ctx, "查找像素", "pos", pos)
+		ix.Tap(pos)
+	} else {
+		log.Info(ctx, "查找像素", "未找到")
+	}
+	LabelWaitClick(ctx, "每日领主-入场", time.Second)
+	if LabelCheck(ctx, "每日领主-跳过确定") {
+		LabelClick(ctx, "每日领主-跳过确定-确定")
+	}
+	LabelWait(ctx, "副本-退出", 60*time.Second)
+	LabelWaitClick(ctx, "每日领主-副本-返回菜单", 120*time.Second)
+	LabelWait(ctx, "每日领主-批量快速通关", 5*time.Second)
+	LabelWaitClick(ctx, "每日领主-批量快速通关", 5*time.Second)
+	LabelWaitClick(ctx, "每日领主-批量快速通关-快速通关", 5*time.Second)
+	log.Info(ctx, "任务入场")
 	BackWorld(ctx)
 }
 

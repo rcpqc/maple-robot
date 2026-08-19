@@ -29,6 +29,7 @@ var (
 	ColorMissionHard       = Color{218, 62, 41}   // 委托任务困难
 	ColorMissionEmpty      = Color{164, 139, 117} // 委托任务空缺
 	ColorMissionExist      = Color{116, 76, 27}   // 委托任务存在
+	ColorFavorite          = Color{234, 160, 0}   // 收藏图标橙色
 )
 
 func (o Color) Equals(c Color) bool {

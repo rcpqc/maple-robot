@@ -8,7 +8,7 @@ import (
 
 var (
 	beepEnabledMu sync.RWMutex
-	beepEnabled   = true
+	beepEnabled   = false
 )
 
 // SetBeepEnabled enables or disables the beep sound.
