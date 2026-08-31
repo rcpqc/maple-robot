@@ -16,8 +16,7 @@ func init() {
 	config.ProvideTask("天空岛贸易", tkdmy)
 	config.ProvideTask("材料副本", clfb)
 	config.ProvideTask("精英副本", jyfb)
-	config.ProvideTask("周常副本", zcfb)
-	config.ProvideTask("特殊周常副本", zcfb)
+	config.ProvideTask("宝石副本", zcfb)
 	config.ProvideTask("奈特的金字塔", ntdjzt)
 	config.ProvideTask("武陵道场", wldc)
 	config.ProvideTask("金钩海兵王", jghbw)
@@ -77,7 +76,7 @@ func wldc(ctx context.Context) {
 	BackWorld(ctx)
 }
 
-// zcfb 周常副本
+// zcfb 宝石副本
 func zcfb(ctx context.Context) {
 	LabelWait(ctx, "世界-电量", 5*time.Second)
 	LabelWaitClick(ctx, "世界-导航", 5*time.Second)
@@ -85,21 +84,21 @@ func zcfb(ctx context.Context) {
 	LabelClick(ctx, "导航-日常")
 	LabelWait(ctx, "日常-进度", 5*time.Second)
 	LabelClick(ctx, "日常-简化模式3号")
-	LabelWait(ctx, "周常副本-模式普通", 5*time.Second)
+	LabelWait(ctx, "宝石副本-模式普通", 5*time.Second)
 	if mode := config.GetTaskOptions(ctx, "模式"); mode == "特殊" {
-		LabelClick(ctx, "周常副本-模式特殊")
+		LabelClick(ctx, "宝石副本-模式特殊")
 	}
 	if difficulty := config.GetTaskOptions(ctx, "难度"); difficulty != "" {
-		LabelClick(ctx, "周常副本-"+difficulty)
+		LabelClick(ctx, "宝石副本-"+difficulty)
 	}
 	if time.Now().Weekday() == time.Saturday || time.Now().Weekday() == time.Sunday {
-		LabelClick(ctx, "周常副本-星期五")
+		LabelClick(ctx, "宝石副本-星期五")
 	}
-	LabelWaitClick(ctx, "周常副本-入场", 5*time.Second)
-	LabelWaitClick(ctx, "周常副本-入场-确定", 5*time.Second)
+	LabelWaitClick(ctx, "宝石副本-入场", 5*time.Second)
+	LabelWaitClick(ctx, "宝石副本-入场-确定", 5*time.Second)
 	LabelWait(ctx, "副本-退出", 15*time.Second)
 	log.Info(ctx, "任务入场")
-	LabelWaitClick(ctx, "周常副本-副本结算-退出", 180*time.Second)
+	LabelWaitClick(ctx, "宝石副本-副本结算-退出", 180*time.Second)
 	BackWorld(ctx)
 }
 

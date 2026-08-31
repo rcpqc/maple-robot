@@ -59,7 +59,7 @@ var labels = map[string]*Label{
 	"导航-邮箱":   {ix.Position{X: 794, Y: 16}, ix.Color{}, 3 * time.Second},
 	"导航-商店":   {ix.Position{X: 814, Y: 277}, ix.Color{}, 3 * time.Second},
 	"导航-关闭":   {ix.Position{X: 925, Y: 22}, ix.ColorWhite, 3 * time.Second},
-	"导航-更改角色": {ix.Position{X: 881, Y: 494}, ix.ColorWhite, 3 * time.Second},
+	"导航-更改角色": {ix.Position{X: 881, Y: 494}, ix.ColorWhite, time.Second},
 	// "导航-角色训练场": {ix.Position{X: 815, Y: 424}, ix.Color{}, 3 * time.Second},
 	"导航-贸易": {ix.Position{X: 900, Y: 424}, ix.Color{}, 3 * time.Second},
 	"导航-委托": {ix.Position{X: 815, Y: 353}, ix.Color{}, 3 * time.Second},
@@ -195,21 +195,21 @@ var labels = map[string]*Label{
 	"精英副本-入场-确定":    {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
 	"精英副本-副本结算-离开":  {ix.Position{X: 322, Y: 505}, ix.ColorButtonBlue, 5 * time.Second},
 
-	// 周常副本
-	"周常副本-模式普通": {ix.Position{X: 65, Y: 189}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
-	"周常副本-模式特殊": {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, 2 * time.Second},
-	"周常副本-星期五":  {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
+	// 宝石副本
+	"宝石副本-模式普通": {ix.Position{X: 65, Y: 189}, ix.Color{R: 188, G: 60, B: 87}, time.Second},
+	"宝石副本-模式特殊": {ix.Position{X: 86, Y: 189}, ix.Color{R: 207, G: 207, B: 207}, 2 * time.Second},
+	"宝石副本-星期五":  {ix.Position{X: 855, Y: 115}, ix.Color{}, time.Second},
 
-	"周常副本-普通": {ix.Position{X: 100, Y: 231}, ix.Color{}, time.Second},
-	"周常副本-困难": {ix.Position{X: 100, Y: 285}, ix.Color{}, time.Second},
-	"周常副本-超难": {ix.Position{X: 100, Y: 337}, ix.Color{}, time.Second},
-	"周常副本-极难": {ix.Position{X: 100, Y: 389}, ix.Color{}, time.Second},
-	"周常副本-绝望": {ix.Position{X: 100, Y: 441}, ix.Color{}, time.Second},
-	"周常副本-噩梦": {ix.Position{X: 100, Y: 493}, ix.Color{}, time.Second},
+	"宝石副本-普通": {ix.Position{X: 100, Y: 231}, ix.Color{}, time.Second},
+	"宝石副本-困难": {ix.Position{X: 100, Y: 285}, ix.Color{}, time.Second},
+	"宝石副本-超难": {ix.Position{X: 100, Y: 337}, ix.Color{}, time.Second},
+	"宝石副本-极难": {ix.Position{X: 100, Y: 389}, ix.Color{}, time.Second},
+	"宝石副本-绝望": {ix.Position{X: 100, Y: 441}, ix.Color{}, time.Second},
+	"宝石副本-噩梦": {ix.Position{X: 100, Y: 493}, ix.Color{}, time.Second},
 
-	"周常副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
-	"周常副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
-	"周常副本-副本结算-退出": {ix.Position{X: 267, Y: 421}, ix.ColorButtonBlue, 5 * time.Second},
+	"宝石副本-入场":      {ix.Position{X: 820, Y: 500}, ix.ColorButtonOrange, time.Second},
+	"宝石副本-入场-确定":   {ix.Position{X: 560, Y: 400}, ix.ColorButtonOrange, time.Second},
+	"宝石副本-副本结算-退出": {ix.Position{X: 267, Y: 421}, ix.ColorButtonBlue, 5 * time.Second},
 
 	// 奈特的金字塔
 	"奈特的金字塔-快速组队":      {ix.Position{X: 810, Y: 500}, ix.ColorButtonOrange, time.Second},

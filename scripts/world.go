@@ -81,21 +81,30 @@ func NextRole(ctx context.Context) {
 	LabelWait(ctx, "导航-关闭", 5*time.Second)
 	LabelClick(ctx, "导航-更改角色")
 	LabelWait(ctx, "更改角色-选择角色", 5*time.Second)
-	if LabelCheck(ctx, "更改角色-上左") {
+	time.Sleep(3 * time.Second) // 等待面板动画完成
+	switch {
+	case LabelCheck(ctx, "更改角色-上左"):
+		log.Info(ctx, "角色切换", "高亮", "上左", "点击", "上右")
 		LabelClick(ctx, "更改角色-上右")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-	} else if LabelCheck(ctx, "更改角色-上右") {
+	case LabelCheck(ctx, "更改角色-上右"):
+		log.Info(ctx, "角色切换", "高亮", "上右", "点击", "中左")
 		LabelClick(ctx, "更改角色-中左")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-	} else if LabelCheck(ctx, "更改角色-中左") {
+	case LabelCheck(ctx, "更改角色-中左"):
+		log.Info(ctx, "角色切换", "高亮", "中左", "点击", "中右")
 		LabelClick(ctx, "更改角色-中右")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-	} else if LabelCheck(ctx, "更改角色-中右") {
+	case LabelCheck(ctx, "更改角色-中右"):
+		log.Info(ctx, "角色切换", "高亮", "中右", "点击", "下左")
 		LabelClick(ctx, "更改角色-下左")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
-	} else if LabelCheck(ctx, "更改角色-下左") {
+	case LabelCheck(ctx, "更改角色-下左"):
+		log.Info(ctx, "角色切换", "高亮", "下左", "点击", "下右")
 		LabelClick(ctx, "更改角色-下右")
 		LabelWaitClick(ctx, "更改角色-变更", 5*time.Second)
+	default:
+		log.Warn(ctx, "角色切换失败: 未检测到高亮位置", "颜色", ix.GetPixel(ix.Position{X: 360, Y: 180}))
 	}
 }
 

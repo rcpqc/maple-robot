@@ -52,6 +52,7 @@ roles:
   - class: 豹弩游侠
   - class: 狂龙战士
   - class: 超能力者
+  - class: 御剑骑士
 
 scripts:
   # ====== 200 组 (默认) ======
@@ -62,21 +63,20 @@ scripts:
       - name: 领取个人奖励
       - name: 神秘河日常
       - name: 神秘河副本
-        condition: weekday==(index/100)
+        condition: weekday==((index/100-1)%5)+1
       - name: 怪物乐园跳关
         options:
           标签位置: 倒数3号
           关卡: 隐匿痕迹
-      - name: 周常副本
+      - name: 宝石副本
         options:
           难度: 超难
       - name: 武陵道场
-        condition: weekday>=1 && weekday<=5
+        condition: weekday>=1 && weekday<=4
       - name: 精英副本
         options:
           副本名: 驮狼雪人
       - name: 奈特的金字塔
-        condition: weekday>=1 && weekday<=5
       - name: 购买委托书
         condition: weekday==1
         options:
@@ -91,9 +91,9 @@ scripts:
           副本名: 玩具城
       - name: 每日领主
         options:
-          副本名: 暗黑龙王
+          副本名: 班雷昂
       - name: 分解装备
-        condition: weekday==0
+        condition: weekday==2 || weekday==5
       # - name: 分享图片
         # condition: weekday==0
       # - name: 梦之操纵者
@@ -109,15 +109,16 @@ scripts:
       - name: 领取个人奖励
       - name: 神秘河日常
       - name: 神秘河副本
-        condition: weekday==(index/100)
+        condition: weekday==((index/100-1)%5)+1
       - name: 怪物乐园跳关
         options:
           标签位置: 倒数3号
           关卡: 隐匿痕迹
-      - name: 周常副本
+      - name: 宝石副本
         options:
           难度: 绝望
-      - name: 特殊周常副本
+      - name: 宝石副本
+        alias: 特殊宝石副本
         options:
           模式: 特殊
           难度: 普通
@@ -141,9 +142,9 @@ scripts:
           副本名: 武陵桃源
       - name: 每日领主
         options:
-          副本名: 暗黑龙王
+          副本名: 班雷昂
       - name: 分解装备
-        condition: weekday==0
+        condition: weekday==2 || weekday==5
       # - name: 分享图片
         # condition: weekday==0
       # - name: 梦之操纵者
@@ -159,15 +160,16 @@ scripts:
       - name: 领取个人奖励
       - name: 神秘河日常
       - name: 神秘河副本
-        condition: weekday==(index/100)
+        condition: weekday==((index/100-1)%5)+1
       - name: 怪物乐园跳关
         options:
           标签位置: 倒数3号
           关卡: 隐匿痕迹
-      - name: 周常副本
+      - name: 宝石副本
         options:
           难度: 绝望
-      - name: 特殊周常副本
+      - name: 宝石副本
+        alias: 特殊宝石副本
         options:
           模式: 特殊
           难度: 普通
@@ -192,15 +194,16 @@ scripts:
           副本名: 武陵桃源
       - name: 每日领主
         options:
-          副本名: 暗黑龙王
+          副本名: 班雷昂
       - name: 领取日常奖励
       - name: 领取公会奖励
 
   # ====== nuo 组 ======
   nuo:
     tasks:
-      - name: 周常副本
-      - name: 特殊周常副本
+      - name: 宝石副本
+      - name: 宝石副本
+        alias: 特殊宝石副本
         options:
           模式: 特殊
       - name: 精英副本
